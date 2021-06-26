@@ -3,4 +3,4 @@ node_modules
 /.fx/*.userdata
 .DS_Store
 *package-lock.json
-/.fx/env.default.json
+.fx/env.default.json
