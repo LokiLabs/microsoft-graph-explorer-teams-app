@@ -10,9 +10,16 @@
 - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) or [TeamsFx CLI](https://aka.ms/teamsfx-cli)
 - Run `npm install -g @microsoft/teamsfx-cli` to get the terminal bash commands
 
-## Debug
+## How to get it running
 
-Start debugging the project by hitting the `F5` key in Visual Studio Code. Alternatively use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Start Debugging` green arrow button.
+Start the project by hitting the `F5` key in Visual Studio Code. Alternatively use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Start Debugging` green arrow button.
+
+## Manual publishing
+
+* Press F5
+* After your code successfully compiles, search your entire repo for the local app code. (i.e. search for `local`)
+* Change the manifest's app id under your webApplicationInfo with the value you found in your repo
+* Upload the app via the app store 
 
 ## Deploy to Azure
 
