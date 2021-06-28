@@ -61,6 +61,6 @@ Once deployed, you may want to distribute your application to your organization'
 ## What happens after you publish or want an update? 
 * After running `teamsfx publish` in your terminal, this means that your app is pending approval. As in, if you try to run this, it will say you still need permissions.
 * To provide approval, visit the [admin site](https://admin.teams.microsoft.com/policies/manage-apps)
-   1) Search for `ToolkitAppFrontend `
+   1) Search for for your app name (i.e. `ToolkitApp`)
    2) Change the dropdown menu for `Publishing status` to `Published`
 * Now you can locally launch the app as per the Readme in the tabs folder and see the respective changes
