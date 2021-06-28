@@ -9,6 +9,8 @@
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) or [TeamsFx CLI](https://aka.ms/teamsfx-cli)
 - Run `npm install -g @microsoft/teamsfx-cli` to get the terminal bash commands
+- [Chrome browser](https://www.google.com/intl/en_ca/chrome/)
+- [.NET](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2010-)
 
 ## How to get it running
 
