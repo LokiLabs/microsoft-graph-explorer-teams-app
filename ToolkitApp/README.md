@@ -20,6 +20,7 @@ Start the project by hitting the `F5` key in Visual Studio Code. Alternatively u
 * After your code successfully compiles, search your entire repo for the local app code. (i.e. search for `local`)
 * Change the manifest's app id under your webApplicationInfo with the value you found in your repo
 * Upload the app via the app store 
+* For a more detailed explanation, please visit the file in our OneNotes folder called `Creating a Teams App`
 
 ## Deploy to Azure
 
