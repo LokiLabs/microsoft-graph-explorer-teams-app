@@ -1,19 +1,17 @@
-import React, { useState } from "react";
-import { Image, Menu } from "@fluentui/react-northstar";
+import React from "react";
+import { Image } from "@fluentui/react-northstar";
 import "./Welcome.css";
-import { EditCode } from "./EditCode";
-import { AzureFunctions } from "./AzureFunctions";
-import { Graph } from "./Graph";
-import { CurrentUser } from "./CurrentUser";
 import { useTeamsFx } from "./lib/useTeamsFx";
 import { TeamsUserCredential } from "@microsoft/teamsfx";
 import { useData } from "./lib/useData";
 import { Deploy } from "./Deploy";
 import { Publish } from "./Publish";
 import { RSCDocumentation } from "./RSCDocumentation";
+import { PrimaryButton } from "office-ui-fabric-react";
+import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL} from "./TabConstants"
 
 export function Welcome(props) {
-  const { showFunction, environment } = {
+  const { environment } = {
     showFunction: true,
     environment: window.location.hostname === "localhost" ? "local" : "azure",
     ...props,
@@ -23,21 +21,6 @@ export function Welcome(props) {
       local: "local environment",
       azure: "Azure environment",
     }[environment] || "local environment";
-
-  const steps = ["local", "azure", "publish"];
-  const friendlyStepsName = {
-    local: "1. Build your app locally",
-    azure: "2. Provision and Deploy to the Cloud",
-    publish: "3. Publish to Teams",
-  };
-  const [selectedMenuItem, setSelectedMenuItem] = useState("local");
-  const items = steps.map((step) => {
-    return {
-      key: step,
-      content: friendlyStepsName[step] || "",
-      onClick: () => setSelectedMenuItem(step),
-    };
-  });
 
   const { isInTeams } = useTeamsFx();
   const userProfile = useData(async () => {
@@ -52,6 +35,16 @@ export function Welcome(props) {
         <h1 className="center">Congratulations{userName ? ", " + userName : ""}!</h1>
         <p className="center">Your app is running in your {friendlyEnvironmentName}</p>
         <RSCDocumentation />
+        <h1 className="left">Congratulations{userName ? ", " + userName : ""}!</h1>
+        <p className="left">Your app is running in your {friendlyEnvironmentName}</p>
+        <p className="left">The app acts as a proxy to send requests to the Azure Active Directory as an application.</p>
+        <p className="left">Use this app to test or demo Microsoft Graph requests using Resource Consent permissions</p>
+        <div class="left" style={{ display: 'flex'}}>
+        <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_URL)} text="Go to Graph Explorer" />
+        <div class="divider"/>
+        <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_DOCS_URL)} text="Graph Explorer Docs!"/>
+        <RSCDocumentation />
+        </div>
       </div>
     </div>
   );

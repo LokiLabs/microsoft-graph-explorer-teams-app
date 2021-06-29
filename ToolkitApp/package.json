@@ -8,6 +8,7 @@
     },
     "license": "MIT",
     "dependencies": {
-        "dompurify": "^2.2.9"
+        "dompurify": "^2.2.9",
+        "office-ui-fabric-react": "^7.172.1"
     }
 }
