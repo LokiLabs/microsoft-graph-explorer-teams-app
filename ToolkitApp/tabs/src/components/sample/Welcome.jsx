@@ -52,27 +52,6 @@ export function Welcome(props) {
         <h1 className="center">Congratulations{userName ? ", " + userName : ""}!</h1>
         <p className="center">Your app is running in your {friendlyEnvironmentName}</p>
         <RSCDocumentation />
-        <Menu defaultActiveIndex={0} items={items} underlined secondary />
-        <div className="sections">
-          {selectedMenuItem === "local" && (
-            <div>
-              <EditCode showFunction={showFunction} />
-              {isInTeams && <CurrentUser userName={userName} />}
-              <Graph />
-              {showFunction && <AzureFunctions />}
-            </div>
-          )}
-          {selectedMenuItem === "azure" && (
-            <div>
-              <Deploy />
-            </div>
-          )}
-          {selectedMenuItem === "publish" && (
-            <div>
-              <Publish />
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );
