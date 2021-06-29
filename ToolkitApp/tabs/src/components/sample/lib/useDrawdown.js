@@ -4,9 +4,20 @@
  * https://github.com/adamvleggett/drawdown
  */
 
+import { README_HEADER } from '../../../constants';
+
+function extractTextBetween(subject, start, end) {
+    try {
+        return subject.split(start)[1].split(end)[0];
+    } catch (e) {
+        console.log("Exception when extracting text", e);
+    }
+}
 
 export function markdown(src) {
-
+    var match = extractTextBetween(src, README_HEADER, README_HEADER);
+    const lenToRemove = match.length + 2 * README_HEADER.length;
+    src = src.substring(lenToRemove);
     var rx_lt = /</g;
     var rx_gt = />/g;
     var rx_space = /\t|\r|\uf8ff/g;
@@ -125,9 +136,6 @@ export function markdown(src) {
 
     // stash
     replace(rx_stash, function (all) { return stash[parseInt(all)] });
-
-    // remove the heading --- thing
-    
 
     return src.trim();
 };

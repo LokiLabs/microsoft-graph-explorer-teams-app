@@ -13,7 +13,6 @@ export function RSCDocumentation() {
         const blob = await response.blob();
         var text = await blob.text();
         var html = markdown(text);
-        console.log(html);
         setRSCDocs(html);
     };
     return (
