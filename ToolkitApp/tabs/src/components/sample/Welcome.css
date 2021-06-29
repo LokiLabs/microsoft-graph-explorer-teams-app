@@ -67,3 +67,8 @@ code {
 .error {
   color: red;
 }
+.divider{
+  width:20px;
+  height:auto;
+  display:inline-block;
+}
