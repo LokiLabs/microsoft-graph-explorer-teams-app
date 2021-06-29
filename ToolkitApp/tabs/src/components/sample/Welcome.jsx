@@ -4,11 +4,9 @@ import "./Welcome.css";
 import { useTeamsFx } from "./lib/useTeamsFx";
 import { TeamsUserCredential } from "@microsoft/teamsfx";
 import { useData } from "./lib/useData";
-import { Deploy } from "./Deploy";
-import { Publish } from "./Publish";
 import { RSCDocumentation } from "./RSCDocumentation";
 import { PrimaryButton } from "office-ui-fabric-react";
-import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL} from "./TabConstants"
+import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL } from "./TabConstants"
 
 export function Welcome(props) {
   const { environment } = {
@@ -32,19 +30,16 @@ export function Welcome(props) {
     <div className="welcome page">
       <div className="narrow page-padding">
         <Image src="hello.png" />
-        <h1 className="center">Congratulations{userName ? ", " + userName : ""}!</h1>
-        <p className="center">Your app is running in your {friendlyEnvironmentName}</p>
-        <RSCDocumentation />
         <h1 className="left">Congratulations{userName ? ", " + userName : ""}!</h1>
         <p className="left">Your app is running in your {friendlyEnvironmentName}</p>
         <p className="left">The app acts as a proxy to send requests to the Azure Active Directory as an application.</p>
         <p className="left">Use this app to test or demo Microsoft Graph requests using Resource Consent permissions</p>
-        <div class="left" style={{ display: 'flex'}}>
-        <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_URL)} text="Go to Graph Explorer" />
-        <div class="divider"/>
-        <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_DOCS_URL)} text="Graph Explorer Docs!"/>
-        <RSCDocumentation />
+        <div class="left" style={{ display: 'flex' }}>
+          <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_URL)} text="Go to Graph Explorer" />
+          <div class="divider" />
+          <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_DOCS_URL)} text="Graph Explorer Docs!" />
         </div>
+        <RSCDocumentation />
       </div>
     </div>
   );

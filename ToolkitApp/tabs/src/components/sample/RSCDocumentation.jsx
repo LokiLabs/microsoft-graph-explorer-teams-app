@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { RSC_DOCUMENATION_URL } from '../../constants';
+import { RSC_DOCUMENATION_URL } from './TabConstants';
 import { markdown } from './lib/useDrawdown';
 
 export function RSCDocumentation() {

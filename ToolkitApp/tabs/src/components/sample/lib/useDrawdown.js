@@ -4,7 +4,7 @@
  * https://github.com/adamvleggett/drawdown
  */
 
-import { README_HEADER } from '../../../constants';
+import { README_HEADER } from '../TabConstants';
 
 function extractTextBetween(subject, start, end) {
     try {
