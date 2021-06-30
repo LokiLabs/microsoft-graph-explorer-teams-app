@@ -4,20 +4,10 @@
  * https://github.com/adamvleggett/drawdown
  */
 
-import { README_HEADER } from '../TabConstants';
-
-function extractTextBetween(subject, start, end) {
-    try {
-        return subject.split(start)[1].split(end)[0];
-    } catch (e) {
-        console.log("Exception when extracting text", e);
-    }
-}
+import { README_HEADER, MS_GRAPH_DOCS } from '../TabConstants';
 
 export function markdown(src) {
-    var match = extractTextBetween(src, README_HEADER, README_HEADER);
-    const lenToRemove = match.length + 2 * README_HEADER.length;
-    src = src.substring(lenToRemove);
+
     var rx_lt = /</g;
     var rx_gt = />/g;
     var rx_space = /\t|\r|\uf8ff/g;
@@ -36,6 +26,19 @@ export function markdown(src) {
     var rx_heading = /(?=^|>|\n)([>\s]*?)(#{1,6}) (.*?)( #*)? *(?=\n|$)/g;
     var rx_para = /(?=^|>|\n)\s*\n+([^<]+?)\n+\s*(?=\n|<|$)/g;
     var rx_stash = /-\d+\uf8ff/g;
+
+    function extractTextBetween(src, start, end) {
+        try {
+            return src.split(start)[1].split(end)[0];
+        } catch (e) {
+            console.log("Exception when extracting text", e);
+        }
+    }
+
+    var match = extractTextBetween(src, README_HEADER, README_HEADER);
+    const lenToRemove = match.length + 2 * README_HEADER.length;
+    src = src.substring(lenToRemove);
+    src = src.replace(/\(\//g, MS_GRAPH_DOCS);
 
     function replace(rex, fn) {
         src = src.replace(rex, fn);
@@ -136,6 +139,9 @@ export function markdown(src) {
 
     // stash
     replace(rx_stash, function (all) { return stash[parseInt(all)] });
+
+    // add target _blank for each link to open on a new tab because it can't open in Teams app
+    replace(/href/g, "target='_blank' href");
 
     return src.trim();
 };
