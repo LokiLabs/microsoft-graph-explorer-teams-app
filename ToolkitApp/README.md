@@ -1,5 +1,5 @@
 ## Which folders are important?
-* `.fx` contains the folder with the teams app skeleton. It also contains the manifest that gets published when you run `teamsfx publish`. For Activity Feed Notifications, we only need to add in the activities section and RSC needs to be added to `webApplicationInfo `.
+* For convenience, our manifest is now located in the teamsApp folder. You can then zip up the entire folder when you want to manually update it.
 * `tabs` is where we will most likely be doing most of the editing. This is where we will be adding the new components
 
 

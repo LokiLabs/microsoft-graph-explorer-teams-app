@@ -1,6 +1,6 @@
 node_modules
 /.fx/*.env
 /.fx/*.userdata
+.fx/env.default.json
 .DS_Store
 *package-lock.json
-
