@@ -4,6 +4,8 @@ export const RSC_DOCUMENATION_URL = "https://raw.githubusercontent.com/Microsoft
 export const README_HEADER = "---";
 export const MS_GRAPH_DOCS = "(https://docs.microsoft.com/en-us/";
 //TO DO: Support multi languages. Attached to ADO ticket #38594
+
+// This list of RSC permissions is copied directly from `webApplicationInfo.applicationPermissions` in "../../../../teamsApp/manifest.json"
 export const RSC_LIST = [   "TeamSettings.Read.Group",
                             "ChannelMessage.Read.Group",
                             "TeamSettings.Edit.Group",
