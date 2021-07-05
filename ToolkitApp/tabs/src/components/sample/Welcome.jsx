@@ -4,6 +4,7 @@ import "./Welcome.css";
 import { useTeamsFx } from "./lib/useTeamsFx";
 import { TeamsUserCredential } from "@microsoft/teamsfx";
 import { useData } from "./lib/useData";
+import { RSCList } from "./RSCList";
 import { RSCDocumentation } from "./RSCDocumentation";
 import { PrimaryButton } from "office-ui-fabric-react";
 import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL } from "./TabConstants"
@@ -39,6 +40,7 @@ export function Welcome(props) {
           <div class="divider" />
           <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_DOCS_URL)} text="Graph Explorer Docs!" />
         </div>
+        <RSCList />
         <RSCDocumentation />
       </div>
     </div>
