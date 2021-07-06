@@ -54,5 +54,14 @@
     "webApplicationInfo": {
         "id": "{appClientId}",
         "resource": "{webApplicationInfoResource}"
+    },
+    "activities": {
+        "activityTypes": [
+          {
+            "type": "pendingFinanceApprovalRequests",
+            "description": "Test Activity Type",
+            "templateText": "Internal spending team has a pending finance approval request"
+          }
+        ]
     }
 }

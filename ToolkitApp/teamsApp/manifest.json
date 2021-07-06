@@ -80,5 +80,14 @@
       "TeamsAppInstallation.Read.Chat",
       "OnlineMeeting.ReadBasic.Chat"
     ]
+  },
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "pendingFinanceApprovalRequests",
+        "description": "Test Activity Type",
+        "templateText": "Internal spending team has a pending finance approval request"
+      }
+    ]
   }
 }
