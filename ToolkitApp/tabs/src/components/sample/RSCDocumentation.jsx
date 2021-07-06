@@ -17,7 +17,9 @@ export function RSCDocumentation() {
         for(var i = 0;i < lines.length;i++){
             // dead links in this section
             if(lines[i] === '## Enable RSC in your application'){
-                i += 13;
+                while(lines[i][0] === '1'){
+                    i++;
+                }
             }
             // do not include the pictures 
             if(!lines[i].includes('.png')){
