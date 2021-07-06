@@ -21,7 +21,6 @@ export function RSCDocumentation() {
             }
             // do not include the pictures 
             if(!lines[i].includes('.png')){
-                console.log(i)
                 refinedText += lines[i];
                 if(i !== lines.length - 1){
                     refinedText += '\n';
