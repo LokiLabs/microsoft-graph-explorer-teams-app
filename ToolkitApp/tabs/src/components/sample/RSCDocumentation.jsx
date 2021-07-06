@@ -27,7 +27,7 @@ export function RSCDocumentation() {
                 }
             }
             else{
-                // if there is a picture in the middle of a list
+                // if there is a picture between two empty lines
                 if(0 < i < lines.length - 1 && lines[i-1] === "" && lines[i+1] ===""){
                     // remove the previous empty line
                     refinedText = refinedText.slice(0, -1);
