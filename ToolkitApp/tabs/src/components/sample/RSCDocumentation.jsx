@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { RSC_DOCUMENATION_URL } from './TabConstants';
+import { RSC_DOCUMENTATION_URL } from './TabConstants';
 import { markdown } from './lib/useDrawdown';
 
 export function RSCDocumentation() {
@@ -9,7 +9,7 @@ export function RSCDocumentation() {
     useEffect(() => getRSCDocs(), []);
 
     const getRSCDocs = async () => {
-        const response = await fetch(RSC_DOCUMENATION_URL);
+        const response = await fetch(RSC_DOCUMENTATION_URL);
         const blob = await response.blob();
         var text = await blob.text();
         var lines = text.split('\n');
