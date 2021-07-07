@@ -38,7 +38,7 @@ export function Welcome(props) {
         <div class="left" style={{ display: 'flex' }}>
           <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_URL)} text="Go to Graph Explorer" />
           <div class="divider" />
-          <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_DOCS_URL)} text="Graph Explorer Docs!" />
+          <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_DOCS_URL)} text="Graph Explorer Docs" />
         </div>
         <RSCList />
         <RSCDocumentation />
