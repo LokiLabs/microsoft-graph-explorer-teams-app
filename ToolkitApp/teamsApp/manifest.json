@@ -7,8 +7,8 @@
   "developer": {
     "name": "Teams App, Inc.",
     "websiteUrl": "https://localhost:3000",
-    "privacyUrl": "https://localhost:3000/index.html#/privacy",
-    "termsOfUseUrl": "https://localhost:3000/index.html#/termsofuse"
+    "privacyUrl": "https://privacy.microsoft.com/en-us/privacystatement",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/servicesagreement/"
   },
   "icons": {
     "color": "color.png",

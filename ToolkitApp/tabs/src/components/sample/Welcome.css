@@ -33,6 +33,11 @@
 
 .center {
   text-align: center;
+  display: 'flex';
+}
+
+.separator{
+  border: 2px solid black;
 }
 
 .sections > * {
