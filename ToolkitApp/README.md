@@ -14,7 +14,8 @@
 
 ## How to get it running
 
-Start the project by hitting the `F5` key in Visual Studio Code. Alternatively use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Start Debugging` green arrow button.
+* Run `nvm use --lts`
+* Start the project by hitting the `F5` key in Visual Studio Code. Alternatively use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Start Debugging` green arrow button.
 
 ## Manual publishing
 
