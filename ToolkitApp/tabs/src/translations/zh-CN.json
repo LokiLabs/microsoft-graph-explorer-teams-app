@@ -1,0 +1,10 @@
+{
+    "translation": {
+        "rsc-list": {
+            "title": "(rsc-list.title) (zh_cn) RSC permissions of this app"
+        },
+        "welcome": {
+            "h1": "(welcome.h1) (zh_cn) Welcome to the Graph Explorer sample app"
+        }
+    }
+}

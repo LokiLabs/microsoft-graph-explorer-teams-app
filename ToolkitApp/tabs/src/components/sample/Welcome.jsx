@@ -7,9 +7,11 @@ import { RSCList } from "./RSCList";
 import { RSCDocumentation } from "./RSCDocumentation";
 import { PrimaryButton } from "office-ui-fabric-react";
 import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL, OFFICIAL_RSC_URL} from "./TabConstants"
+import { useTranslation } from "react-i18next";
 
 export function Welcome(props) {
 
+  const { t } = useTranslation();
   const { isInTeams } = useTeamsFx();
   const userProfile = useData(async () => {
     const credential = new TeamsUserCredential();
@@ -19,7 +21,7 @@ export function Welcome(props) {
   return (
     <div className="welcome page">
       <div className="narrow page-padding">
-        <h1 className="center">Welcome to the Graph Explorer sample app{userName ? ", " + userName : ""}!</h1>
+        <h1 className="center">{t('welcome.h1') + (userName ? ", " + userName : "")}!</h1>
         <p className="center">The app acts as a proxy to send requests to the Azure Active Directory as an application.</p>
         <p className="center">Use this app to test or demo Microsoft Graph requests using Resource Consent permissions</p>
         <div class="center">
