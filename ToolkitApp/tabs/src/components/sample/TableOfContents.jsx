@@ -25,7 +25,7 @@ const Headings = ({ headings }) => {
     },
     {
         key: "resource-specific-consent",
-        content: "Resource-Specific-Consent",
+        content: "Resource-Specific Consent",
         onClick: scrollHeadingIntoView(headings[2])
     },
 
