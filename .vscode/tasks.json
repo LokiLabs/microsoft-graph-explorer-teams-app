@@ -40,7 +40,7 @@
             "type": "shell",
             "command": "npm install",
             "options": {
-                "cwd": "${workspaceFolder}/tabs"
+                "cwd": "${workspaceFolder}"
             }
         }
     ]
