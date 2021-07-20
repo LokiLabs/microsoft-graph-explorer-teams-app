@@ -61,7 +61,7 @@ export function QueryRunner() {
     }, [graphVersion, query])
 
     const requestComponents = [
-        <TextArea fluid={true} resize="both" value={requestBody} />,
+        <TextArea fluid={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
         <>
             <Flex gap="gap.small" padding="padding.medium">
                 <Flex.Item size="size.half">
