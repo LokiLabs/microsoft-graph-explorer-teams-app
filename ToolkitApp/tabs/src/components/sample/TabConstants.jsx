@@ -4,6 +4,7 @@ export const RSC_DOCUMENTATION_URL = "https://raw.githubusercontent.com/Microsof
 export const OFFICIAL_RSC_URL = "https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent#:~:text=Resource-specific%20consent%20%28RSC%29%20is%20a%20Microsoft%20Teams%20and,manage%20specific%20resources%E2%80%94either%20teams%20or%20chats%E2%80%94within%20an%20organization.";
 export const README_HEADER = "---";
 export const MS_GRAPH_DOCS = "(https://docs.microsoft.com/en-us/";
+export const GRAPH_URL = "https://graph.microsoft.com/"
 //TO DO: Support multi languages. Attached to ADO ticket #38594
 
 // This list of RSC permissions is copied directly from `webApplicationInfo.applicationPermissions` in "../../../../teamsApp/manifest.json"
@@ -34,7 +35,15 @@ export const RSC_LIST = [
     "OnlineMeeting.ReadBasic.Chat"
 ];
 
-export const requestTypes = ["GET", "POST", "DELETE", "PATCH", "PUT"];
+export const requestTypes = [
+    "GET",
+    "POST",
+    "DELETE",
+    "PATCH",
+    "PUT"
+]
 
-
-export const graphVersions = ["v1.0", "beta"];
+export const graphVersions = [
+    "v1.0",
+    "beta"
+]
