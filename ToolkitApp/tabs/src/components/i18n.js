@@ -14,32 +14,46 @@ import ruRU from '../translations/ru-RU.json';
 import zhCN from '../translations/zh-CN.json';
 
 i18n
-  // load translation using http -> see /public/locales (i.e. https://github.com/i18next/react-i18next/tree/master/example/react/public/locales)
-  // learn more: https://github.com/i18next/i18next-http-backend
-  // want your translations to be loaded from a professional CDN? => https://github.com/locize/react-tutorial#step-2---use-the-locize-cdn
   .use(Backend)
-  // detect user language
-  // learn more: https://github.com/i18next/i18next-browser-languageDetector
   .use(LanguageDetector)
-  // pass the i18n instance to react-i18next.
   .use(initReactI18next)
-  // init i18next
-  // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    fallbackLng: 'en_us',
+    detection: {
+      order: ['querystring', 'path', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag'],
+      lookupQuerystring: 'lng',
+      lookupCookie: 'i18next',
+      lookupLocalStorage: 'i18nextLng',
+      lookupSessionStorage: 'i18nextLng',
+      lookupFromPathIndex: 0,
+  
+      // cache user language
+      caches: ['localStorage'],
+      excludeCacheFor: ['cimode'],
+    },
+    fallbackLng: 'en-US',
     debug: true,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
+    supportedLngs: [
+      'en-US',
+      'de-DE',
+      'es-ES',
+      'fr-FR',
+      'ja-JP',
+      'pt-BR',
+      'ru-RU',
+      'zh-CN',
+    ],
     resources: {
-        en_us: enUS,
-        de_de: deDE,
-        es_es: esES,
-        fr_fr: frFR,
-        ja_jp: jaJP,
-        pt_br: ptBR,
-        ru_ru: ruRU,
-        zh_cn: zhCN,
+      'en-US': enUS,
+      'de-DE': deDE,
+      'es-ES': esES,
+      'fr-FR': frFR,
+      'ja-JP': jaJP,
+      'pt-BR': ptBR,
+      'ru-RU': ruRU,
+      'zh-CN': zhCN,
     },
   });
 

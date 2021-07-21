@@ -11,7 +11,8 @@ import { useTranslation } from "react-i18next";
 
 export function Welcome(props) {
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  console.log(`${i18n.languages}`);
   const { isInTeams } = useTeamsFx();
   const userProfile = useData(async () => {
     const credential = new TeamsUserCredential();
