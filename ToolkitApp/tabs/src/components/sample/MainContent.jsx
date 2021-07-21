@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDownIcon, ChevronEndIcon, Header, Flex } from '@fluentui/react-northstar';
+import { ChevronDownIcon, ChevronEndIcon, Header, Flex,List, Image } from '@fluentui/react-northstar';
+import ConnectedResources from './ConnectedResources.jsx';
 import { RSCList } from "./RSCList";
 import { RSCDocumentation } from "./RSCDocumentation";
 import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL, OFFICIAL_RSC_URL } from "./TabConstants";
@@ -26,8 +27,8 @@ const MainContent = () => {
                     <Header id="connected-resource-header" as="h2" content={t("Table of Contents.Connected Resources")} />
                 </Flex>
                 <div>
-                    <p>REMOVE LOREM IPSUM AND PLACE CONNECTED RESOURCES HERE</p>
-                    <p>{dummyText}</p>
+                  <ConnectedResources/>
+                  <p>{dummyText}</p>
                 </div>
             </div>
     } else {

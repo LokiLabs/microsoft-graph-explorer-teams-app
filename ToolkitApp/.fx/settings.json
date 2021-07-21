@@ -14,5 +14,7 @@
             "fx-resource-aad-app-for-teams",
             "fx-resource-simple-auth"
         ]
-    }
+    },
+    "currentEnv": "default",
+    "projectId": "fc988e4a-e66f-4c79-86eb-7a894d46f69e"
 }
