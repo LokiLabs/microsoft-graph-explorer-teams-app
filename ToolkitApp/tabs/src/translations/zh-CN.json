@@ -1,10 +1,10 @@
 {
     "translation": {
-        "rsc-list": {
-            "title": "(rsc-list.title) (zh-CN) RSC permissions of this app"
-        },
-        "welcome": {
-            "h1": "(welcome.h1) (zh-CN) Welcome to the Graph Explorer sample app"
+        "Table of Contents" : {
+            "Connected Resources": "(zh-cn) Connected Resources",
+            "Query Runner": "(zh-cn) Query Runner",
+            "Resource-Specific Consent": "(zh-cn) Resource-Specific Consent",
+            "Documentation Links": "(zh-cn) Documentation Links"
         }
     }
 }

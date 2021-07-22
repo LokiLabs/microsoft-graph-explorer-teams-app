@@ -1,5 +1,6 @@
 import useHeadingsData from "./useHeadingsData";
 import { Menu } from "@fluentui/react-northstar";
+import { useTranslation } from "react-i18next";
 
 const Headings = ({ headings }) => {
   const scrollHeadingIntoView = (headingData) => {
@@ -11,27 +12,29 @@ const Headings = ({ headings }) => {
     };
   };
 
+  const { t } = useTranslation();
+
   const items = [
     {
         key: 'connected-resource',
-        content: "Connected Resource",
+        content: t("Table of Contents.Connected Resources"),
         onClick: scrollHeadingIntoView(headings[0])
     },
     {
         key: "query-runner",
-        content: "Query Runner",
+        content: t("Table of Contents.Query Runner"),
         onClick: scrollHeadingIntoView(headings[1])
 
     },
     {
         key: "resource-specific-consent",
-        content: "Resource-Specific Consent",
+        content: t("Table of Contents.Resource-Specific Consent"),
         onClick: scrollHeadingIntoView(headings[2])
     },
 
     {
         key: "documentation-links",
-        content: "Documentation Links",
+        content: t("Table of Contents.Documentation Links"),
         onClick: scrollHeadingIntoView(headings[3])
     },
 ]
