@@ -8,21 +8,13 @@ import TermsOfUse from "./TermsOfUse";
 import Tab from "./Tab";
 import "./App.css";
 import TabConfig from "./TabConfig";
-import { useTranslation } from "react-i18next";
-import { useTeams } from "msteams-react-base-component";
-import { changeLanguage } from "./i18n";
 
 /**
  * The main app which handles the initialization and routing
  * of the app.
  */
 export default function App() {
-  const [ isTeams ] = useTeams({});
   const { theme, loading } = useTeamsFx();
-  const { i18n } = useTranslation();
-  if (isTeams.context?.locale) {
-    changeLanguage(i18n, isTeams.context.locale);
-  }
   return (
     <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee" }}>
       <Router>
