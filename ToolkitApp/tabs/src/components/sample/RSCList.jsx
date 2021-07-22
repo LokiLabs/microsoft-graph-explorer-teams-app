@@ -4,7 +4,7 @@ import "./RSCList.css";
 import { RSC_LIST } from './TabConstants';
 
 export function RSCList(props) {
-    const RSCTableItems = RSC_LIST.map((item) => <tr key={item}>{item}</tr>);
+    const RSCTableItems = RSC_LIST.map((item) => <tr key={item}><td>{item}</td></tr>);
     const { t } = useTranslation();
 
     return (

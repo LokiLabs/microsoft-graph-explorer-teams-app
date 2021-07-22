@@ -11,8 +11,7 @@ import { useTranslation } from "react-i18next";
 
 export function Welcome(props) {
 
-  const { t, i18n } = useTranslation();
-  console.log(`${i18n.languages}`);
+  const { t } = useTranslation();
   const { isInTeams } = useTeamsFx();
   const userProfile = useData(async () => {
     const credential = new TeamsUserCredential();
@@ -25,16 +24,16 @@ export function Welcome(props) {
         <h1 className="center">{t('welcome.h1') + (userName ? ", " + userName : "")}!</h1>
         <p className="center">The app acts as a proxy to send requests to the Azure Active Directory as an application.</p>
         <p className="center">Use this app to test or demo Microsoft Graph requests using Resource Consent permissions</p>
-        <div class="center">
+        <div className="center">
           <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_URL)} text="Go to Graph Explorer" />
-          <div class="divider" />
+          <div className="divider" />
           <PrimaryButton onClick={() => window.open(GRAPH_EXPLORER_DOCS_URL)} text="Graph Explorer Docs" />
         </div>
         <RSCList />
         <br></br>
-        <hr class="separator"/>
+        <hr className="separator"/>
         <RSCDocumentation />
-        <div class="center">
+        <div className="center">
           <PrimaryButton onClick={() => window.open(OFFICIAL_RSC_URL)} text="RSC Docs" />
         </div>
       </div>
