@@ -1,43 +1,62 @@
-import React , { useState } from 'react';
-import { List, Image, Button } from '@fluentui/react-northstar'
+import React from 'react';
+import { Button } from '@fluentui/react-northstar'
+import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar'
 import * as microsoftTeams from "@microsoft/teams-js"; 
+import "./ConnectedResources.css";
+import {TEAMS_CHANNEL_ID, CHAT, CHAT_ID} from './TabConstants';
 
-export function processTeamsContext(setResourceList,resourceList ){
-    var obj = {}
+export function processTeamsContext(setResourceList,resourceList,setTitle){
     microsoftTeams.getContext(function(context) {
-        console.log(context);
-        obj.endMedia = (
-            <Button content="Disconnect app" primary onClick={() =>console.log("clicked the button")}
-            />
-          )
-        obj.media = (
-            <Image
-              src="https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/RobertTolbert.jpg"
-              avatar
-            />
-          )
-        obj.header = context.entityId;
-            obj.content = "Resource ID: " + context.chatId + " Resource Type:  Chat";
-        if(isAlreadyPresent(resourceList,obj.content)){
-            return; 
+        if(context.channelId && context.channelId.length !== 0){
+            if(isAlreadyPresent(resourceList, context.channelId)){
+                return; 
+            }
+            var channelId = createItemWithCopy(context.channelId);
+            channelId.header = TEAMS_CHANNEL_ID + context.channelId;
+            setTitle(context.teamName + " > " + context.channelName);
+            setResourceList([channelId])
         }
-        console.log("adding to the resourceList")
-        console.log(resourceList)
-        if(resourceList.length === 0){
-            setResourceList([obj])
+            
+        else if(context.chatId && context.chatId.length !== 0){
+            if(isAlreadyPresent(resourceList, context.chatId)){
+                return; 
+            }
+            setTitle(CHAT);
+            var chatId = createItemWithCopy(context.chatId);
+            chatId.header = CHAT_ID + context.chatId;
+            setResourceList([chatId]);
         }
         else{
-            setResourceList(oldArray => [...oldArray, obj]);
+            setResourceList([]);
         }
     });
-
 }
 
 function isAlreadyPresent(list, id){
-    for (let i = 0; i < list.length; i++){
-        if (id === list[i].content){
-            return true
+    if(list.length === 0){
+        return false;
+    }
+    for(let i  = 0; i < list.length; i++){
+        if (list[i].header && list[i].header.includes(id)){
+            return true;
         }
     }
-    return false
+    return false;
+}
+
+function copyText(id){
+    var copyValue = document.createElement('textarea');
+    copyValue.value = id;
+    document.body.appendChild(copyValue);
+    copyValue.select();
+    document.execCommand("copy"); 
+}
+
+export function createItemWithCopy(id){
+    var item = {};
+
+    item.endMedia = (
+        <Button icon={<ClipboardCopiedToIcon  className = "copyIcon"  />} size="medium"  text iconOnly title="Copy" onClick={() => copyText(id)}/>
+    )
+    return item;
 }
