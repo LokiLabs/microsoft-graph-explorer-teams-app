@@ -1,54 +1,57 @@
 import React, { useState, useEffect } from "react";
 import { requestTypes, graphVersions, GRAPH_URL } from "./TabConstants";
-import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown } from '@fluentui/react-northstar'
+import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, Box } from '@fluentui/react-northstar'
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility'
 import { TrashCanIcon, AddIcon } from '@fluentui/react-icons-northstar'
 import enUS from './GE.json';
 
 export function QueryRunner() {
     const addRequestHeader = () => {
-        if (requestHeaders.filter(requestH => requestH.key === userAddedHeader).length === 0) {
-            requestHeaders.splice(requestHeaders.length - 1, 0, {
-                key: userAddedHeader,
-                items: [userAddedHeader, userAddedValue, {
-                    content: <Button
-                        tabIndex={-1}
-                        icon={<TrashCanIcon />}
-                        circular
-                        text
-                        iconOnly
-                        title="Delete request header"
-                        onClick={() => {
-                            setRequestHeaders(requestHeaders.filter(requestH => requestH.key !== userAddedHeader))
-                        }}
-                    />,
+        if (!requestHeaders.map(r => r.key).includes(userAddedHeader)) {
+            const headerCopy = (' ' + userAddedHeader).slice(1);
+            const valueCopy = (' ' + userAddedValue).slice(1);
+            setUserAddedHeader("");
+            setUserAddedValue("");
+            const deleteButton = (deleteTodo) => <Button
+                tabIndex={-1}
+                icon={<TrashCanIcon />}
+                circular
+                text
+                iconOnly
+                title="Delete request header"
+                onClick={() => deleteTodo(headerCopy)}
+            />
+            const newHeaderValue = {
+                key: headerCopy,
+                items: [headerCopy, valueCopy, {
+                    content: deleteButton(deleteRow),
                     truncateContent: true,
                     accessibility: gridCellWithFocusableElementBehavior,
                     onClick: e => {
                         e.stopPropagation()
                     },
                 }],
-            });
-            setRequestHeaders(requestHeaders);
+            };
+            const lastValue = requestHeaders[requestHeaders.length - 1];
+            setRequestHeaders([...requestHeaders.slice(0, -1), newHeaderValue, lastValue]);
         }
-        setUserAddedHeader("");
-        setUserAddedValue("");
     }
 
-    const addOptionCell = {
-        content: <Button tabIndex={-1} icon={<AddIcon />} circular text iconOnly title="Delete request header" />,
-        truncateContent: true,
-        accessibility: gridCellWithFocusableElementBehavior,
-        onClick: e => {
-            addRequestHeader()
-            e.stopPropagation()
-        },
-    }
+    // const addOptionCell = {
+    //     content: ,
+    //     truncateContent: true,
+    //     accessibility: gridCellWithFocusableElementBehavior,
+    //     onClick: e => {
+    //         addRequestHeader()
+    //         e.stopPropagation()
+    //     },
+    // }
 
-    const [userAddedHeader, setUserAddedHeader] = useState("");
-    const [userAddedValue, setUserAddedValue] = useState("");
+    const [userAddedHeader, setUserAddedHeader] = useState("moment");
+    const [userAddedValue, setUserAddedValue] = useState("bruh");
 
     const keyInputCell = {
+
         content: <Input fluid={true} inverted={true} id="key" value={userAddedHeader} showSuccessIndicator={false} required onChange={(evt) => setUserAddedHeader(evt.target.value)} type="text" />,
     }
 
@@ -72,9 +75,13 @@ export function QueryRunner() {
     const [requestHeaders, setRequestHeaders] = useState([
         {
             key: 'addNew',
-            items: [keyInputCell, valueInputCell, addOptionCell],
+            items: [keyInputCell, valueInputCell, ""],
         }
     ]);
+
+    const deleteRow = (header) => setRequestHeaders(requestHeaders.filter(r => r.key !== header));
+
+
 
     const requestItems = [
         enUS["request body"],
@@ -86,11 +93,11 @@ export function QueryRunner() {
         enUS["response headers"]
     ]
 
-    const requestHeadersTable = {
+    const requestTableHeaders = {
         items: ['Key', 'Value', ''],
     }
 
-    const responseHeadersTable = {
+    const responseTableHeaders = {
         items: ['Key', 'Value'],
     }
 
@@ -100,25 +107,26 @@ export function QueryRunner() {
         console.log(query);
     }
 
-    useEffect(() => {
-        setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + 4, query.length));
-    }, [graphVersion, query])
+    // useEffect(() => {
+    //     setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + 4, query.length));
+    // }, [graphVersion, query])
 
 
     const requestComponents = [
         <TextArea fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
-        <Table compact header={requestHeadersTable} rows={requestHeaders} aria-label="request headers" />
+        <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
     ]
 
     const responseComponents = [
         <TextArea fluid={true} inverted={true} resize="both" value={responseBody} />,
-        <Table compact header={responseHeadersTable} rows={responseHeaders} aria-label="response headers" />
+        <Table compact header={responseTableHeaders} rows={responseHeaders} aria-label="response headers" />
     ]
 
     return (
         <>
             <h2>{enUS["query runner"]}</h2>
-
+            <Input fluid={true} inverted={true} id="key" value={userAddedHeader} showSuccessIndicator={false} required onChange={(evt) => setUserAddedHeader(evt.target.value)} type="text" />
+            <Button tabIndex={-1} icon={<AddIcon />} circular text iconOnly title="Add request header" onClick={() => addRequestHeader()} />
             <Flex gap="gap.small">
                 <Flex.Item size="size.quarter">
                     <Flex gap="gap.small">
