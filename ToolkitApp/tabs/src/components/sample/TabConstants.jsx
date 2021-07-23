@@ -81,5 +81,4 @@ export const graphVersions = {
 export const TEAMS_CHANNEL_ID = "Teams Channel ID: ";
 export const CHAT = "Chat";
 export const CHAT_ID = "Chat ID: ";
-export const NO_CONNECTED_RESOURCES = "No Connected Resources. Please connect to a Teams or Chats instance";
-
+export const NO_CONNECTED_RESOURCES = "No connected resources. Please connect to a Teams or Chats instance";

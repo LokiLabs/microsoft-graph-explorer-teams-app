@@ -22,10 +22,9 @@ const MainContent = () => {
     const [fourthSectionActive, toggleFourthSection] = useState(true);
     const { t } = useTranslation();
     const [connectedResourcesList, setResourceList] = useState([]);
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState(" ");
 
 
-      //{connectedResourcesList.length !== 0 && <List selectable defaultSelectedIndex={0} items={connectedResourcesList}/>}   
     let firstSection;
     if (firstSectionActive) {
         processTeamsContext(setResourceList, connectedResourcesList, setTitle);   
@@ -38,7 +37,7 @@ const MainContent = () => {
                 <div> 
                     {connectedResourcesList.length !== 0 && <ListItem className = "title" header = {title}/>}
                     {connectedResourcesList.length !== 0 && <List selectable defaultSelectedIndex={0} items={connectedResourcesList}/>} 
-                    {connectedResourcesList.length === 0 &&  <Alert danger content={NO_CONNECTED_RESOURCES}/>}
+                    {connectedResourcesList.length === 0 && !title &&  <Alert danger content={NO_CONNECTED_RESOURCES}/>}
                 </div>
             </div>
     } else {
