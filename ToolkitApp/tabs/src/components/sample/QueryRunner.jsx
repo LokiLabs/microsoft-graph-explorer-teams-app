@@ -32,35 +32,14 @@ export function QueryRunner() {
                     },
                 }],
             };
-            const lastValue = requestHeaders[requestHeaders.length - 1];
-            setRequestHeaders([...requestHeaders.slice(0, -1), newHeaderValue, lastValue]);
+            setRequestHeaders([...requestHeaders, newHeaderValue]);
         }
     }
 
-    // const addOptionCell = {
-    //     content: ,
-    //     truncateContent: true,
-    //     accessibility: gridCellWithFocusableElementBehavior,
-    //     onClick: e => {
-    //         addRequestHeader()
-    //         e.stopPropagation()
-    //     },
-    // }
-
-    const [userAddedHeader, setUserAddedHeader] = useState("moment");
-    const [userAddedValue, setUserAddedValue] = useState("bruh");
-
-    const keyInputCell = {
-
-        content: <Input fluid={true} inverted={true} id="key" value={userAddedHeader} showSuccessIndicator={false} required onChange={(evt) => setUserAddedHeader(evt.target.value)} type="text" />,
-    }
-
-    const valueInputCell = {
-        content: <Input fluid={true} inverted={true} id="value" value={userAddedValue} showSuccessIndicator={false} required onChange={(evt) => setUserAddedValue(evt.target.value)} type="text" />,
-    }
-
-    const [requestType, setRequestType] = useState(requestTypes[0]);
-    const [graphVersion, setGraphVersion] = useState(graphVersions[0]);
+    const [userAddedHeader, setUserAddedHeader] = useState("");
+    const [userAddedValue, setUserAddedValue] = useState("");
+    const [requestType, setRequestType] = useState(requestTypes.GET);
+    const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
     const [query, setQuery] = useState(GRAPH_URL);
     const [responseBody, setResponseBody] = useState("{}");
     const [requestBody, setRequestBody] = useState("{}");
@@ -72,16 +51,7 @@ export function QueryRunner() {
     ]);
     const [responseComponentIndex, setResponseComponentIndex] = useState(0);
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
-    const [requestHeaders, setRequestHeaders] = useState([
-        {
-            key: 'addNew',
-            items: [keyInputCell, valueInputCell, ""],
-        }
-    ]);
-
-    const deleteRow = (header) => setRequestHeaders(requestHeaders.filter(r => r.key !== header));
-
-
+    const [requestHeaders, setRequestHeaders] = useState([]);
 
     const requestItems = [
         enUS["request body"],
@@ -102,19 +72,34 @@ export function QueryRunner() {
     }
 
     const callGraph = () => {
+        // stub
         console.log(requestType);
         console.log(graphVersion);
         console.log(query);
     }
 
-    // useEffect(() => {
-    //     setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + 4, query.length));
-    // }, [graphVersion, query])
+    const deleteRow = (header) => setRequestHeaders(requestHeaders.filter(r => r.key !== header));
 
+    useEffect(() => {
+        setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + 4, query.length));
+    }, [graphVersion, query])
 
     const requestComponents = [
         <TextArea fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
-        <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
+        <>
+            <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
+            <Flex gap="gap.small">
+                <Flex.Item>
+                    <Input fluid={true} inverted={true} id="key" value={userAddedHeader} showSuccessIndicator={false} required onChange={(evt) => setUserAddedHeader(evt.target.value)} type="text" />
+                </Flex.Item>
+                <Flex.Item>
+                    <Input fluid={true} inverted={true} id="value" value={userAddedValue} showSuccessIndicator={false} required onChange={(evt) => setUserAddedValue(evt.target.value)} type="text" />
+                </Flex.Item>
+                <Flex.Item>
+                    <Button tabIndex={-1} icon={<AddIcon />} circular text iconOnly title="Add request header" onClick={() => addRequestHeader()} />
+                </Flex.Item>
+            </Flex>
+        </>
     ]
 
     const responseComponents = [
@@ -125,39 +110,42 @@ export function QueryRunner() {
     return (
         <>
             <h2>{enUS["query runner"]}</h2>
-            <Input fluid={true} inverted={true} id="key" value={userAddedHeader} showSuccessIndicator={false} required onChange={(evt) => setUserAddedHeader(evt.target.value)} type="text" />
-            <Button tabIndex={-1} icon={<AddIcon />} circular text iconOnly title="Add request header" onClick={() => addRequestHeader()} />
             <Flex gap="gap.small">
                 <Flex.Item size="size.quarter">
                     <Flex gap="gap.small">
-                        <Flex.Item size="size.half">
+                        <Flex.Item>
                             <Dropdown
                                 inverted={true}
                                 fluid={true}
-                                items={requestTypes}
+                                items={Object.keys(requestTypes).map(key => requestTypes[key])}
                                 id="requestType"
                                 placeholder={requestType}
-                                onChange={(evt, selected) => setRequestType(requestTypes[selected.highlightedIndex])}
+                                onChange={(evt, selected) => setRequestType(Object.keys(requestTypes).map(key => requestTypes[key])[selected.highlightedIndex])}
                             />
                         </Flex.Item>
-                        <Flex.Item size="size.half">
+                        <Flex.Item>
                             <Dropdown
                                 inverted={true}
                                 fluid={true}
-                                items={graphVersions}
+                                items={Object.keys(graphVersions).map(key => graphVersions[key])}
                                 id="graphVersion"
                                 placeholder={graphVersion}
-                                onChange={(evt, selected) => setGraphVersion(graphVersions[selected.highlightedIndex])}
+                                onChange={(evt, selected) => setGraphVersion(Object.keys(graphVersions).map(key => graphVersions[key])[selected.highlightedIndex])}
                             />
                         </Flex.Item>
                     </Flex>
                 </Flex.Item>
 
                 <Flex.Item grow>
-                    <Input fluid inverted value={query} showSuccessIndicator={false} required onChange={(evt) => setQuery(evt.target.value)} type="text" />
+                    <Flex gap="gap.small">
+                        <Flex.Item grow>
+                            <Input fluid inverted value={query} showSuccessIndicator={false} required onChange={(evt) => setQuery(evt.target.value)} type="text" />
+                        </Flex.Item>
+                        <Flex.Item size="size.half">
+                            <Button content={enUS["run query"]} onClick={() => callGraph()} primary />
+                        </Flex.Item>
+                    </Flex>
                 </Flex.Item>
-
-                <Button content={enUS["run query"]} onClick={() => callGraph()} primary />
             </Flex>
 
             <Flex padding="padding.medium">
@@ -165,8 +153,7 @@ export function QueryRunner() {
                     defaultActiveIndex={0}
                     underlined
                     primary
-                    accessibility={tabListBehavior}
-                >
+                    accessibility={tabListBehavior}>
                     <Menu.Item index={0} onClick={() => setRequestComponentIndex(0)}>
                         <Menu.ItemContent>{requestItems[0]}</Menu.ItemContent>
                     </Menu.Item>
@@ -176,13 +163,13 @@ export function QueryRunner() {
                 </Menu>
             </Flex>
             {requestComponents[requestComponentIndex]}
+
             <Flex padding="padding.medium">
                 <Menu
                     defaultActiveIndex={0}
                     underlined
                     primary
-                    accessibility={tabListBehavior}
-                >
+                    accessibility={tabListBehavior}>
                     <Menu.Item index={0} onClick={() => setResponseComponentIndex(0)}>
                         <Menu.ItemContent>{responseItems[0]}</Menu.ItemContent>
                     </Menu.Item>

@@ -35,15 +35,15 @@ export const RSC_LIST = [
     "OnlineMeeting.ReadBasic.Chat"
 ];
 
-export const requestTypes = [
-    "GET",
-    "POST",
-    "DELETE",
-    "PATCH",
-    "PUT"
-]
+export const requestTypes = {
+    GET: "GET",
+    POST: "POST",
+    DELETE: "DELETE",
+    PATCH: "PATCH",
+    PUT: "PUT"
+}
 
-export const graphVersions = [
-    "v1.0",
-    "beta"
-]
+export const graphVersions = {
+    v1: "v1.0",
+    beta: "beta"
+}
