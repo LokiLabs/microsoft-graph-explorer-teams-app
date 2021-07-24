@@ -4,6 +4,7 @@ import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, 
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility'
 import { TrashCanIcon, AddIcon } from '@fluentui/react-icons-northstar'
 import enUS from './GE.json';
+import "./style.css";
 
 export function QueryRunner() {
     const addRequestHeader = () => {
@@ -88,15 +89,38 @@ export function QueryRunner() {
         <TextArea fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
         <>
             <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
-            <Flex gap="gap.small">
+            <Flex gap="gap.small" padding="padding.medium">
                 <Flex.Item>
-                    <Input fluid={true} inverted={true} id="key" value={userAddedHeader} showSuccessIndicator={false} required onChange={(evt) => setUserAddedHeader(evt.target.value)} type="text" />
+                    <Input
+                        fluid={true}
+                        inverted={true}
+                        id="key"
+                        value={userAddedHeader}
+                        showSuccessIndicator={false}
+                        required
+                        onChange={(evt) => setUserAddedHeader(evt.target.value)}
+                        type="text" />
                 </Flex.Item>
                 <Flex.Item>
-                    <Input fluid={true} inverted={true} id="value" value={userAddedValue} showSuccessIndicator={false} required onChange={(evt) => setUserAddedValue(evt.target.value)} type="text" />
+                    <Input
+                        fluid={true}
+                        inverted={true}
+                        id="value"
+                        value={userAddedValue}
+                        showSuccessIndicator={false}
+                        required
+                        onChange={(evt) => setUserAddedValue(evt.target.value)}
+                        type="text" />
                 </Flex.Item>
                 <Flex.Item>
-                    <Button tabIndex={-1} icon={<AddIcon />} circular text iconOnly title="Add request header" onClick={() => addRequestHeader()} />
+                    <Button
+                        tabIndex={-1}
+                        icon={<AddIcon />}
+                        circular
+                        text
+                        iconOnly
+                        title="Add request header"
+                        onClick={() => addRequestHeader()} />
                 </Flex.Item>
             </Flex>
         </>
@@ -109,32 +133,25 @@ export function QueryRunner() {
 
     return (
         <>
-            <h2>{enUS["query runner"]}</h2>
             <Flex gap="gap.small">
-                <Flex.Item size="size.quarter">
-                    <Flex gap="gap.small">
-                        <Flex.Item>
-                            <Dropdown
-                                inverted={true}
-                                fluid={true}
-                                items={Object.keys(requestTypes).map(key => requestTypes[key])}
-                                id="requestType"
-                                placeholder={requestType}
-                                onChange={(evt, selected) => setRequestType(Object.keys(requestTypes).map(key => requestTypes[key])[selected.highlightedIndex])}
-                            />
-                        </Flex.Item>
-                        <Flex.Item>
-                            <Dropdown
-                                inverted={true}
-                                fluid={true}
-                                items={Object.keys(graphVersions).map(key => graphVersions[key])}
-                                id="graphVersion"
-                                placeholder={graphVersion}
-                                onChange={(evt, selected) => setGraphVersion(Object.keys(graphVersions).map(key => graphVersions[key])[selected.highlightedIndex])}
-                            />
-                        </Flex.Item>
-                    </Flex>
-                </Flex.Item>
+                <Dropdown
+                    inverted={true}
+                    fluid={true}
+                    items={Object.keys(requestTypes).map(key => requestTypes[key])}
+                    id="requestType"
+                    placeholder={requestType}
+                    onChange={(evt, selected) => setRequestType(Object.keys(requestTypes).map(key => requestTypes[key])[selected.highlightedIndex])}
+                    className="dropdown"
+                />
+                <Dropdown
+                    inverted={true}
+                    fluid={true}
+                    items={Object.keys(graphVersions).map(key => graphVersions[key])}
+                    id="graphVersion"
+                    placeholder={graphVersion}
+                    onChange={(evt, selected) => setGraphVersion(Object.keys(graphVersions).map(key => graphVersions[key])[selected.highlightedIndex])}
+                    className="dropdown"
+                />
 
                 <Flex.Item grow>
                     <Flex gap="gap.small">
