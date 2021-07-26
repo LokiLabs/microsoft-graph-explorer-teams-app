@@ -15,3 +15,4 @@ export function RSCList() {
         <Table header={{ items }} rows={RSCRows} aria-label="RSC Table" />
     );
 }
+

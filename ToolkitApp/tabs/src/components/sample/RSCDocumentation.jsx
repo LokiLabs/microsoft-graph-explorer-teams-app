@@ -5,10 +5,9 @@ import { markdown } from './lib/useDrawdown';
 export function RSCDocumentation() {
     const [rscDocs, setRSCDocs] = useState({});
 
-    // Passing an empty array [] ensures this effect will run just once; otherwise, it will run after every render.
-    useEffect(() => getRSCDocs(), []);
-
-    const getRSCDocs = async () => {
+    // Passing an empty array [] ensures this effect will run just once; 
+    // otherwise, it will run after every render.
+    useEffect(() => async () => {
         const response = await fetch(RSC_DOCUMENTATION_URL);
         const blob = await response.blob();
         var text = await blob.text();
@@ -31,7 +30,7 @@ export function RSCDocumentation() {
             }
             else{
                 // if there is a picture between two empty lines
-                if(0 < i < lines.length - 1 && lines[i-1] === "" && lines[i+1] ===""){
+                if(0 < i < lines.length - 1 && lines[i-1] === "" && lines[i+1] === ""){
                     // remove the previous empty line
                     refinedText = refinedText.slice(0, -1);
                     // skip the next empty line
@@ -42,7 +41,7 @@ export function RSCDocumentation() {
         }
         var html = markdown(refinedText);
         setRSCDocs(html);
-    };
+    }, []);
     return (
         <div dangerouslySetInnerHTML={{ __html: rscDocs }} />
     );

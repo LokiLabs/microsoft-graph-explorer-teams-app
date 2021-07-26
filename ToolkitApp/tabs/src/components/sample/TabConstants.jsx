@@ -63,3 +63,17 @@ export const items = [
     'Permissions',
     'Descriptions'
 ]
+export const GRAPH_URL = "https://graph.microsoft.com/"
+
+export const requestTypes = {
+    GET: "GET",
+    POST: "POST",
+    DELETE: "DELETE",
+    PATCH: "PATCH",
+    PUT: "PUT"
+}
+
+export const graphVersions = {
+    v1: "v1.0",
+    beta: "beta"
+}
