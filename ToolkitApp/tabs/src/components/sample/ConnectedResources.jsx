@@ -1,12 +1,14 @@
-import React from 'react';
-import { Button } from '@fluentui/react-northstar'
+import React, {useState} from 'react';
+import { Button, List, Alert, ListItem } from '@fluentui/react-northstar'
 import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar'
 import * as microsoftTeams from "@microsoft/teams-js"; 
 import "./ConnectedResources.css";
-import {TEAMS_CHANNEL_ID, CHAT, CHAT_ID} from './TabConstants';
+import {TEAMS_CHANNEL_ID, CHAT, CHAT_ID,  NO_CONNECTED_RESOURCES} from './TabConstants';
 
-export function processTeamsContext(setResourceList,resourceList,setTitle){
+export function ProcessTeamsContext(){
     //Get the context of where the tab is currently
+    const [resourceList, setResourceList] = useState([]);
+    const [title, setTitle] = useState(" ");
     microsoftTeams.getContext(function(context) {
         
         //Check if this is a teams channel
@@ -34,6 +36,13 @@ export function processTeamsContext(setResourceList,resourceList,setTitle){
             setResourceList([]);
         }
     });
+    return (
+        <div>
+            {resourceList.length !== 0 && <ListItem className = "title" header = {title}/>}
+            {resourceList.length !== 0 && <List selectable defaultSelectedIndex={0} items={resourceList}/>} 
+            {resourceList.length === 0 && !title &&  <Alert danger content={NO_CONNECTED_RESOURCES}/>}
+        </div>
+    );
 }
 
 function isAlreadyPresent(list, id){

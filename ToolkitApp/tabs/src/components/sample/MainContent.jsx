@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import DocumentationLinks from "./DocumentationLinks";
 
 import * as microsoftTeams from "@microsoft/teams-js"; 
+import { ProcessTeamsContext } from './ConnectedResources.jsx';
 import { NO_CONNECTED_RESOURCES} from "./TabConstants";
 import "./ConnectedResources.css";
 
@@ -26,19 +27,14 @@ const MainContent = () => {
 
 
     let firstSection;
-    if (firstSectionActive) {
-        processTeamsContext(setResourceList, connectedResourcesList, setTitle);   
+    if (firstSectionActive) { 
         firstSection =
             <div>
                 <Flex id="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
                     <ChevronDownIcon id="connected-resource-chevron" />
                     <Header id="connected-resource-header" as="h2" content={t("Table of Contents.Connected Resources")} />
                 </Flex>
-                <div> 
-                    {connectedResourcesList.length !== 0 && <ListItem className = "title" header = {title}/>}
-                    {connectedResourcesList.length !== 0 && <List selectable defaultSelectedIndex={0} items={connectedResourcesList}/>} 
-                    {connectedResourcesList.length === 0 && !title &&  <Alert danger content={NO_CONNECTED_RESOURCES}/>}
-                </div>
+                <ProcessTeamsContext />
             </div>
     } else {
         firstSection =
