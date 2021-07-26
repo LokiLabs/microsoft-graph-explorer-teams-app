@@ -1,8 +1,5 @@
 import React from "react";
 import "./Welcome.css";
-// import { useTeamsFx } from "./lib/useTeamsFx";
-// import { TeamsUserCredential } from "@microsoft/teamsfx";
-// import { useData } from "./lib/useData";
 
 
 
