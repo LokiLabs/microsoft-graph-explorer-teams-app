@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { requestTypes, graphVersions, GRAPH_URL } from "./TabConstants";
-import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, Box } from '@fluentui/react-northstar'
+import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown } from '@fluentui/react-northstar'
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility'
-import { TrashCanIcon, AddIcon } from '@fluentui/react-icons-northstar'
+import { TrashCanIcon } from '@fluentui/react-icons-northstar'
 import enUS from './GE.json';
 import "./style.css";
 
@@ -13,23 +13,23 @@ export function QueryRunner() {
             const valueCopy = (' ' + userAddedValue).slice(1);
             setUserAddedHeader("");
             setUserAddedValue("");
-            const deleteButton = (deleteTodo) => <Button
+            const deleteButton = () => <Button
                 tabIndex={-1}
                 icon={<TrashCanIcon />}
                 circular
                 text
                 iconOnly
                 title="Delete request header"
-                onClick={() => deleteTodo(headerCopy)}
             />
             const newHeaderValue = {
                 key: headerCopy,
                 items: [headerCopy, valueCopy, {
-                    content: deleteButton(deleteRow),
+                    content: deleteButton(),
                     truncateContent: true,
                     accessibility: gridCellWithFocusableElementBehavior,
                     onClick: e => {
-                        e.stopPropagation()
+                        deleteRow(headerCopy);
+                        e.stopPropagation();
                     },
                 }],
             };
@@ -44,12 +44,7 @@ export function QueryRunner() {
     const [query, setQuery] = useState(GRAPH_URL);
     const [responseBody, setResponseBody] = useState("{}");
     const [requestBody, setRequestBody] = useState("{}");
-    const [responseHeaders, setResponseHeaders] = useState([
-        {
-            key: 'Content',
-            items: ['Content', 'json'],
-        },
-    ]);
+    const [responseHeaders, setResponseHeaders] = useState([{ key: 'Content', items: ['Content', 'json'] }]);
     const [responseComponentIndex, setResponseComponentIndex] = useState(0);
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
     const [requestHeaders, setRequestHeaders] = useState([]);
@@ -79,7 +74,9 @@ export function QueryRunner() {
         console.log(query);
     }
 
-    const deleteRow = (header) => setRequestHeaders(requestHeaders.filter(r => r.key !== header));
+    const deleteRow = (header) => {
+        setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header))
+    };
 
     useEffect(() => {
         setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + 4, query.length));
@@ -113,14 +110,7 @@ export function QueryRunner() {
                         type="text" />
                 </Flex.Item>
                 <Flex.Item>
-                    <Button
-                        tabIndex={-1}
-                        icon={<AddIcon />}
-                        circular
-                        text
-                        iconOnly
-                        title="Add request header"
-                        onClick={() => addRequestHeader()} />
+                    <Button content="Add" onClick={() => addRequestHeader()} primary />
                 </Flex.Item>
             </Flex>
         </>
