@@ -13,7 +13,6 @@ import Layout from "./Layout";
 
 export function Welcome(props) {
 
-  // const { isInTeams } = useTeamsFx();
   // const userProfile = useData(async () => {
   //   const credential = new TeamsUserCredential();
   //   return isInTeams ? await credential.getUserInfo() : undefined;
