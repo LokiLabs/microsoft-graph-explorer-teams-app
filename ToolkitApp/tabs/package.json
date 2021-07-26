@@ -4,14 +4,14 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-northstar": "^0.54.0",
-    "dompurify": "^2.2.9",
-    "office-ui-fabric-react": "^7.172.1",
     "@microsoft/teams-js": "^1.6.0",
     "@microsoft/teamsfx": "^0.1.0",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
+    "dompurify": "^2.2.9",
     "msteams-react-base-component": "^3.1.0",
     "node-fetch": "^2.6.1",
+    "office-ui-fabric-react": "^7.172.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.1.2",
@@ -21,7 +21,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.js src/**/*.jsx"
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +42,9 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "."
+  "homepage": ".",
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-plugin-react": "^7.24.0"
+  }
 }
