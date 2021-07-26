@@ -6,7 +6,6 @@ import { useTeamsFx } from "./sample/lib/useTeamsFx";
 import Privacy from "./Privacy";
 import TermsOfUse from "./TermsOfUse";
 import Tab from "./Tab";
-import "./App.css";
 import TabConfig from "./TabConfig";
 import { useTranslation } from "react-i18next";
 import { useTeams } from "msteams-react-base-component";
