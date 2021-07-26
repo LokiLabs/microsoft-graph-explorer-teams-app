@@ -5,6 +5,11 @@
             "Query Runner": "(zh-cn) Query Runner",
             "Resource-Specific Consent": "(zh-cn) Resource-Specific Consent",
             "Documentation Links": "(zh-cn) Documentation Links"
+        },
+        "Documentation Links" : {
+            "Go to Graph Explorer": "(zh-cn) Go to Graph Explorer",
+            "Graph Explorer Documentation": "(zh-cn) Graph Explorer Documentation",
+            "Resource-Specific Consent": "(zh-cn) Resource-Specific Consent"
         }
     }
 }
