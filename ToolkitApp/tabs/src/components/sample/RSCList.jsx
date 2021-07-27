@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import "./RSCList.css";
 import { RSC_LIST } from './TabConstants';
 
-export function RSCList(props) {
+export function RSCList() {
     const RSCTableItems = RSC_LIST.map((item) => <tr key={item}><td>{item}</td></tr>);
     const { t } = useTranslation();
 
