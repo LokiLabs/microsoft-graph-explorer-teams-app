@@ -8,8 +8,8 @@
     height:40vh;
     width: 100vw;
     background-color: #fff;
-    padding: 5px 20px;
     position: relative;
+    font-size: 110%;
   }
 .image {
   text-align: center;

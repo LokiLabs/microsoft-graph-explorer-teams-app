@@ -40,7 +40,7 @@ class TabConfig extends React.Component {
     return (
       <center className = "center" >
         <img className = "image" src={imageName.default} />
-        <h3 className = "caption">Select save to finish adding Graph Explorer Sample Teams app.</h3>
+        <h4 className = "caption">Select save to finish adding the Graph Explorer Sample Teams app.</h4>
       </center>
     );
   }
