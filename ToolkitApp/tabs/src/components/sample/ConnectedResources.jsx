@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Button, List, Alert, ListItem } from '@fluentui/react-northstar'
 import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar'
+import copy from "copy-to-clipboard"; 
 import * as microsoftTeams from "@microsoft/teams-js"; 
 import "./ConnectedResources.css";
 import {TEAMS_CHANNEL_ID, CHAT, CHAT_ID,  NO_CONNECTED_RESOURCES} from './TabConstants';
@@ -47,26 +48,13 @@ export function ProcessTeamsContext(){
 
 function isAlreadyPresent(list, id){
     //if there aren't any contexts
-    if(list.length === 0){
-        return false;
-    }
-
-    //Loop through all the instances 
-    for(let i  = 0; i < list.length; i++){
-        if (list[i].header && list[i].header.includes(id)){
-            return true;
-        }
-    }
-    return false;
+    list.some((item => {
+        item.header?.includes(id);
+    }));
 }
 
 function copyText(id){
-    //Goal is to be able to have the user paste "id" once they try to copy 
-    var copyValue = document.createElement('textarea');
-    copyValue.value = id;
-    document.body.appendChild(copyValue);
-    copyValue.select();
-    document.execCommand("copy"); 
+    copy(id);
 }
 
 export function createItemWithCopy(id){
@@ -74,7 +62,7 @@ export function createItemWithCopy(id){
 
     //Add the copy icon 
     item.endMedia = (
-        <Button icon={<ClipboardCopiedToIcon  className = "copyIcon"  />} size="medium"  text iconOnly title="Copy" onClick={() => copyText(id)}/>
+        <Button icon={<ClipboardCopiedToIcon  className = "copy-icon"  />} size="medium"  text iconOnly title="Copy" onClick={() => copyText(id)}/>
     )
     return item;
 }
