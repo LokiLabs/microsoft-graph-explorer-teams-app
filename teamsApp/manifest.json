@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "1.0.0",
+  "id": "47c88300-12bd-44cb-b3ba-734ed25fe1de",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://privacy.microsoft.com/en-us/privacystatement",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/servicesagreement/"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "ToolkitApp",
+    "full": "This field is not used"
+  },
+  "description": {
+    "short": "Short description of ToolkitApp.",
+    "full": "Full description of ToolkitApp."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [],
+  "composeExtensions": [],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://localhost:3000/index.html#/config",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://localhost:3000/index.html#/tab",
+      "websiteUrl": "https://localhost:3000/index.html#/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [],
+  "webApplicationInfo": {
+    "id": "de8bc8b5-d9f9-48b1-a8ad-b748da725064",
+    "resource": "https://RscBasedStoreApp",
+    "applicationPermissions": [
+      "TeamSettings.Read.Group",
+      "TeamSettings.ReadWrite.Group",
+      "ChannelSettings.Read.Group",
+      "ChannelSettings.ReadWrite.Group",
+      "Channel.Create.Group",
+      "Channel.Delete.Group",
+      "ChannelMessage.Read.Group",
+      "TeamsAppInstallation.Read.Group",
+      "TeamsTab.Read.Group",
+      "TeamsTab.Create.Group",
+      "TeamsTab.ReadWrite.Group",
+      "TeamsTab.Delete.Group",
+      "TeamMember.Read.Group",
+      "ChatSettings.Read.Chat",
+      "ChatSettings.ReadWrite.Chat",
+      "ChatMessage.Read.Chat",
+      "ChatMember.Read.Chat",
+      "Chat.Manage.Chat",
+      "TeamsTab.Read.Chat",
+      "TeamsTab.Create.Chat",
+      "TeamsTab.Delete.Chat",
+      "TeamsTab.ReadWrite.Chat",
+      "TeamsAppInstallation.Read.Chat",
+      "OnlineMeeting.ReadBasic.Chat"
+    ]
+  },
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "pendingFinanceApprovalRequests",
+        "description": "Test Activity Type",
+        "templateText": "Internal spending team has a pending finance approval request"
+      }
+    ]
+  }
+}

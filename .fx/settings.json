@@ -1,0 +1,20 @@
+{
+    "appName": "ToolkitApp",
+    "solutionSettings": {
+        "name": "fx-solution-azure",
+        "version": "1.0.0",
+        "hostType": "Azure",
+        "capabilities": [
+            "Tab"
+        ],
+        "azureResources": [],
+        "activeResourcePlugins": [
+            "fx-resource-local-debug",
+            "fx-resource-frontend-hosting",
+            "fx-resource-aad-app-for-teams",
+            "fx-resource-simple-auth"
+        ]
+    },
+    "currentEnv": "default",
+    "projectId": "ada57d22-2e1d-4467-8ed1-16bcaf38e044"
+}

@@ -1,0 +1,18 @@
+{
+    "translation": {
+
+        "Table of Contents" : {
+            "Connected Resources": "Connected Resources",
+            "Query Runner": "Query Runner",
+            "Resource-Specific Consent": "Resource-Specific Consent",
+            "Documentation Links": "Documentation Links"
+        },
+
+        "Documentation Links" : {
+            "Go to Graph Explorer": "Go to Graph Explorer",
+            "Graph Explorer Documentation": "Graph Explorer Documentation",
+            "Resource-Specific Consent": "Resource-Specific Consent"
+        }
+
+    }
+}
