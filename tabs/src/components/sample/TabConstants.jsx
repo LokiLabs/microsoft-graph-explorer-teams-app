@@ -30,7 +30,7 @@ export const RSC_LIST =
         "TeamsTab.ReadWrite.Chat",
         "TeamsAppInstallation.Read.Chat",
         "OnlineMeeting.ReadBasic.Chat"
-    ]
+    ];
 
 export const RSC_NAME_DESCRIPTION = {
     'TeamSettings.Read.Group': "Get this team's settings.",
@@ -57,13 +57,13 @@ export const RSC_NAME_DESCRIPTION = {
     "TeamsTab.ReadWrite.Chat": "Manage this chat's tabs.",
     "TeamsAppInstallation.Read.Chat": "Get which apps are installed in this chat.",
     "OnlineMeeting.ReadBasic.Chat": "Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat."
-}
+};
 
 export const items = [
     'Permissions',
     'Descriptions'
-]
-export const GRAPH_URL = "https://graph.microsoft.com/"
+];
+export const GRAPH_URL = "https://graph.microsoft.com/";
 
 export const requestTypes = {
     GET: "GET",
@@ -71,12 +71,12 @@ export const requestTypes = {
     DELETE: "DELETE",
     PATCH: "PATCH",
     PUT: "PUT"
-}
+};
 
 export const graphVersions = {
     v1: "v1.0",
     beta: "beta"
-}
+};
 //TO DO: Support multi languages. Attached to ADO ticket #38594
 export const TEAMS_CHANNEL_ID = "Teams Channel ID: ";
 export const CHAT = "Chat";
