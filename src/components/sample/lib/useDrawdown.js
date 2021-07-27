@@ -144,4 +144,4 @@ export function markdown(src) {
     replace(/href/g, "target='_blank' href");
 
     return src.trim();
-};
+}

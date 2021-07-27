@@ -1,18 +1,18 @@
 import React from "react";
 import "./RSCList.css";
-import { RSC_LIST } from './TabConstants';
+import { RSC_LIST, items, RSC_NAME_DESCRIPTION } from './TabConstants';
+import { Table } from '@fluentui/react-northstar'
 
 export function RSCList() {
-    const RSCTableItems = RSC_LIST.map((item) => <tr key={item}>{item}</tr>);
+
+    const filterPermType = (permType, perm) => perm.includes(permType);
+
+    const RSCRows = RSC_LIST
+        .filter(perm => filterPermType("Group", perm))
+        .map(perm => ({ key: perm, items: [perm, RSC_NAME_DESCRIPTION[perm]], }));
 
     return (
-        <div>
-            <h1>RSC permissions of this app</h1>
-            <table id='RSCTable'>
-                <tbody>
-                    {RSCTableItems}
-                </tbody>
-            </table>
-        </div>
+        <Table header={{ items }} rows={RSCRows} aria-label="RSC Table" />
     );
 }
+
