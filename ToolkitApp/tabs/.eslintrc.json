@@ -5,8 +5,10 @@
         "es2021": true
     },
     "extends": [
+        "react-app",
+        "react-app/jest",
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react-hooks/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -18,8 +20,15 @@
     "plugins": [
         "react"
     ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
         "react/no-unescaped-entities": 0,
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
         "semi": [
             2,
             "always"

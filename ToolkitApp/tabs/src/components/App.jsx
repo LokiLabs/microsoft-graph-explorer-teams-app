@@ -16,7 +16,7 @@ import { changeLanguage } from "./i18n";
  * of the app.
  */
 export default function App() {
-  const [ isTeams ] = useTeams({});
+  var [ isTeams ] = useTeams({});
   const { theme, loading } = useTeamsFx();
   const { i18n } = useTranslation();
   if (isTeams.context?.locale) {
