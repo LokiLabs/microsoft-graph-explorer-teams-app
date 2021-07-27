@@ -72,6 +72,8 @@ export function QueryRunner() {
         console.log(requestType);
         console.log(graphVersion);
         console.log(query);
+        setResponseBody("");
+        setResponseHeaders([{ key: 'Content', items: ['Content', 'json'] }]);
     }
 
     const deleteRow = (header) => {
@@ -83,7 +85,7 @@ export function QueryRunner() {
     }, [graphVersion, query])
 
     const requestComponents = [
-        <TextArea fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
+        <TextArea key="requestBody" fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
         <>
             <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
             <Flex gap="gap.small" padding="padding.medium">
@@ -117,8 +119,8 @@ export function QueryRunner() {
     ]
 
     const responseComponents = [
-        <TextArea fluid={true} inverted={true} resize="both" value={responseBody} />,
-        <Table compact header={responseTableHeaders} rows={responseHeaders} aria-label="response headers" />
+        <TextArea key="responseBody" fluid={true} inverted={true} resize="both" value={responseBody} />,
+        <Table key="responseHeaders" compact header={responseTableHeaders} rows={responseHeaders} aria-label="response headers" />
     ]
 
     return (

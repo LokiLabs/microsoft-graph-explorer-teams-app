@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDownIcon, ChevronEndIcon, Header, Flex } from '@fluentui/react-northstar';
 import { RSCList } from "./RSCList";
-import { RSCDocumentation } from "./RSCDocumentation";
-import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL, OFFICIAL_RSC_URL } from "./TabConstants";
 import { QueryRunner } from './QueryRunner';
 import { useTranslation } from 'react-i18next';
 import DocumentationLinks from "./DocumentationLinks";
