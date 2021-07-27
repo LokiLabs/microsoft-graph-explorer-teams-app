@@ -59,11 +59,11 @@ jobs:
       - script: |
           npm install
           npm run build
-        workingDirectory: ToolkitApp/tabs
+        workingDirectory: tabs
         displayName: 'npm install and build'
       - script: |
           npm run lint
-        workingDirectory: ToolkitApp/tabs
+        workingDirectory: tabs
         displayName: 'Runs linting checks'
       - task: DeleteFiles@1
         inputs:
