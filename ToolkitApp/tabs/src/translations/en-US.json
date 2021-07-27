@@ -1,6 +1,12 @@
 {
     "translation": {
 
+        "docs": "docs",
+
+        "AzureFunctions": {
+            "Call your Azure Function": "Call your Azure Function"
+        },
+
         "Table of Contents" : {
             "Connected Resources": "Connected Resources",
             "Query Runner": "Query Runner",
