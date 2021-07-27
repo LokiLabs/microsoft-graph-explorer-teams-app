@@ -2,8 +2,14 @@
     width: 100%;
 }
 
-#RSCTable tr:nth-child(odd){background-color: #e5e5e5;}
+#RSCTable tr:nth-child(odd) {
+    background-color: #e5e5e5;
+}
 
-#RSCTable tr:nth-child(even){background-color: #f2f2f2;}
+#RSCTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 
-#RSCTable tr:hover {background-color: #ddd;}
+#RSCTable tr:hover {
+    background-color: #ddd;
+}
