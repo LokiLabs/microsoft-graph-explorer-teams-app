@@ -79,7 +79,7 @@ code {
 
 * {
   box-sizing: border-box;
-  margin: -1.2px;
+  margin: 0px;
 }
 
 .layout {
