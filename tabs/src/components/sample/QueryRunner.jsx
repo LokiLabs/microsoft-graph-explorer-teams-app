@@ -42,9 +42,9 @@ export function QueryRunner() {
     const [requestType, setRequestType] = useState(requestTypes.GET);
     const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
     const [query, setQuery] = useState(GRAPH_URL);
-    const [responseBody, setResponseBody] = useState("{}");
+    const [responseBody] = useState("{}");
     const [requestBody, setRequestBody] = useState("{}");
-    const [responseHeaders, setResponseHeaders] = useState([{ key: 'Content', items: ['Content', 'json'] }]);
+    const [responseHeaders] = useState([{ key: 'Content', items: ['Content', 'json'] }]);
     const [responseComponentIndex, setResponseComponentIndex] = useState(0);
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
     const [requestHeaders, setRequestHeaders] = useState([]);

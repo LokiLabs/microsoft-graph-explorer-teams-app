@@ -39,7 +39,7 @@ class TabConfig extends React.Component {
     var imageName = require('./teamsappzeronotes.svg')
     return (
       <center className = "center" >
-        <img className = "image" src={imageName.default} />
+        <img className = "image" src={imageName.default} alt = ''/>
         <h4 className = "caption">Select save to finish adding the Graph Explorer Sample Teams app.</h4>
       </center>
     );
