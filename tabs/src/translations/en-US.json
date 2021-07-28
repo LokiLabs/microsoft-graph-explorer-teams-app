@@ -1,6 +1,19 @@
 {
     "translation": {
 
+        "Query Runner": {
+            "Key": "Key",
+            "Value": "Value",
+            "Run query": "RUN QUERY",
+            "Request body": "Request Body",
+            "Request headers": "Request Headers",
+            "Response body": "Response Body",
+            "Response headers": "Response Headers",
+            "Response": "Response",
+            "Warning": "To use Graph requests, you must connect the app to a resource in order to use resource-specific consent queries. Learn more here.",
+            "Add": "ADD"
+        },
+
         "Connected Resources": {
             "Teams Channel ID": "Teams Channel ID",
             "Chat": "Chat",
