@@ -4,7 +4,6 @@ import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown }
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility'
 import { TrashCanIcon } from '@fluentui/react-icons-northstar'
 import enUS from './GE.json';
-import "./style.css";
 
 export function QueryRunner() {
     const addRequestHeader = () => {

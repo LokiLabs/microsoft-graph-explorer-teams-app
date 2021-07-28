@@ -1,3 +1,10 @@
+@import url("components/TabConfig.css");
+@import url("components/sample/ConnectedResources.css");
+@import url("components/sample/Publish.css");
+@import url("components/sample/RSCList.css");
+@import url("components/sample/QueryRunner.css");
+@import url("components/sample/Welcome.css");
+
 * {
   box-sizing: border-box;
   /* outline: 1px dashed #f00; */

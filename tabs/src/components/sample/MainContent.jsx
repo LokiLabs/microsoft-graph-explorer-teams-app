@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import DocumentationLinks from "./DocumentationLinks";
 
 import { ProcessTeamsContext } from './ConnectedResources.jsx';
-import "./ConnectedResources.css";
 
 const MainContent = () => {
     const [firstSectionActive, toggleFirstSection] = useState(true);
