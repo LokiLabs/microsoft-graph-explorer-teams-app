@@ -8,7 +8,6 @@ var functionName = process.env.REACT_APP_FUNC_NAME || "myFunc";
 
 async function callFunction() {
   try {
-    // Not fully sure how to localize this since it is not a react component
     const credential = new TeamsUserCredential();
     const accessToken = await credential.getToken("");
     const apiConfig = getResourceConfiguration(ResourceType.API);
