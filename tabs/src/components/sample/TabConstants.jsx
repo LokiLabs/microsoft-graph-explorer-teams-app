@@ -31,38 +31,7 @@ export const RSC_LIST =
         "TeamsAppInstallation.Read.Chat",
         "OnlineMeeting.ReadBasic.Chat"
     ]
-
-export const RSC_NAME_DESCRIPTION = {
-    'TeamSettings.Read.Group': "Get this team's settings.",
-    'TeamSettings.ReadWrite.Group': "Update this team's settings.",
-    'ChannelSettings.Read.Group': "Get this team's channel names, channel descriptions, and channel settings.",
-    'ChannelSettings.ReadWrite.Group': "Update this team's channel names, channel descriptions, and channel settings.",
-    'Channel.Create.Group': 'Create channels in this team.',
-    'Channel.Delete.Group': 'Delete channels in this team.',
-    'ChannelMessage.Read.Group': "Get this team's channel messages.",
-    'TeamsAppInstallation.Read.Group': "Get a list of this team's installed apps.",
-    'TeamsTab.Read.Group': "Get a list of this team's tabs.",
-    'TeamsTab.Create.Group': 'Create tabs in this team.',
-    'TeamsTab.ReadWrite.Group': "Update this team's tabs.",
-    'TeamsTab.Delete.Group': "Delete this team's tabs.",
-    'TeamMember.Read.Group': "Get this team's members.",
-    "ChatSettings.Read.Chat": "Get this chat's settings.",
-    "ChatSettings.ReadWrite.Chat": "Update this chat's settings.",
-    "ChatMessage.Read.Chat": "Get this chat's messages.",
-    "ChatMember.Read.Chat": "Get this chat's members.",
-    "Chat.Manage.Chat": "Manage this chat.",
-    "TeamsTab.Read.Chat": "Get this chat's tabs.",
-    "TeamsTab.Create.Chat": "Create tabs in this chat.",
-    "TeamsTab.Delete.Chat": "Delete this chat's tabs.",
-    "TeamsTab.ReadWrite.Chat": "Manage this chat's tabs.",
-    "TeamsAppInstallation.Read.Chat": "Get which apps are installed in this chat.",
-    "OnlineMeeting.ReadBasic.Chat": "Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat."
-}
-
-export const items = [
-    'Permissions',
-    'Descriptions'
-]
+    
 export const GRAPH_URL = "https://graph.microsoft.com/"
 
 export const requestTypes = {
