@@ -1,15 +1,70 @@
 {
     "translation": {
+
+        "Query Runner": {
+            "Key": "(zh-cn) Key",
+            "Value": "(zh-cn) Value",
+            "Run query": "(zh-cn) RUN QUERY",
+            "Request body": "(zh-cn) Request Body",
+            "Request headers": "(zh-cn) Request Headers",
+            "Response body": "(zh-cn) Response Body",
+            "Response headers": "(zh-cn) Response Headers",
+            "Response": "(zh-cn) Response",
+            "Warning": "(zh-cn) To use Graph requests, you must connect the app to a resource in order to use resource-specific consent queries. Learn more here.",
+            "Add": "(zh-cn) ADD"
+        },
+
+        "Connected Resources": {
+            "Teams Channel ID": "(zh-cn) Teams Channel ID",
+            "Chat": "(zh-cn) Chat",
+            "Chat ID": "(zh-cn) Chat ID",
+            "No Connected Resources": "(zh-cn) No connected resources. Please connect to a Teams or Chats instance."
+        },
+
+        "RSC Headers": {
+            "Permissions": "(zh-cn) Permissions",
+            "Descriptions": "(zh-cn) Descriptions"
+        },
+
+        "RSC Descriptions": {
+            "TeamSettings.Read.Group": "(zh-cn) Get this team's settings.",
+            "TeamSettings.ReadWrite.Group": "(zh-cn) Update this team's settings.",
+            "ChannelSettings.Read.Group": "(zh-cn) Get this team's channel names, channel descriptions, and channel settings.",
+            "ChannelSettings.ReadWrite.Group": "(zh-cn) Update this team's channel names, channel descriptions, and channel settings.",
+            "Channel.Create.Group": "(zh-cn) Create channels in this team.",
+            "Channel.Delete.Group": "(zh-cn) Delete channels in this team.",
+            "ChannelMessage.Read.Group": "(zh-cn) Get this team's channel messages.",
+            "TeamsAppInstallation.Read.Group": "(zh-cn) Get a list of this team's installed apps.",
+            "TeamsTab.Read.Group": "(zh-cn) Get a list of this team's tabs.",
+            "TeamsTab.Create.Group": "(zh-cn) Create tabs in this team.",
+            "TeamsTab.ReadWrite.Group": "(zh-cn) Update this team's tabs.",
+            "TeamsTab.Delete.Group": "(zh-cn) Delete this team's tabs.",
+            "TeamMember.Read.Group": "(zh-cn) Get this team's members.",
+            "ChatSettings.Read.Chat": "(zh-cn) Get this chat's settings.",
+            "ChatSettings.ReadWrite.Chat": "(zh-cn) Update this chat's settings.",
+            "ChatMessage.Read.Chat": "(zh-cn) Get this chat's messages.",
+            "ChatMember.Read.Chat": "(zh-cn) Get this chat's members.",
+            "Chat.Manage.Chat": "(zh-cn) Manage this chat.",
+            "TeamsTab.Read.Chat": "(zh-cn) Get this chat's tabs.",
+            "TeamsTab.Create.Chat": "(zh-cn) Create tabs in this chat.",
+            "TeamsTab.Delete.Chat": "(zh-cn) Delete this chat's tabs.",
+            "TeamsTab.ReadWrite.Chat": "(zh-cn) Manage this chat's tabs.",
+            "TeamsAppInstallation.Read.Chat": "(zh-cn) Get which apps are installed in this chat.",
+            "OnlineMeeting.ReadBasic.Chat": "(zh-cn) Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat."
+        },
+
         "Table of Contents" : {
             "Connected Resources": "(zh-cn) Connected Resources",
             "Query Runner": "(zh-cn) Query Runner",
             "Resource-Specific Consent": "(zh-cn) Resource-Specific Consent",
             "Documentation Links": "(zh-cn) Documentation Links"
         },
+        
         "Documentation Links" : {
             "Go to Graph Explorer": "(zh-cn) Go to Graph Explorer",
             "Graph Explorer Documentation": "(zh-cn) Graph Explorer Documentation",
             "Resource-Specific Consent": "(zh-cn) Resource-Specific Consent"
         }
+
     }
 }
