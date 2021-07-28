@@ -48,10 +48,9 @@ export function AzureFunctions(props) {
   const { loading, data, error, reload } = useData(callFunction, {
     auto: false,
   });
-  const { t } = useTranslation();
   return (
     <div>
-      <h2>{t("AzureFunctions.Call your Azure Function")}</h2>
+      <h2>Call your Azure Function</h2>
       <p>An Azure Functions app is running. Click below to call it for a response:</p>
       <Button primary content="Call Azure Function" disabled={loading} onClick={reload} />
       {loading && (
@@ -62,7 +61,7 @@ export function AzureFunctions(props) {
       {!loading && !!data && !error && <pre className="fixed">{JSON.stringify(data, null, 2)}</pre>}
       {!loading && !data && !error && <pre className="fixed"></pre>}
       {!loading && !!error && <div className="error fixed">{error.toString()}</div>}
-      <h4>t(How to edit the Azure Function</h4>
+      <h4>How to edit the Azure Function</h4>
       <p>
         See the code in <code>{codePath}</code> to add your business logic.
       </p>
@@ -70,7 +69,7 @@ export function AzureFunctions(props) {
         <p>
           For more information, see the{" "}
           <a href={docsUrl} target="_blank" rel="noreferrer">
-            {t('docs')}
+            docs
           </a>
           .
         </p>
