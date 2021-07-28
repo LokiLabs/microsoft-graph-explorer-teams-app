@@ -77,11 +77,6 @@ code {
   display: inline-block;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0px;
-}
-
 .layout {
   display: flex;
   padding: 0px;
@@ -95,7 +90,6 @@ code {
 
 main {
   max-width: 800px;
-  /* background-color: #161822; */
   padding: 24px;
   border-radius: 8px;
   margin-left: 32px;
@@ -105,7 +99,6 @@ nav {
   width: 250px;
   min-width: 250px;
   padding: 24px;
-  /* margin: 8px; */
   align-self: flex-start;
   position: -webkit-sticky;
   /* Safari */
@@ -121,43 +114,4 @@ nav {
   }
 }
 
-#main-section {
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
 
-#connected-resource-chevron {
-  cursor: pointer;
-  padding-top: 8px;
-}
-
-#connected-resource-header {
-  cursor: pointer;
-}
-
-#query-runner-chevron {
-  cursor: pointer;
-  padding-top: 8px;
-}
-
-#query-runner-header {
-  cursor: pointer;
-}
-
-#resource-specific-consent-chevron {
-  cursor: pointer;
-  padding-top: 8px;
-}
-
-#resource-specific-consent-header {
-  cursor: pointer;
-}
-
-#documentation-links-chevron {
-  cursor: pointer;
-  padding-top: 8px;
-}
-
-#documentation-links-header {
-  cursor: pointer;
-}
