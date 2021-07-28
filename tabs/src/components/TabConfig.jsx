@@ -1,5 +1,6 @@
 import React from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
+import './TabConfig.css';
 
 /**
  * The 'Config' component is used to display your group tabs
@@ -20,7 +21,7 @@ class TabConfig extends React.Component {
     microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
       const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
       microsoftTeams.settings.setSettings({
-        suggestedDisplayName: "My Tab",
+        suggestedDisplayName: "Graph Explorer",
         entityId: "Test",
         contentUrl: baseUrl + "/index.html#/tab",
         websiteUrl: baseUrl + "/index.html#/tab",
@@ -35,15 +36,12 @@ class TabConfig extends React.Component {
      * dialog.
      */
     microsoftTeams.settings.setValidityState(true);
-
+    var imageName = require('./teamsappzeronotes.svg')
     return (
-      <div>
-        <h1>Tab Configuration</h1>
-        <div>
-          This is where you will add your tab configuration options the user can choose when the tab
-          is added to your team/group chat.
-        </div>
-      </div>
+      <center className = "center" >
+        <img className = "image" src={imageName.default} alt = ''/>
+        <h4 className = "caption">Select save to finish adding the Graph Explorer Sample Teams app.</h4>
+      </center>
     );
   }
 }
