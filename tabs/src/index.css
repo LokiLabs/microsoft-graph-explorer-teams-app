@@ -21,7 +21,6 @@ body {
   text-align: center;
   display: 'flex';
   margin: unset;
-  background-color: #fff;
   overflow: hidden;
   position: relative;
 }

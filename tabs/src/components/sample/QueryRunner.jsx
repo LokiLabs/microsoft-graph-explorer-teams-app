@@ -14,7 +14,7 @@ export function QueryRunner() {
             setUserAddedValue("");
             const deleteButton = () => <Button
                 tabIndex={-1}
-                icon={<TrashCanIcon className="icon" />}
+                icon={<TrashCanIcon className="button-icon" />}
                 circular
                 text
                 iconOnly
