@@ -1,28 +1,30 @@
 .caption {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    flex-grow: 1;
-    height:40vh;
-    width: 100vw;
-    background-color: #fff;
-    position: relative;
-    font-size: 110%;
-  }
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  height: 40vh;
+  width: 100vw;
+  background-color: #fff;
+  position: relative;
+  font-size: 110%;
+}
+
 .image {
   text-align: center;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  height:60vh;
+  height: 60vh;
   width: 100vw;
   position: relative;
-} 
-.center{
-  margin:unset;
+}
+
+.center {
+  margin: unset;
   background-color: #fff;
   overflow: hidden;
   position: relative;
