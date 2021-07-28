@@ -1,11 +1,18 @@
 {
     "translation": {
 
+        "Connected Resources": {
+            "Teams Channel ID": "Teams Channel ID",
+            "Chat": "Chat",
+            "Chat ID": "Chat ID",
+            "No Connected Resources": "No connected resources. Please connect to a Teams or Chats instance."
+        },
+
         "RSC Headers": {
             "Permissions": "Permissions",
             "Descriptions": "Descriptions"
         },
-        
+
         "RSC Descriptions": {
             "TeamSettings.Read.Group": "Get this team's settings.",
             "TeamSettings.ReadWrite.Group": "Update this team's settings.",
