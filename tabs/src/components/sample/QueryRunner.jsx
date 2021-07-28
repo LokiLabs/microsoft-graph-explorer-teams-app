@@ -87,7 +87,7 @@ export function QueryRunner() {
         <TextArea key="requestBody" fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
         <>
             <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
-            <Flex gap="gap.small" padding="padding.medium">
+            <Flex gap="gap.small" className="pad-vertical">
                 <Flex.Item>
                     <Input
                         fluid={true}
