@@ -1,0 +1,71 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+pr:
+  branches:
+    include:
+      - master
+      - dev
+      - interns/*
+  paths:
+    exclude:
+      - .github/*
+      - .vscode/*
+      - build/*
+      - .gitignore
+      - .prettierrc
+      - CHANGELOG.md
+      - CONTRIBUTING.md
+      - LICENSE
+      - README.md
+      - azure-pipelines.yml
+      - package-lock.json
+
+trigger:
+  branches:
+    include:
+      - master
+      - dev
+      - interns/*
+  paths:
+    exclude:
+      - .github/*
+      - .vscode/*
+      - build/*
+      - .gitignore
+      - .prettierrc
+      - CHANGELOG.md
+      - CONTRIBUTING.md
+      - LICENSE
+      - README.md
+      - azure-pipelines.yml
+      - package-lock.json
+
+pool:
+  vmImage: windows-latest
+jobs:
+  - job: One
+    displayName: 'Build and test validation'
+    steps:
+      - task: CredScan@2
+        inputs:
+          toolMajorVersion: 'V2'
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install Node.js'
+      - script: |
+          npm install
+          npm run build
+        workingDirectory: tabs
+        displayName: 'npm install and build'
+      - script: |
+          npm run lint
+        workingDirectory: tabs
+        displayName: 'Runs linting checks'
+      - task: DeleteFiles@1
+        inputs:
+          contents: node_modules
+        displayName: 'Delete node_modules'
