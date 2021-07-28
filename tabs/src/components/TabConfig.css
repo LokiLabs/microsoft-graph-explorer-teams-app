@@ -22,10 +22,3 @@
   width: 100vw;
   position: relative;
 }
-
-.center {
-  margin: unset;
-  background-color: #fff;
-  overflow: hidden;
-  position: relative;
-}
