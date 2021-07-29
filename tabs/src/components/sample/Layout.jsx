@@ -9,4 +9,4 @@ export default Layout;
 
 Layout.propTypes = {
   children: PropTypes.any
-}
+};

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { requestTypes, graphVersions, GRAPH_URL } from "./TabConstants";
-import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown } from '@fluentui/react-northstar'
-import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility'
-import { TrashCanIcon } from '@fluentui/react-icons-northstar'
+import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown } from '@fluentui/react-northstar';
+import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
+import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import enUS from './GE.json';
 import "./style.css";
 
@@ -20,7 +20,7 @@ export function QueryRunner() {
                 text
                 iconOnly
                 title="Delete request header"
-            />
+            />;
             const newHeaderValue = {
                 key: headerCopy,
                 items: [headerCopy, valueCopy, {
@@ -35,7 +35,7 @@ export function QueryRunner() {
             };
             setRequestHeaders([...requestHeaders, newHeaderValue]);
         }
-    }
+    };
 
     const [userAddedHeader, setUserAddedHeader] = useState("");
     const [userAddedValue, setUserAddedValue] = useState("");
@@ -52,20 +52,20 @@ export function QueryRunner() {
     const requestItems = [
         enUS["request body"],
         enUS["request headers"]
-    ]
+    ];
 
     const responseItems = [
         enUS["response body"],
         enUS["response headers"]
-    ]
+    ];
 
     const requestTableHeaders = {
         items: ['Key', 'Value', ''],
-    }
+    };
 
     const responseTableHeaders = {
         items: ['Key', 'Value'],
-    }
+    };
 
     const callGraph = () => {
         // stub
@@ -74,15 +74,15 @@ export function QueryRunner() {
         console.log(query);
         setResponseBody("");
         setResponseHeaders([{ key: 'Content', items: ['Content', 'json'] }]);
-    }
+    };
 
     const deleteRow = (header) => {
-        setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header))
+        setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header));
     };
 
     useEffect(() => {
         setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + 4, query.length));
-    }, [graphVersion, query])
+    }, [graphVersion, query]);
 
     const requestComponents = [
         <TextArea key="requestBody" fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
@@ -116,12 +116,12 @@ export function QueryRunner() {
                 </Flex.Item>
             </Flex>
         </>
-    ]
+    ];
 
     const responseComponents = [
         <TextArea key="responseBody" fluid={true} inverted={true} resize="both" value={responseBody} />,
         <Table key="responseHeaders" compact header={responseTableHeaders} rows={responseHeaders} aria-label="response headers" />
-    ]
+    ];
 
     return (
         <>

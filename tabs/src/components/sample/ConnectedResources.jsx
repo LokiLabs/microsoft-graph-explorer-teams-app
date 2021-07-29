@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { Button, List, Alert, ListItem } from '@fluentui/react-northstar'
-import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar'
+import { Button, List, Alert, ListItem } from '@fluentui/react-northstar';
+import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
 import copy from "copy-to-clipboard"; 
 import * as microsoftTeams from "@microsoft/teams-js"; 
 import "./ConnectedResources.css";
@@ -20,7 +20,7 @@ export function ProcessTeamsContext(){
             var channelId = createItemWithCopy(context.channelId);
             channelId.header = TEAMS_CHANNEL_ID + context.channelId;
             setTitle(context.teamName + " > " + context.channelName);
-            setResourceList([channelId])
+            setResourceList([channelId]);
         }
         //Check if it is a chat
         else if(context.chatId && context.chatId.length !== 0){
@@ -63,6 +63,6 @@ export function createItemWithCopy(id){
     //Add the copy icon 
     item.endMedia = (
         <Button icon={<ClipboardCopiedToIcon  className = "copy-icon"  />} size="medium"  text iconOnly title="Copy" onClick={() => copyText(id)}/>
-    )
+    );
     return item;
 }

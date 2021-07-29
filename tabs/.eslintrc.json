@@ -5,7 +5,10 @@
         "es2021": true
     },
     "extends": [
+        "react-app",
+        "react-app/jest",
         "eslint:recommended",
+        "plugin:react-hooks/recommended",
         "plugin:react/recommended"
     ],
     "parserOptions": {
@@ -18,7 +21,20 @@
     "plugins": [
         "react"
     ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
-        "react/no-unescaped-entities": 0
+        "react/no-unescaped-entities": 0,
+        "react/no-direct-mutation-state": 2,
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/react-in-jsx-scope": 2,
+        "semi": [
+            2,
+            "always"
+        ]
     }
 }

@@ -25,13 +25,13 @@ const MainContent = () => {
                     <Header id="connected-resource-header" as="h2" content={t("Table of Contents.Connected Resources")} />
                 </Flex>
                 <ProcessTeamsContext />
-            </div>
+            </div>;
     } else {
         firstSection =
             <Flex id="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
                 <ChevronEndIcon id="connected-resource-chevron" />
                 <Header id="connected-resource-header" as="h2" content={t("Table of Contents.Connected Resources")} />
-            </Flex>
+            </Flex>;
     }
 
     let secondSection;
@@ -45,13 +45,13 @@ const MainContent = () => {
                 <div>
                     <QueryRunner />
                 </div>
-            </div>
+            </div>;
     } else {
         secondSection =
             <Flex id="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
                 <ChevronEndIcon id="query-runner-chevron" />
                 <Header id="query-runner-header" as="h2" content={t("Table of Contents.Query Runner")} />
-            </Flex>
+            </Flex>;
     }
 
     let thirdSection;
@@ -65,13 +65,13 @@ const MainContent = () => {
                 <div>
                     <RSCList />
                 </div>
-            </div>
+            </div>;
     } else {
         thirdSection =
             <Flex id="main-section" gap="gap.small" onClick={() => toggleThirdSection(!thirdSectionActive)}>
                 <ChevronEndIcon id="resource-specific-consent-chevron" />
                 <Header id="resource-specific-consent-header" as="h2" content={t("Table of Contents.Resource-Specific Consent")} />
-            </Flex>
+            </Flex>;
     }
 
     let fourthSection;
@@ -83,13 +83,13 @@ const MainContent = () => {
                     <Header id="documentation-links-header" as="h2" content={t("Table of Contents.Documentation Links")} />
                 </Flex>
                 <DocumentationLinks />
-            </div>
+            </div>;
     } else {
         fourthSection =
             <Flex id="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
                 <ChevronEndIcon id="documentation-links-chevron" />
                 <Header id="documentation-links-header" as="h2" content={t("Table of Contents.Documentation Links")} />
-            </Flex>
+            </Flex>;
     }
 
     return (

@@ -47,13 +47,13 @@ export const changeLanguage = (i18n, code) => {
     }
   }
   i18n.changeLanguage(locale);
-}
+};
 
 const processLanguageCode = (code) => {
   if (!code) {
     return fallbackLang;
   }
-  let langCode = code.replace('_', '-').toLowerCase()
+  let langCode = code.replace('_', '-').toLowerCase();
   // Check general supported locales
   let supported = supportedLangs.find(l => l.toLowerCase() === langCode);
   if (supported) {
@@ -61,14 +61,14 @@ const processLanguageCode = (code) => {
   }
   // Remove country part of locale to check for general language support
   if (langCode.includes("-")) {
-    langCode = langCode.split("-")[0]
+    langCode = langCode.split("-")[0];
   }
   supported = supportedLangs.find(l => l.toLowerCase().startsWith(langCode));
   if (supported) {
     return supported;
   }
   return fallbackLang;
-}
+};
 
 i18n
   .use(Backend)
