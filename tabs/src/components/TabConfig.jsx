@@ -1,6 +1,5 @@
 import React from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
-import './TabConfig.css';
 
 /**
  * The 'Config' component is used to display your group tabs
@@ -36,7 +35,7 @@ class TabConfig extends React.Component {
      * dialog.
      */
     microsoftTeams.settings.setValidityState(true);
-    var imageName = require('./teamsappzeronotes.svg')
+    var imageName = require('./teamsappzeronotes.svg');
     return (
       <center className = "center" >
         <img className = "image" src={imageName.default} alt = ''/>

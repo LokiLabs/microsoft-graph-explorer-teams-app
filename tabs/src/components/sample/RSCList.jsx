@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./RSCList.css";
 import { CLIENT_APP_ID, items, RSC_NAME_DESCRIPTION, DEVX_API_URL } from './TabConstants';
 import { useTeamsFx } from "../sample/lib/useTeamsFx";
-import { Table } from '@fluentui/react-northstar'
+import { Table } from '@fluentui/react-northstar';
 
 export function RSCList() {
     const [RSCList, setRSCList] = useState([]);
     const { context } = useTeamsFx();
-    
+
     useEffect(() => {
         async function getRSCList(context) {
             if (context?.groupId) {
@@ -43,9 +42,25 @@ export function RSCList() {
     }, [context]);
 
     const RSCRows = RSCList
-        .map(perm => ({ key: perm, items: [perm, RSC_NAME_DESCRIPTION[perm]], }));
+        .map(perm => ({
+            key: perm, items: [
+                {
+                    content: perm,
+                    truncateContent: true
+                },
+                {
+                    content: RSC_NAME_DESCRIPTION[perm],
+                    truncateContent: true,
+                }
+            ],
+        }));
 
     return (
-        <Table header={{ items }} rows={RSCRows} aria-label="RSC Table" />
+        <Table variables={{
+            cellContentOverflow: 'none',
+        }}
+            header={{ items }}
+            rows={RSCRows}
+            aria-label="RSC Table" />
     );
 }
