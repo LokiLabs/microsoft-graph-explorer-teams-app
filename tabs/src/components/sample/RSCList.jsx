@@ -8,10 +8,27 @@ export function RSCList() {
 
     const RSCRows = RSC_LIST
         .filter(perm => filterPermType("Group", perm))
-        .map(perm => ({ key: perm, items: [perm, RSC_NAME_DESCRIPTION[perm]], }));
+        .map(perm => ({
+            key: perm,
+            items: [
+                {
+                    content: perm,
+                    truncateContent: true
+                },
+                {
+                    content: RSC_NAME_DESCRIPTION[perm],
+                    truncateContent: true,
+                }
+            ]
+        }));
 
     return (
-        <Table header={{ items }} rows={RSCRows} aria-label="RSC Table" />
+        <Table variables={{
+            cellContentOverflow: 'none',
+        }}
+            header={{ items }}
+            rows={RSCRows}
+            aria-label="RSC Table" />
     );
 }
 

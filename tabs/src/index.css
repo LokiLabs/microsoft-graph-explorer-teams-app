@@ -5,6 +5,7 @@
 @import url("components/sample/style/TableOfContents.css");
 @import url("components/sample/style/QueryRunner.css");
 @import url("components/sample/style/Welcome.css");
+@import url("components/sample/style/DocumentationLinks.css");
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -17,17 +18,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+  margin: auto;
+  width: 75vw;
+  padding: 2%;
+}
+
+@media screen and (max-width: 900px) {
+  main {
+    width: 95vw;
+  }
+  nav {
+    display: none;
+  }
+}
+
+.ui-button {
+  min-width: min-content;
+}
+
 .center {
   text-align: center;
   display: 'flex';
   margin: unset;
   overflow: hidden;
   position: relative;
-}
-
-main {
-  width: 75vw;
-  padding: 2%;
 }
 
 .pad-vertical {

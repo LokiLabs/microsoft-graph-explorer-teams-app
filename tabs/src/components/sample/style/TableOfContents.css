@@ -10,9 +10,3 @@ nav {
     max-height: calc(100vh - 70px);
     overflow: auto;
 }
-
-@media screen and (max-width: 900px) {
-    nav {
-        display: none;
-    }
-}
