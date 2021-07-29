@@ -1,6 +1,6 @@
 import React from "react";
 import { RSC_LIST, items, RSC_NAME_DESCRIPTION } from './TabConstants';
-import { Table } from '@fluentui/react-northstar'
+import { Table } from '@fluentui/react-northstar';
 
 export function RSCList() {
 
