@@ -12,7 +12,7 @@ export function RSCDocumentation() {
         const blob = await response.blob();
         var text = await blob.text();
         var lines = text.split('\n');
-        var refinedText = ''
+        var refinedText = '';
         for(var i = 0;i < lines.length;i++){
             // dead links in this section
             if(lines[i] === '## Enable RSC in your application'){
@@ -34,7 +34,7 @@ export function RSCDocumentation() {
                     // remove the previous empty line
                     refinedText = refinedText.slice(0, -1);
                     // skip the next empty line
-                    i += 1
+                    i += 1;
                 }
             }
 

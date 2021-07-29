@@ -125,20 +125,20 @@ export function markdown(src) {
         return '\n' + element('table',
             table.replace(rx_row, function (row, ri) {
                 return row === sep ? '' : element('tr', row.replace(rx_cell, function (all, cell, ci) {
-                    return ci ? element(sep && !ri ? 'th' : 'td', unesc(highlight(cell || ''))) : ''
-                }))
+                    return ci ? element(sep && !ri ? 'th' : 'td', unesc(highlight(cell || ''))) : '';
+                }));
             })
-        )
+        );
     });
 
     // heading
-    replace(rx_heading, function (all, _, p1, p2) { return _ + element('h' + p1.length, unesc(highlight(p2))) });
+    replace(rx_heading, function (all, _, p1, p2) { return _ + element('h' + p1.length, unesc(highlight(p2))); });
 
     // paragraph
-    replace(rx_para, function (all, content) { return element('p', unesc(highlight(content))) });
+    replace(rx_para, function (all, content) { return element('p', unesc(highlight(content))); });
 
     // stash
-    replace(rx_stash, function (all) { return stash[parseInt(all)] });
+    replace(rx_stash, function (all) { return stash[parseInt(all)]; });
 
     // add target _blank for each link to open on a new tab because it can't open in Teams app
     replace(/href/g, "target='_blank' href");
