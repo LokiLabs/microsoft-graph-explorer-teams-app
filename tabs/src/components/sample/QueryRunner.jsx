@@ -94,7 +94,7 @@ export function QueryRunner() {
             requestParams = {
                 method: requestType,
                 headers: cleanedHeaders,
-                body: JSON.parse(requestBody)
+                body: requestBody
             };
         }
         const graphResponse = await fetch(DEVX_API, requestParams);
