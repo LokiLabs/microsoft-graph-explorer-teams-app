@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { requestTypes, graphVersions, GRAPH_URL } from "./TabConstants";
-import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown } from '@fluentui/react-northstar';
+import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, Alert } from '@fluentui/react-northstar';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import enUS from './GE.json';
@@ -48,6 +48,7 @@ export function QueryRunner() {
     const [responseComponentIndex, setResponseComponentIndex] = useState(0);
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
     const [requestHeaders, setRequestHeaders] = useState([]);
+    const [responseState, setReponseState] = useState(-1);
 
     const requestItems = [
         enUS["request body"],
@@ -67,21 +68,37 @@ export function QueryRunner() {
         items: ['Key', 'Value'],
     };
 
-    const callGraph = () => {
-        // stub
+    async function callGraph() {
+        // c7ced617-91ba-4d83-8f69-77c39c6eee68
+        // 19:c213c3137b404a6a83e75a5d5142acaf@thread.tacv2
+        // https://graph.microsoft.com/v1.0/teams/c7ced617-91ba-4d83-8f69-77c39c6eee68/channels/19:c213c3137b404a6a83e75a5d5142acaf@thread.tacv2
+        const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
+        const DEVX_API = "https://graphwebapi.azurewebsites.net/graphproxy/" + graphVersion + queryParameters;
         console.log(requestType);
-        console.log(graphVersion);
-        console.log(query);
-        setResponseBody("");
-        setResponseHeaders([{ key: 'Content', items: ['Content', 'json'] }]);
-    };
+        console.log(requestBody);
+        console.log(requestHeaders);
+        console.log(queryParameters);
+        const graphResponse = await fetch(DEVX_API);
+        console.log(graphResponse);
+        let graphResponseHeaders = [];
+        for (const p of graphResponse.headers.entries()) {
+            graphResponseHeaders.push({
+                key: p[0],
+                items: [p[0], p[1]]
+            });
+        }
+        setResponseHeaders(graphResponseHeaders);
+        setReponseState(graphResponse.status + " " + graphResponse.statusText);
+        const text = await graphResponse.json();
+        setResponseBody(JSON.stringify(text, undefined, 4));
+    }
 
     const deleteRow = (header) => {
         setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header));
     };
 
     useEffect(() => {
-        setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + 4, query.length));
+        setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
     }, [graphVersion, query]);
 
     const requestComponents = [
@@ -187,6 +204,7 @@ export function QueryRunner() {
                     </Menu.Item>
                 </Menu>
             </Flex>
+            {responseState !== -1 && <Alert success content={responseState} />}
             {responseComponents[responseComponentIndex]}
         </>
     );
