@@ -84,7 +84,6 @@ export function QueryRunner() {
         for (const i of requestHeaders) {
             cleanedHeaders[i.items[0]] = i.items[1];
         }
-        console.log(cleanedHeaders);
         let requestParams = {};
         if (requestType === requestTypes.GET) {
             requestParams = {
