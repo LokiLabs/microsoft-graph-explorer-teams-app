@@ -41,6 +41,7 @@ main {
 .center {
   text-align: center;
   display: 'flex';
+  background-color: #fff;
   margin: unset;
   overflow: hidden;
   position: relative;
