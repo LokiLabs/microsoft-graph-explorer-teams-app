@@ -75,17 +75,35 @@ export function QueryRunner() {
     };
 
     async function callGraph() {
-        // c7ced617-91ba-4d83-8f69-77c39c6eee68
-        // 19:c213c3137b404a6a83e75a5d5142acaf@thread.tacv2
-        // https://graph.microsoft.com/v1.0/teams/c7ced617-91ba-4d83-8f69-77c39c6eee68/channels/19:c213c3137b404a6a83e75a5d5142acaf@thread.tacv2
+        // b126aba2-a1fb-4e03-acc3-410b5d5af2dc
+        // 19:DoKOxALlRc5rtcbZdIjW4t4s9RpHU_HdLk037dgQ5zg1@thread.tacv2
+        // https://graph.microsoft.com/v1.0/teams/b126aba2-a1fb-4e03-acc3-410b5d5af2dc/channels/19:DoKOxALlRc5rtcbZdIjW4t4s9RpHU_HdLk037dgQ5zg1@thread.tacv2
+        // /teams/b126aba2-a1fb-4e03-acc3-410b5d5af2dc/channels
+        // {
+        //     "displayName": "Architecture Discusswerwion",
+        //         "description": "This channel is where we debate all future architecture plans"
+        // }
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
         const DEVX_API = "https://graphwebapi.azurewebsites.net/graphproxy/" + graphVersion + queryParameters;
-        console.log(requestType);
-        console.log(requestBody);
-        console.log(requestHeaders);
-        console.log(queryParameters);
-        const graphResponse = await fetch(DEVX_API);
-        console.log(graphResponse);
+        const cleanedHeaders = {};
+        for (const i of requestHeaders) {
+            cleanedHeaders[i.items[0]] = i.items[1];
+        }
+        console.log(cleanedHeaders);
+        let requestParams = {};
+        if (requestType === requestTypes.GET) {
+            requestParams = {
+                method: requestType,
+                headers: cleanedHeaders,
+            };
+        } else {
+            requestParams = {
+                method: requestType,
+                headers: cleanedHeaders,
+                body: JSON.parse(requestBody)
+            };
+        }
+        const graphResponse = await fetch(DEVX_API, requestParams);
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
             graphResponseHeaders.push({
@@ -226,7 +244,8 @@ export function QueryRunner() {
                     </Menu.Item>
                 </Menu>
             </Flex>
-            {responseState !== -1 && <Alert success content={responseState} />}
+            {responseState !== -1 && responseState[0] === "2" && <Alert success content={responseState} />}
+            {responseState !== -1 && (responseState[0] === "4" || responseState[0] === "5") && <Alert danger content={responseState} />}
             {responseComponents[responseComponentIndex]}
         </>
     );
