@@ -75,21 +75,17 @@ export function QueryRunner() {
     };
 
     async function callGraph() {
+        // c7ced617-91ba-4d83-8f69-77c39c6eee68
+        // 19:c213c3137b404a6a83e75a5d5142acaf@thread.tacv2
+        // https://graph.microsoft.com/v1.0/teams/c7ced617-91ba-4d83-8f69-77c39c6eee68/channels/19:c213c3137b404a6a83e75a5d5142acaf@thread.tacv2
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
-        const url = RSC_API_URL + graphVersion + queryParameters;
-        const cleanedHeaders = {};
-        for (const header of requestHeaders) {
-            cleanedHeaders[header.items[0]] = header.items[1];
-        }
-
-        let options = {
-            method: requestType,
-            headers: cleanedHeaders,
-        };
-        if (requestType !== requestTypes.GET) {
-            options.body = requestBody;
-        }
-        const graphResponse = await fetch(url, options);
+        const DEVX_API = "https://graphwebapi.azurewebsites.net/graphproxy/" + graphVersion + queryParameters;
+        console.log(requestType);
+        console.log(requestBody);
+        console.log(requestHeaders);
+        console.log(queryParameters);
+        const graphResponse = await fetch(DEVX_API);
+        console.log(graphResponse);
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
             graphResponseHeaders.push({
@@ -99,13 +95,8 @@ export function QueryRunner() {
         }
         setResponseHeaders(graphResponseHeaders);
         setReponseState(graphResponse.status + " " + graphResponse.statusText);
-        if (graphResponse.ok) {
-            const text = await graphResponse.json();
-            setResponseBody(JSON.stringify(text, undefined, 4));
-        } else {
-            const text = await graphResponse.text();
-            setResponseBody(text);
-        }
+        const text = await graphResponse.json();
+        setResponseBody(JSON.stringify(text, undefined, 4));
     }
 
     const deleteRow = (header) => {
@@ -235,8 +226,7 @@ export function QueryRunner() {
                     </Menu.Item>
                 </Menu>
             </Flex>
-            {responseState !== -1 && responseState[0] === "2" && <Alert className = "response-number" success content={responseState} />}
-            {responseState !== -1 && (responseState[0] === "4" || responseState[0] === "5") && <Alert className = "response-number" danger content={responseState} />}
+            {responseState !== -1 && <Alert success content={responseState} />}
             {responseComponents[responseComponentIndex]}
         </>
     );
