@@ -1,12 +1,12 @@
 .title {
-  margin-top:-20px;
+  margin-top: -20px;
   margin-bottom: -15px;
   padding: 0px;
   font-size: 30px;
   font-weight: bold;
-  height:0.5px;
+  height: 0.5px;
 }
 
-.copy-icon {
+.button-icon {
   width: 50px;
 }

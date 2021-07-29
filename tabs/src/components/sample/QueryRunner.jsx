@@ -5,7 +5,6 @@ import { useRangeKnob } from '@fluentui/docs-components';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import enUS from './GE.json';
-import "./style.css";
 
 export function QueryRunner() {
     const addRequestHeader = () => {
@@ -16,7 +15,7 @@ export function QueryRunner() {
             setUserAddedValue("");
             const deleteButton = () => <Button
                 tabIndex={-1}
-                icon={<TrashCanIcon />}
+                icon={<TrashCanIcon className="button-icon" />}
                 circular
                 text
                 iconOnly
@@ -135,7 +134,7 @@ export function QueryRunner() {
         />,
         <>
             <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
-            <Flex gap="gap.small" padding="padding.medium">
+            <Flex gap="gap.small" className="pad-vertical">
                 <Flex.Item>
                     <Input
                         fluid={true}

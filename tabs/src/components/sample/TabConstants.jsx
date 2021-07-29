@@ -4,33 +4,12 @@ export const RSC_DOCUMENTATION_URL = "https://raw.githubusercontent.com/Microsof
 export const OFFICIAL_RSC_URL = "https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent#:~:text=Resource-specific%20consent%20%28RSC%29%20is%20a%20Microsoft%20Teams%20and,manage%20specific%20resources%E2%80%94either%20teams%20or%20chats%E2%80%94within%20an%20organization.";
 export const README_HEADER = "---";
 export const MS_GRAPH_DOCS = "(https://docs.microsoft.com/en-us/";
-export const RSC_LIST =
-    [
-        "TeamSettings.Read.Group",
-        "ChannelMessage.Read.Group",
-        "TeamSettings.Edit.Group",
-        "ChannelSettings.ReadWrite.Group",
-        "Channel.Create.Group",
-        "Channel.Delete.Group",
-        "TeamsApp.Read.Group",
-        "TeamsTab.Read.Group",
-        "TeamsTab.Create.Group",
-        "TeamsTab.ReadWrite.Group",
-        "TeamsTab.Delete.Group",
-        "Member.Read.Group",
-        "Owner.Read.Group",
-        "ChatSettings.Read.Chat",
-        "ChatSettings.ReadWrite.Chat",
-        "ChatMessage.Read.Chat",
-        "ChatMember.Read.Chat",
-        "Chat.Manage.Chat",
-        "TeamsTab.Read.Chat",
-        "TeamsTab.Create.Chat",
-        "TeamsTab.Delete.Chat",
-        "TeamsTab.ReadWrite.Chat",
-        "TeamsAppInstallation.Read.Chat",
-        "OnlineMeeting.ReadBasic.Chat"
-    ];
+
+// Application ID for Graph explorer (official site)
+export const CLIENT_APP_ID = "de8bc8b5-d9f9-48b1-a8ad-b748da725064";
+
+// TODO: Change this URL to `https://gi21devxapi-devtest.azurewebsites.net` once the DevX API `interns/feature/ge-app-mode-proxy-endpoint` branch is merged into `interns/dev`. ADO ticket #39398
+export const DEVX_API_URL = "https://localhost:44399";
 
 export const RSC_NAME_DESCRIPTION = {
     'TeamSettings.Read.Group': "Get this team's settings.",

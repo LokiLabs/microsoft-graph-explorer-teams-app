@@ -1,18 +1,66 @@
-import React from "react";
-import "./RSCList.css";
-import { RSC_LIST, items, RSC_NAME_DESCRIPTION } from './TabConstants';
+import React, { useState, useEffect } from "react";
+import { CLIENT_APP_ID, items, RSC_NAME_DESCRIPTION, DEVX_API_URL } from './TabConstants';
+import { useTeamsFx } from "../sample/lib/useTeamsFx";
 import { Table } from '@fluentui/react-northstar';
 
 export function RSCList() {
+    const [RSCList, setRSCList] = useState([]);
+    const { context } = useTeamsFx();
 
-    const filterPermType = (permType, perm) => perm.includes(permType);
+    useEffect(() => {
+        async function getRSCList(context) {
+            if (context?.groupId) {
+                let teamResponse = await fetch(DEVX_API_URL + "/graphproxy/beta/teams/" + context?.groupId + "/permissionGrants").then(response => response.json());
+                const teamRSCs = teamResponse.value;
 
-    const RSCRows = RSC_LIST
-        .filter(perm => filterPermType("Group", perm))
-        .map(perm => ({ key: perm, items: [perm, RSC_NAME_DESCRIPTION[perm]], }));
+                if (teamRSCs) {
+                    let filteredRSCs = [];
+                    for (let i = 0; i < teamRSCs.length; i++) {
+                        if (teamRSCs[i].clientAppId === CLIENT_APP_ID) {
+                            filteredRSCs.push(teamRSCs[i].permission);
+                        }
+                    }
+                    setRSCList(filteredRSCs);
+                }
+
+            } else if (context?.chatId) {
+                let chatResponse = await fetch(DEVX_API_URL + "/graphproxy/beta/chats/" + context?.chatId + "/permissionGrants").then(response => response.json());
+                const chatRSCs = chatResponse.value;
+
+                if (chatRSCs) {
+                    let filteredRSCs = [];
+                    for (let i = 0; i < chatRSCs.length; i++) {
+                        if (chatRSCs[i].clientAppId === CLIENT_APP_ID) {
+                            filteredRSCs.push(chatRSCs[i].permission);
+                        }
+                    }
+                    setRSCList(filteredRSCs);
+                }
+            }
+        }
+        getRSCList(context);
+    }, [context]);
+
+    const RSCRows = RSCList
+        .map(perm => ({
+            key: perm, items: [
+                {
+                    content: perm,
+                    truncateContent: true
+                },
+                {
+                    content: RSC_NAME_DESCRIPTION[perm],
+                    truncateContent: true,
+                }
+            ],
+        }));
 
     return (
-        <Table header={{ items }} rows={RSCRows} aria-label="RSC Table" />
+        <Table variables={{
+            cellContentOverflow: 'none',
+        }}
+            header={{ items }}
+            rows={RSCRows}
+            aria-label="RSC Table" />
     );
 }
-
