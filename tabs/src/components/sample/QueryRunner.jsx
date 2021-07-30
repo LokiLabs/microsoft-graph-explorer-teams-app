@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { requestTypes, graphVersions, GRAPH_URL } from "./TabConstants";
+import { requestTypes, graphVersions, GRAPH_URL, RSC_API_URL } from "./TabConstants";
 import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, Alert } from '@fluentui/react-northstar';
 import { useRangeKnob } from '@fluentui/docs-components';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
@@ -69,16 +69,8 @@ export function QueryRunner() {
     };
 
     async function callGraph() {
-        // b126aba2-a1fb-4e03-acc3-410b5d5af2dc
-        // 19:DoKOxALlRc5rtcbZdIjW4t4s9RpHU_HdLk037dgQ5zg1@thread.tacv2
-        // https://graph.microsoft.com/v1.0/teams/b126aba2-a1fb-4e03-acc3-410b5d5af2dc/channels/19:DoKOxALlRc5rtcbZdIjW4t4s9RpHU_HdLk037dgQ5zg1@thread.tacv2
-        // /teams/b126aba2-a1fb-4e03-acc3-410b5d5af2dc/channels
-        // {
-        //     "displayName": "Architecture Discusswerwion",
-        //         "description": "This channel is where we debate all future architecture plans"
-        // }
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
-        const DEVX_API = "https://graphwebapi.azurewebsites.net/graphproxy/" + graphVersion + queryParameters;
+        const url = RSC_API_URL + graphVersion + queryParameters;
         const cleanedHeaders = {};
         for (const i of requestHeaders) {
             cleanedHeaders[i.items[0]] = i.items[1];
@@ -96,7 +88,7 @@ export function QueryRunner() {
                 body: requestBody
             };
         }
-        const graphResponse = await fetch(DEVX_API, requestParams);
+        const graphResponse = await fetch(url, requestParams);
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
             graphResponseHeaders.push({
