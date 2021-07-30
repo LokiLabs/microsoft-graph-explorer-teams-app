@@ -26,3 +26,8 @@ export const graphVersions = {
     v1: "v1.0",
     beta: "beta"
 };
+//TO DO: Support multi languages. Attached to ADO ticket #38594
+export const TEAMS_CHANNEL_ID = "Teams Channel ID: ";
+export const CHAT = "Chat";
+export const CHAT_ID = "Chat ID: ";
+export const NO_CONNECTED_RESOURCES = "No connected resources. Please connect to a Teams or Chats instance";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CLIENT_APP_ID, RSC_API_URL } from './TabConstants';
+import { CLIENT_APP_ID, items, RSC_NAME_DESCRIPTION, RSC_API_URL } from './TabConstants';
 import { useTeamsFx } from "../sample/lib/useTeamsFx";
 import { Table } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
