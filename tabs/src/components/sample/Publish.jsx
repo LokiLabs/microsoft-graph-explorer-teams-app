@@ -1,5 +1,4 @@
 import React from "react";
-import "./Publish.css";
 import { Image } from "@fluentui/react-northstar";
 
 export function Publish(props) {

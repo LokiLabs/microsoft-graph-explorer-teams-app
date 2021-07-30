@@ -1,0 +1,12 @@
+nav {
+    width: 250px;
+    min-width: 250px;
+    padding: 24px;
+    align-self: flex-start;
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+    top: 0px;
+    max-height: calc(100vh - 70px);
+    overflow: auto;
+}
