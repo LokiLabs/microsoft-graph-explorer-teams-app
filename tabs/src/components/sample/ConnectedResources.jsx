@@ -3,13 +3,9 @@ import { Button, List, Alert, ListItem } from '@fluentui/react-northstar';
 import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
 import copy from "copy-to-clipboard";
 import * as microsoftTeams from "@microsoft/teams-js";
-import "./style/ConnectedResources.css";
-import { useTranslation } from "react-i18next";
+import { TEAMS_CHANNEL_ID, CHAT, CHAT_ID, NO_CONNECTED_RESOURCES } from './TabConstants';
 
 export function ProcessTeamsContext() {
-
-    // Translations
-    const { t } = useTranslation();
     //Get the context of where the tab is currently
     const [resourceList, setResourceList] = useState([]);
     const [title, setTitle] = useState(" ");
@@ -43,8 +39,8 @@ export function ProcessTeamsContext() {
     return (
         <div className="connected-resource">
             {resourceList.length !== 0 && <ListItem className="title" header={title} />}
-            {resourceList.length !== 0 && <List defaultSelectedIndex={0} items={resourceList}/>} 
-            {resourceList.length === 0 && !title && <Alert danger content={t("Connected Resources.No Connected Resources")} />}
+            {resourceList.length !== 0 && <List selectable defaultSelectedIndex={0} items={resourceList} />}
+            {resourceList.length === 0 && !title && <Alert danger content={NO_CONNECTED_RESOURCES} />}
         </div>
     );
 }
@@ -60,15 +56,7 @@ export function createItemWithCopy(id) {
 
     //Add the copy icon 
     item.endMedia = (
-        <Button
-            aria-label="copy"
-            icon={<ClipboardCopiedToIcon className="button-icon" />}
-            size="medium"
-            text
-            iconOnly
-            title="Copy"
-            onClick={() => copyText(id)}
-        />
+        <Button icon={<ClipboardCopiedToIcon className="button-icon" />} size="medium" text iconOnly title="Copy" onClick={() => copyText(id)} />
     );
     return item;
 }
