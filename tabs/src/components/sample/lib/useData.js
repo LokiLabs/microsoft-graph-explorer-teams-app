@@ -28,6 +28,7 @@ export function useData(asyncFn, options) {
   }
   useEffect(() => {
     if (auto) reload();
-  }, []); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return { data, loading, error, reload };
 }
