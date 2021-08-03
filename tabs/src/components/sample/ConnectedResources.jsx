@@ -14,6 +14,7 @@ export function ProcessTeamsContext() {
     const [resourceList, setResourceList] = useState([]);
     const [title, setTitle] = useState(" ");
     microsoftTeams.getContext(function (context) {
+        console.log("test");
 
         //Check if this is a teams channel
         if (context.channelId && context.channelId.length !== 0) {
@@ -35,7 +36,7 @@ export function ProcessTeamsContext() {
             chatId.header = t("Connected Resources.Chat ID") + ": " + context.chatId;
             setResourceList([chatId]);
         }
-        else {
+        else if (title === " ") {
             setTitle("");
             setResourceList([]);
         }
@@ -43,7 +44,7 @@ export function ProcessTeamsContext() {
     return (
         <div className="connected-resource">
             {resourceList.length !== 0 && <ListItem className="title" header={title} />}
-            {resourceList.length !== 0 && <List selectable defaultSelectedIndex={0} items={resourceList} />}
+            {resourceList.length !== 0 && <List defaultSelectedIndex={0} items={resourceList}/>} 
             {resourceList.length === 0 && !title && <Alert danger content={t("Connected Resources.No Connected Resources")} />}
         </div>
     );
