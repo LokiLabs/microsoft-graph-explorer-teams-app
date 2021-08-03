@@ -3,7 +3,7 @@ import { Button, List, Alert, ListItem } from '@fluentui/react-northstar';
 import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
 import copy from "copy-to-clipboard"; 
 import * as microsoftTeams from "@microsoft/teams-js"; 
-import {TEAMS_CHANNEL_ID, CHAT, CHAT_ID,  NO_CONNECTED_RESOURCES} from './TabConstants';
+import {TEAMS_CHANNEL_ID, TEAMS_TEAM_ID, CHAT, CHAT_ID,  NO_RESOURCE_IDS} from './TabConstants';
 
 export function ProcessTeamsContext(){
     //Get the context of where the tab is currently
@@ -18,8 +18,10 @@ export function ProcessTeamsContext(){
             }
             var channelId = createItemWithCopy(context.channelId);
             channelId.header = TEAMS_CHANNEL_ID + context.channelId;
+            var teamId = createItemWithCopy(context.teamId);
+            teamId.header = TEAMS_TEAM_ID + context.teamId;
             setTitle(context.teamName + " > " + context.channelName);
-            setResourceList([channelId]);
+            setResourceList([teamId, channelId]);
         }
         //Check if it is a chat
         else if(context.chatId && context.chatId.length !== 0){
@@ -40,7 +42,7 @@ export function ProcessTeamsContext(){
         <div className="connected-resource">
             {resourceList.length !== 0 && <ListItem className = "title" header = {title}/>}
             {resourceList.length !== 0 && <List selectable defaultSelectedIndex={0} items={resourceList}/>} 
-            {resourceList.length === 0 && !title &&  <Alert danger content={NO_CONNECTED_RESOURCES}/>}
+            {resourceList.length === 0 && !title &&  <Alert danger content={NO_RESOURCE_IDS}/>}
         </div>
     );
 }
