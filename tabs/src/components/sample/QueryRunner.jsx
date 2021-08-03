@@ -229,8 +229,9 @@ export function QueryRunner() {
                     </Menu.Item>
                 </Menu>
             </Flex>
-            {responseState !== -1 && responseState[0] === "2" && <Alert success content={responseState} />}
-            {responseState !== -1 && (responseState[0] === "4" || responseState[0] === "5") && <Alert danger content={responseState} />}
+            {responseState !== -1 && responseState[0] === "2" && <Alert className = "response-number" success content={responseState} />}
+            {responseState !== -1 && (responseState[0] === "4" || responseState[0] === "5") && <Alert className = "response-number" danger content={responseState} />}
+            <div></div>
             {responseComponents[responseComponentIndex]}
         </>
     );
