@@ -4,7 +4,7 @@
         "Table of Contents" : {
             "Connected Resources": "Connected Resources",
             "Query Runner": "Query Runner",
-            "Resource-Specific Consent": "Resource-Specific Consent",
+            "Granted Resource-Specific Consent": "Granted Resource-Specific Consent",
             "Documentation Links": "Documentation Links"
         },
 
