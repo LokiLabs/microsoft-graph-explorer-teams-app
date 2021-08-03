@@ -19,6 +19,7 @@ export function QueryRunner() {
                 circular
                 text
                 iconOnly
+                aria-label="delete"
                 title="Delete request header"
             />;
             const newHeaderValue = {

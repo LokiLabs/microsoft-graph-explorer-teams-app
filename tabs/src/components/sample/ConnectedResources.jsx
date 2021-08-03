@@ -56,7 +56,7 @@ export function createItemWithCopy(id) {
 
     //Add the copy icon 
     item.endMedia = (
-        <Button icon={<ClipboardCopiedToIcon className="button-icon" />} size="medium" text iconOnly title="Copy" onClick={() => copyText(id)} />
+        <Button aria-label="copy" icon={<ClipboardCopiedToIcon className="button-icon" />} size="medium" text iconOnly title="Copy" onClick={() => copyText(id)} />
     );
     return item;
 }
