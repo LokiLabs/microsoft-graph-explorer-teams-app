@@ -39,7 +39,7 @@ class TabConfig extends React.Component {
     return (
       <center className = "center" >
         <img className = "image" src={imageName.default} alt = ''/>
-        <h4 className = "caption">Select save to finish adding the Graph Explorer Sample Teams app.</h4>
+        <h4 className = "caption">Select save to finish adding the Graph Explorer Sample Teams app. By installing this app, you are granting it resource-specific consent permission against the Teams channel/chat. </h4>
       </center>
     );
   }
