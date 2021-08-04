@@ -42,7 +42,7 @@ const MainContent = () => {
             <div>
                 <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
                     <ChevronDownIcon className="chevron" />
-                    <Header id="query-runner-header" className="pointer-header" as="h2" content={"SAMPLE QUERIES"} />
+                    <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
                 </Flex>
                 <div>
                     <FetchSamples />
@@ -52,7 +52,7 @@ const MainContent = () => {
         secondSection =
             <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
                 <ChevronEndIcon className="chevron" />
-                <Header id="query-runner-header" className="pointer-header" as="h2" content={"SAMPLE QUERIES"} />
+                <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
             </Flex>;
     }
     

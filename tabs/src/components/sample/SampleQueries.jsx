@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table} from '@fluentui/react-northstar';
+import { Table, OpenOutsideIcon, Button} from '@fluentui/react-northstar';
 
 export function FetchSamples(){
     const [samples, setSamples] = useState([]);
@@ -21,10 +21,11 @@ export function FetchSamples(){
             }
             const res = await response.json();
             var arr = [];
-            for(let i = 0; i < res.sampleQueries.length; i++){
+            console.log(res.teamsAppSampleQueries);
+            for(let i = 0; i < res.teamsAppSampleQueries.length; i++){
                 var query = {};
-                query.key = res.sampleQueries[i]["id"];
-                query.items = [res.sampleQueries[i]["method"], res.sampleQueries[i]["humanName"]];
+                query.key = res.teamsAppSampleQueries[i]["id"];
+                query.items = [res.teamsAppSampleQueries[i]["method"], res.teamsAppSampleQueries[i]["humanName"], createFillIn(res.teamsAppSampleQueries[i]["requestUrl"])];
                 arr.push(query);
             }
             console.log("Inside sampleQueries");
@@ -44,6 +45,22 @@ export function FetchSamples(){
     return (
         <Table rows = {samples} aria-label="sample queries" />
     );
+}
+
+function createFillIn(url){
+    const deleteButton = () => <Button
+        tabIndex={-1}
+        icon={<OpenOutsideIcon className="button-icon" />}
+        circular
+        text
+        iconOnly
+        aria-label="delete"
+        title="Delete request header"
+    />;
+    var obj = {content: deleteButton(), onClick:e => {
+        console.log(url);
+    }};
+    return obj;
 }
 
 
