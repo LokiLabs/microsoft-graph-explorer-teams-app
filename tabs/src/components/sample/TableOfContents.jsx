@@ -23,21 +23,25 @@ const Headings = ({ headings }) => {
       onClick: scrollHeadingIntoView(headings[0])
     },
     {
+      key: 'sample-queries',
+      content: t("Table of Contents.Sample Queries"),
+      onClick: scrollHeadingIntoView(headings[1])
+    },
+    {
       key: "query-runner",
       content: t("Table of Contents.Query Runner"),
-      onClick: scrollHeadingIntoView(headings[1])
-
+      onClick: scrollHeadingIntoView(headings[2])
     },
     {
       key: "resource-specific-consent",
       content: t("Table of Contents.Granted Resource-Specific Consent"),
-      onClick: scrollHeadingIntoView(headings[2])
+      onClick: scrollHeadingIntoView(headings[3])
     },
 
     {
       key: "documentation-links",
       content: t("Table of Contents.Documentation Links"),
-      onClick: scrollHeadingIntoView(headings[3])
+      onClick: scrollHeadingIntoView(headings[4])
     },
   ];
 

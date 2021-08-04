@@ -55,6 +55,7 @@
 
         "Table of Contents" : {
             "Connected Resources": "Connected Resources",
+            "Sample Queries": "Sample Queries",
             "Query Runner": "Query Runner",
             "Granted Resource-Specific Consent": "Granted Resource-Specific Consent",
             "Documentation Links": "Documentation Links"

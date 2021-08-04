@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-import { ChevronDownIcon, ChevronEndIcon, Header, Flex } from '@fluentui/react-northstar';
+import { ChevronDownIcon, ChevronEndIcon, Header, Flex, Table} from '@fluentui/react-northstar';
 import { RSCList } from "./RSCList";
 import { QueryRunner } from './QueryRunner';
 import { useTranslation } from 'react-i18next';
 import DocumentationLinks from "./DocumentationLinks";
+import { FetchSamples } from "./SampleQueries";
 
 import { ProcessTeamsContext } from './ConnectedResources.jsx';
 
 const MainContent = () => {
     const [firstSectionActive, toggleFirstSection] = useState(true);
     const [secondSectionActive, toggleSecondSection] = useState(true);
-    const [thirdSectionActive, toggleThirdSection] = useState(false);
+    const [thirdSectionActive, toggleThirdSection] = useState(true);
     const [fourthSectionActive, toggleFourthSection] = useState(false);
+    const [fifthSectionActive, toggleFifthSection] = useState(false);
     const { t } = useTranslation();
 
 
     let firstSection;
     if (firstSectionActive) {
-        firstSection =
+        firstSection = 
             <div>
                 <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
                     <ChevronDownIcon className="chevron" />
@@ -33,11 +35,34 @@ const MainContent = () => {
             </Flex>;
     }
 
+
     let secondSection;
     if (secondSectionActive) {
+        console.log("lets bring out the samples");
+        console.log(FetchSamples());
         secondSection =
             <div>
                 <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
+                    <ChevronDownIcon className="chevron" />
+                    <Header id="query-runner-header" className="pointer-header" as="h2" content={"SAMPLE QUERIES"} />
+                </Flex>
+                <div>
+                    <Table rows={FetchSamples()} aria-label="sample queries" />
+                </div>
+            </div>;
+    } else {
+        secondSection =
+            <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
+                <ChevronEndIcon className="chevron" />
+                <Header id="query-runner-header" className="pointer-header" as="h2" content={"SAMPLE QUERIES"} />
+            </Flex>;
+    }
+    
+    let thirdSection;
+    if (thirdSectionActive) {
+        thirdSection =
+            <div>
+                <Flex className="main-section" gap="gap.small" onClick={() => toggleThirdSection(!thirdSectionActive)}>
                     <ChevronDownIcon className="chevron" />
                     <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
                 </Flex>
@@ -46,30 +71,10 @@ const MainContent = () => {
                 </div>
             </div>;
     } else {
-        secondSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
-            </Flex>;
-    }
-
-    let thirdSection;
-    if (thirdSectionActive) {
-        thirdSection =
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleThirdSection(!thirdSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Granted Resource-Specific Consent")} />
-                </Flex>
-                <div>
-                    <RSCList />
-                </div>
-            </div>;
-    } else {
         thirdSection =
             <Flex className="main-section" gap="gap.small" onClick={() => toggleThirdSection(!thirdSectionActive)}>
                 <ChevronEndIcon className="chevron" />
-                <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Granted Resource-Specific Consent")} />
+                <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
             </Flex>;
     }
 
@@ -79,13 +84,33 @@ const MainContent = () => {
             <div>
                 <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
                     <ChevronDownIcon className="chevron" />
+                    <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource-Specific Consent")} />
+                </Flex>
+                <div>
+                    <RSCList />
+                </div>
+            </div>;
+    } else {
+        fourthSection =
+            <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
+                <ChevronEndIcon className="chevron" />
+                <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource-Specific Consent")} />
+            </Flex>;
+    }
+
+    let fifthSection;
+    if (fifthSectionActive) {
+        fifthSection =
+            <div>
+                <Flex className="main-section" gap="gap.small" onClick={() => toggleFifthSection(!fifthSectionActive)}>
+                    <ChevronDownIcon className="chevron" />
                     <Header id="documentation-links-header" className="pointer-header" as="h2" content={t("Table of Contents.Documentation Links")} />
                 </Flex>
                 <DocumentationLinks />
             </div>;
     } else {
-        fourthSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
+        fifthSection =
+            <Flex className="main-section" gap="gap.small" onClick={() => toggleFifthSection(!fifthSectionActive)}>
                 <ChevronEndIcon className="chevron" />
                 <Header id="documentation-links-header" className="pointer-header" as="h2" content={t("Table of Contents.Documentation Links")} />
             </Flex>;
@@ -97,6 +122,7 @@ const MainContent = () => {
             {secondSection}
             {thirdSection}
             {fourthSection}
+            {fifthSection}
         </main>
     );
 };
