@@ -26,6 +26,9 @@
             "version": "detect"
         }
     },
+    "ignorePatterns": [
+        "./node_modules/*.js"
+    ],
     "rules": {
         "react/no-unescaped-entities": 0,
         "react/no-direct-mutation-state": 2,
