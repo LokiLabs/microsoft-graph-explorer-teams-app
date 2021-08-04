@@ -73,23 +73,18 @@ export function QueryRunner() {
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
         const url = RSC_API_URL + graphVersion + queryParameters;
         const cleanedHeaders = {};
-        for (const i of requestHeaders) {
-            cleanedHeaders[i.items[0]] = i.items[1];
+        for (const header of requestHeaders) {
+            cleanedHeaders[header.items[0]] = header.items[1];
         }
-        let requestParams = {};
-        if (requestType === requestTypes.GET) {
-            requestParams = {
-                method: requestType,
-                headers: cleanedHeaders,
-            };
-        } else {
-            requestParams = {
-                method: requestType,
-                headers: cleanedHeaders,
-                body: requestBody
-            };
+
+        let options = {
+            method: requestType,
+            headers: cleanedHeaders,
+        };
+        if (requestType !== requestTypes.GET) {
+            options.body = requestBody;
         }
-        const graphResponse = await fetch(url, requestParams);
+        const graphResponse = await fetch(url, options);
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
             graphResponseHeaders.push({
