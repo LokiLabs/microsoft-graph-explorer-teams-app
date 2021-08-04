@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, OpenOutsideIcon, Button} from '@fluentui/react-northstar';
+import { Table, TableCell, OpenOutsideIcon, Button} from '@fluentui/react-northstar';
 import { GRAPH_URL, SAMPLE_QUERIES_URL} from "./TabConstants";
 import * as microsoftTeams from "@microsoft/teams-js";
 /* eslint-disable react/prop-types */
@@ -29,7 +29,9 @@ export function FetchSamples(props){
                         }
                         var query = {};
                         query.key = res.teamsAppSampleQueries[i]["id"];
-                        query.items = [res.teamsAppSampleQueries[i]["method"], res.teamsAppSampleQueries[i]["humanName"], createFillIn(res.teamsAppSampleQueries[i]["requestUrl"], props.setQuery)];
+                        var label = <TableCell className = {"table-cell"} content = {res.teamsAppSampleQueries[i]["method"]}/>;
+                        var button = <TableCell className = {"table-cell"} content = {createFillIn(res.teamsAppSampleQueries[i]["requestUrl"], props.setQuery)}/>;
+                        query.items = [label, res.teamsAppSampleQueries[i]["humanName"], button];
                         arr.push(query);
                     }
                 } catch (error) {
