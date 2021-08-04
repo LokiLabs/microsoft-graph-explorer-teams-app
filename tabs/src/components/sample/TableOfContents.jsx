@@ -39,7 +39,7 @@ const Headings = ({ headings }) => {
       content: t("Table of Contents.Documentation Links"),
       onClick: scrollHeadingIntoView(headings[3])
     },
-  ]
+  ];
 
   return (
     <Menu defaultActiveIndex={0} items={items} vertical pointing />
@@ -48,7 +48,7 @@ const Headings = ({ headings }) => {
 
 Headings.propTypes = {
   headings: PropTypes.string
-}
+};
 
 const TableOfContents = () => {
   const headingsData = useHeadingsData();

@@ -1,0 +1,11 @@
+.dropdown {
+    max-width: min-content;
+}
+
+.ui-dropdown__container {
+    max-width: min-content;
+}
+
+.ui-dropdown__selected-items {
+    max-width: min-content;
+}

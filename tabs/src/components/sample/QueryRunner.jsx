@@ -19,12 +19,13 @@ export function QueryRunner() {
             setUserAddedValue("");
             const deleteButton = () => <Button
                 tabIndex={-1}
-                icon={<TrashCanIcon />}
+                icon={<TrashCanIcon className="button-icon" />}
                 circular
                 text
                 iconOnly
+                aria-label="delete"
                 title="Delete request header"
-            />
+            />;
             const newHeaderValue = {
                 key: headerCopy,
                 items: [headerCopy, valueCopy, {
@@ -39,7 +40,7 @@ export function QueryRunner() {
             };
             setRequestHeaders([...requestHeaders, newHeaderValue]);
         }
-    }
+    };
 
     const [userAddedHeader, setUserAddedHeader] = useState("");
     const [userAddedValue, setUserAddedValue] = useState("");
@@ -78,21 +79,21 @@ export function QueryRunner() {
         console.log(query);
         setResponseBody("");
         setResponseHeaders([{ key: 'Content', items: ['Content', 'json'] }]);
-    }
+    };
 
     const deleteRow = (header) => {
-        setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header))
+        setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header));
     };
 
     useEffect(() => {
         setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + 4, query.length));
-    }, [graphVersion, query])
+    }, [graphVersion, query]);
 
     const requestComponents = [
         <TextArea key="requestBody" fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
         <>
             <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
-            <Flex gap="gap.small" padding="padding.medium">
+            <Flex gap="gap.small" className="pad-vertical">
                 <Flex.Item>
                     <Input
                         fluid={true}
@@ -120,12 +121,12 @@ export function QueryRunner() {
                 </Flex.Item>
             </Flex>
         </>
-    ]
+    ];
 
     const responseComponents = [
         <TextArea key="responseBody" fluid={true} inverted={true} resize="both" value={responseBody} />,
         <Table key="responseHeaders" compact header={responseTableHeaders} rows={responseHeaders} aria-label="response headers" />
-    ]
+    ];
 
     return (
         <>

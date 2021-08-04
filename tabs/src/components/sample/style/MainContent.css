@@ -1,0 +1,13 @@
+.main-section {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.pointer-header {
+    cursor: pointer;
+}
+
+.chevron {
+    cursor: pointer;
+    padding-top: 8px;
+}
