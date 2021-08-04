@@ -30,7 +30,7 @@ const Headings = ({ headings }) => {
     },
     {
       key: "resource-specific-consent",
-      content: t("Table of Contents.Resource-Specific Consent"),
+      content: t("Table of Contents.Granted Resource-Specific Consent"),
       onClick: scrollHeadingIntoView(headings[2])
     },
 
