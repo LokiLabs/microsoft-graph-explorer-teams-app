@@ -3,9 +3,14 @@ import { requestTypes, graphVersions, GRAPH_URL } from "./TabConstants";
 import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown } from '@fluentui/react-northstar';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
-import enUS from './GE.json';
+import { useTranslation } from "react-i18next";
+import "./style/QueryRunner.css";
 
 export function QueryRunner() {
+
+    // Translations
+    const { t } = useTranslation();
+
     const addRequestHeader = () => {
         if (!requestHeaders.map(r => r.key).includes(userAddedHeader)) {
             const headerCopy = (' ' + userAddedHeader).slice(1);
@@ -50,21 +55,21 @@ export function QueryRunner() {
     const [requestHeaders, setRequestHeaders] = useState([]);
 
     const requestItems = [
-        enUS["request body"],
-        enUS["request headers"]
+        t("Query Runner.Request body"),
+        t("Query Runner.Request headers")
     ];
 
     const responseItems = [
-        enUS["response body"],
-        enUS["response headers"]
+        t("Query Runner.Response body"),
+        t("Query Runner.Response headers")
     ];
 
     const requestTableHeaders = {
-        items: ['Key', 'Value', ''],
+        items: [t("Query Runner.Key"), t("Query Runner.Value"), ''],
     };
 
     const responseTableHeaders = {
-        items: ['Key', 'Value'],
+        items: [t("Query Runner.Key"), t("Query Runner.Value")],
     };
 
     const callGraph = () => {
@@ -112,7 +117,7 @@ export function QueryRunner() {
                         type="text" />
                 </Flex.Item>
                 <Flex.Item>
-                    <Button content="Add" onClick={() => addRequestHeader()} primary />
+                    <Button content={t("Query Runner.Add")} onClick={() => addRequestHeader()} primary />
                 </Flex.Item>
             </Flex>
         </>
@@ -151,7 +156,7 @@ export function QueryRunner() {
                             <Input fluid inverted value={query} showSuccessIndicator={false} required onChange={(evt) => setQuery(evt.target.value)} type="text" />
                         </Flex.Item>
                         <Flex.Item size="size.half">
-                            <Button content={enUS["run query"]} onClick={() => callGraph()} primary />
+                            <Button content={t("Query Runner.Run query")} onClick={() => callGraph()} primary />
                         </Flex.Item>
                     </Flex>
                 </Flex.Item>
