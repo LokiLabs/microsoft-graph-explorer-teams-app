@@ -7,30 +7,30 @@ import * as microsoftTeams from "@microsoft/teams-js";
 export function FetchSamples(props){
     const [samples, setSamples] = useState([]);
     useEffect(() => {
-        async function getSamplesList(samples, context) {
+        async function getSamplesList(FetchSamples) {
             microsoftTeams.getContext(async function (context) {
                 const devxApi = SAMPLE_QUERIES_URL;
 
                 const headers = {
-                'Content-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 };
     
                 try {
-                    const response = await fetch(devxApi, headers);
-                    if (!response.ok) {
-                        throw response;
+                        const response = await fetch(devxApi, headers);
+                        if (!response.ok) {
+                            throw response;
                     }
                     const res = await response.json();
                     var arr = [];
-                for(let i = 0; i < res.teamsAppSampleQueries.length; i++){
-                    //filter through all the chats and teams
-                    if( (context?.groupId && res.teamsAppSampleQueries[i]["requestUrl"].includes("chat"))||(context?.chatId &&  res.teamsAppSampleQueries[i]["requestUrl"].includes("teams")) ){
-                        continue;
-                    }
-                    var query = {};
-                    query.key = res.teamsAppSampleQueries[i]["id"];
-                    query.items = [res.teamsAppSampleQueries[i]["method"], res.teamsAppSampleQueries[i]["humanName"], createFillIn(res.teamsAppSampleQueries[i]["requestUrl"], props.setQuery)];
-                    arr.push(query);
+                    for(let i = 0; i < res.teamsAppSampleQueries.length; i++){
+                        //filter through all the chats and teams
+                        if( (context?.groupId && res.teamsAppSampleQueries[i]["requestUrl"].includes("chat"))||(context?.chatId &&  res.teamsAppSampleQueries[i]["requestUrl"].includes("teams")) ){
+                            continue;
+                        }
+                        var query = {};
+                        query.key = res.teamsAppSampleQueries[i]["id"];
+                        query.items = [res.teamsAppSampleQueries[i]["method"], res.teamsAppSampleQueries[i]["humanName"], createFillIn(res.teamsAppSampleQueries[i]["requestUrl"], props.setQuery)];
+                        arr.push(query);
                     }
                 } catch (error) {
                     return error;
@@ -59,7 +59,7 @@ function createFillIn(url, setQuery){
         title="Sample Query"
     />;
     var obj = {content: sampleButton(), onClick:e => {
-        setQuery(GRAPH_URL + url.slice(1, -1));
+        setQuery(GRAPH_URL + url.slice(1,));
     }};
     return obj;
 }
