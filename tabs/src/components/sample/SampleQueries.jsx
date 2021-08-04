@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Table, OpenOutsideIcon, Button} from '@fluentui/react-northstar';
+import { GRAPH_URL } from "./TabConstants";
 
-export function FetchSamples(){
+export function FetchSamples(props){
     const [samples, setSamples] = useState([]);
     console.log("FETCH SAMPLE");
     useEffect(() => {
@@ -25,7 +26,8 @@ export function FetchSamples(){
             for(let i = 0; i < res.teamsAppSampleQueries.length; i++){
                 var query = {};
                 query.key = res.teamsAppSampleQueries[i]["id"];
-                query.items = [res.teamsAppSampleQueries[i]["method"], res.teamsAppSampleQueries[i]["humanName"], createFillIn(res.teamsAppSampleQueries[i]["requestUrl"])];
+                // eslint-disable-next-line react/prop-types
+                query.items = [res.teamsAppSampleQueries[i]["method"], res.teamsAppSampleQueries[i]["humanName"], createFillIn(res.teamsAppSampleQueries[i]["requestUrl"], props.setQuery)];
                 arr.push(query);
             }
             console.log("Inside sampleQueries");
@@ -47,7 +49,7 @@ export function FetchSamples(){
     );
 }
 
-function createFillIn(url){
+function createFillIn(url, setQuery){
     const deleteButton = () => <Button
         tabIndex={-1}
         icon={<OpenOutsideIcon className="button-icon" />}
@@ -58,7 +60,11 @@ function createFillIn(url){
         title="Delete request header"
     />;
     var obj = {content: deleteButton(), onClick:e => {
+        console.log("delete button");
+        console.log(GRAPH_URL);
         console.log(url);
+        console.log(GRAPH_URL + url);
+        setQuery(GRAPH_URL + url.slice(1, -1));
     }};
     return obj;
 }

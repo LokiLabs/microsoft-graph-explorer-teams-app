@@ -78,23 +78,18 @@ export function QueryRunner() {
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
         const url = RSC_API_URL + graphVersion + queryParameters;
         const cleanedHeaders = {};
-        for (const i of requestHeaders) {
-            cleanedHeaders[i.items[0]] = i.items[1];
+        for (const header of requestHeaders) {
+            cleanedHeaders[header.items[0]] = header.items[1];
         }
-        let requestParams = {};
-        if (requestType === requestTypes.GET) {
-            requestParams = {
-                method: requestType,
-                headers: cleanedHeaders,
-            };
-        } else {
-            requestParams = {
-                method: requestType,
-                headers: cleanedHeaders,
-                body: requestBody
-            };
+
+        let options = {
+            method: requestType,
+            headers: cleanedHeaders,
+        };
+        if (requestType !== requestTypes.GET) {
+            options.body = requestBody;
         }
-        const graphResponse = await fetch(url, requestParams);
+        const graphResponse = await fetch(url, options);
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
             graphResponseHeaders.push({
@@ -104,8 +99,13 @@ export function QueryRunner() {
         }
         setResponseHeaders(graphResponseHeaders);
         setReponseState(graphResponse.status + " " + graphResponse.statusText);
-        const text = await graphResponse.json();
-        setResponseBody(JSON.stringify(text, undefined, 4));
+        if (graphResponse.ok) {
+            const text = await graphResponse.json();
+            setResponseBody(JSON.stringify(text, undefined, 4));
+        } else {
+            const text = await graphResponse.text();
+            setResponseBody(text);
+        }
     }
 
     const deleteRow = (header) => {
@@ -235,8 +235,8 @@ export function QueryRunner() {
                     </Menu.Item>
                 </Menu>
             </Flex>
-            {responseState !== -1 && responseState[0] === "2" && <Alert success content={responseState} />}
-            {responseState !== -1 && (responseState[0] === "4" || responseState[0] === "5") && <Alert danger content={responseState} />}
+            {responseState !== -1 && responseState[0] === "2" && <Alert className = "response-number" success content={responseState} />}
+            {responseState !== -1 && (responseState[0] === "4" || responseState[0] === "5") && <Alert className = "response-number" danger content={responseState} />}
             {responseComponents[responseComponentIndex]}
         </>
     );

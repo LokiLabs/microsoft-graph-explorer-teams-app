@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDownIcon, ChevronEndIcon, Header, Flex} from '@fluentui/react-northstar';
+import { GRAPH_URL } from "./TabConstants";
 import { RSCList } from "./RSCList";
 import { QueryRunner } from './QueryRunner';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +15,8 @@ const MainContent = () => {
     const [thirdSectionActive, toggleThirdSection] = useState(true);
     const [fourthSectionActive, toggleFourthSection] = useState(false);
     const [fifthSectionActive, toggleFifthSection] = useState(false);
+    
+    const [query, setQuery] = useState(GRAPH_URL);
     const { t } = useTranslation();
 
 
@@ -45,7 +48,7 @@ const MainContent = () => {
                     <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
                 </Flex>
                 <div>
-                    <FetchSamples />
+                    <FetchSamples setQuery = {setQuery} />
                 </div>
             </div>;
     } else {
@@ -65,7 +68,7 @@ const MainContent = () => {
                     <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
                 </Flex>
                 <div>
-                    <QueryRunner />
+                    <QueryRunner query = {query} setQuery = {setQuery}/>
                 </div>
             </div>;
     } else {
