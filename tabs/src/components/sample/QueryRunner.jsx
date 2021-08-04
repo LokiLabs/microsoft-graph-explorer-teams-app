@@ -4,7 +4,7 @@ import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown }
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import { useTranslation } from "react-i18next";
-import "./style.css";
+import "./style/QueryRunner.css";
 
 export function QueryRunner() {
 
@@ -57,20 +57,20 @@ export function QueryRunner() {
     const requestItems = [
         t("Query Runner.Request body"),
         t("Query Runner.Request headers")
-    ]
+    ];
 
     const responseItems = [
         t("Query Runner.Response body"),
         t("Query Runner.Response headers")
-    ]
+    ];
 
     const requestTableHeaders = {
         items: [t("Query Runner.Key"), t("Query Runner.Value"), ''],
-    }
+    };
 
     const responseTableHeaders = {
         items: [t("Query Runner.Key"), t("Query Runner.Value")],
-    }
+    };
 
     const callGraph = () => {
         // stub

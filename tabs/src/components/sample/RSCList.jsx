@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CLIENT_APP_ID, items, DEVX_API_URL } from './TabConstants';
-import "./RSCList.css";
+import { CLIENT_APP_ID, DEVX_API_URL } from './TabConstants';
 import { useTeamsFx } from "../sample/lib/useTeamsFx";
 import { Table } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
@@ -13,7 +12,7 @@ export function RSCList() {
     const items = [
         t('RSC Headers.Permissions'),
         t('RSC Headers.Descriptions')
-    ]
+    ];
 
     useEffect(() => {
         async function getRSCList(context) {

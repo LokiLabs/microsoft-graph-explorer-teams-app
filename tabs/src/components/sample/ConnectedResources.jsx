@@ -3,7 +3,7 @@ import { Button, List, Alert, ListItem } from '@fluentui/react-northstar';
 import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
 import copy from "copy-to-clipboard"; 
 import * as microsoftTeams from "@microsoft/teams-js"; 
-import "./ConnectedResources.css";
+import "./style/ConnectedResources.css";
 import { useTranslation } from "react-i18next";
 
 export function ProcessTeamsContext(){
