@@ -18,8 +18,8 @@ export function ProcessTeamsContext(){
             }
             var channelId = createItemWithCopy(context.channelId);
             channelId.header = TEAMS_CHANNEL_ID + context.channelId;
-            var teamId = createItemWithCopy(context.teamId);
-            teamId.header = TEAMS_TEAM_ID + context.teamId;
+            var teamId = createItemWithCopy(context.groupId);
+            teamId.header = TEAMS_TEAM_ID + context.groupId;
             setTitle(context.teamName + " > " + context.channelName);
             setResourceList([teamId, channelId]);
         }
