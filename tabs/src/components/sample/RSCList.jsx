@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CLIENT_APP_ID, DEVX_API_URL } from './TabConstants';
+import { CLIENT_APP_ID, RSC_API_URL } from './TabConstants';
 import { useTeamsFx } from "../sample/lib/useTeamsFx";
 import { Table } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
@@ -17,7 +17,7 @@ export function RSCList() {
     useEffect(() => {
         async function getRSCList(context) {
             if (context?.groupId) {
-                let teamResponse = await fetch(DEVX_API_URL + "/graphproxy/beta/teams/" + context?.groupId + "/permissionGrants").then(response => response.json());
+                let teamResponse = await fetch(RSC_API_URL + "beta/teams/" + context?.groupId + "/permissionGrants").then(response => response.json());
                 const teamRSCs = teamResponse.value;
 
                 if (teamRSCs) {
@@ -31,7 +31,7 @@ export function RSCList() {
                 }
 
             } else if (context?.chatId) {
-                let chatResponse = await fetch(DEVX_API_URL + "/graphproxy/beta/chats/" + context?.chatId + "/permissionGrants").then(response => response.json());
+                let chatResponse = await fetch(RSC_API_URL + "beta/chats/" + context?.chatId + "/permissionGrants").then(response => response.json());
                 const chatRSCs = chatResponse.value;
 
                 if (chatRSCs) {

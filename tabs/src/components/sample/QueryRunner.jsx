@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { requestTypes, graphVersions, GRAPH_URL } from "./TabConstants";
-import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown } from '@fluentui/react-northstar';
+import { requestTypes, graphVersions, GRAPH_URL, RSC_API_URL } from "./TabConstants";
+import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, Alert } from '@fluentui/react-northstar';
+import { useRangeKnob } from '@fluentui/docs-components';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import { useTranslation } from "react-i18next";
@@ -49,10 +50,11 @@ export function QueryRunner() {
     const [query, setQuery] = useState(GRAPH_URL);
     const [responseBody, setResponseBody] = useState("{}");
     const [requestBody, setRequestBody] = useState("{}");
-    const [responseHeaders, setResponseHeaders] = useState([{ key: 'Content', items: ['Content', 'json'] }]);
+    const [responseHeaders, setResponseHeaders] = useState([]);
     const [responseComponentIndex, setResponseComponentIndex] = useState(0);
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
     const [requestHeaders, setRequestHeaders] = useState([]);
+    const [responseState, setReponseState] = useState(-1);
 
     const requestItems = [
         t("Query Runner.Request body"),
@@ -72,25 +74,62 @@ export function QueryRunner() {
         items: [t("Query Runner.Key"), t("Query Runner.Value")],
     };
 
-    const callGraph = () => {
-        // stub
-        console.log(requestType);
-        console.log(graphVersion);
-        console.log(query);
-        setResponseBody("");
-        setResponseHeaders([{ key: 'Content', items: ['Content', 'json'] }]);
-    };
+    async function callGraph() {
+        const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
+        const url = RSC_API_URL + graphVersion + queryParameters;
+        const cleanedHeaders = {};
+        for (const header of requestHeaders) {
+            cleanedHeaders[header.items[0]] = header.items[1];
+        }
+
+        let options = {
+            method: requestType,
+            headers: cleanedHeaders,
+        };
+        if (requestType !== requestTypes.GET) {
+            options.body = requestBody;
+        }
+        const graphResponse = await fetch(url, options);
+        let graphResponseHeaders = [];
+        for (const p of graphResponse.headers.entries()) {
+            graphResponseHeaders.push({
+                key: p[0],
+                items: [p[0], p[1]]
+            });
+        }
+        setResponseHeaders(graphResponseHeaders);
+        setReponseState(graphResponse.status + " " + graphResponse.statusText);
+        if (graphResponse.ok) {
+            const text = await graphResponse.json();
+            setResponseBody(JSON.stringify(text, undefined, 4));
+        } else {
+            const text = await graphResponse.text();
+            setResponseBody(text);
+        }
+    }
 
     const deleteRow = (header) => {
         setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header));
     };
 
     useEffect(() => {
-        setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + 4, query.length));
+        setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
     }, [graphVersion, query]);
 
+    const [height] = useRangeKnob({
+        name: 'height',
+        initialValue: '120px',
+        min: '20px',
+        max: '300px',
+        step: 10,
+    });
+
     const requestComponents = [
-        <TextArea key="requestBody" fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)} />,
+        <TextArea key="requestBody" fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)}
+            variables={{
+                height,
+            }}
+        />,
         <>
             <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
             <Flex gap="gap.small" className="pad-vertical">
@@ -124,7 +163,11 @@ export function QueryRunner() {
     ];
 
     const responseComponents = [
-        <TextArea key="responseBody" fluid={true} inverted={true} resize="both" value={responseBody} />,
+        <TextArea key="responseBody" fluid={true} inverted={true} resize="both" value={responseBody}
+            variables={{
+                height,
+            }}
+        />,
         <Table key="responseHeaders" compact header={responseTableHeaders} rows={responseHeaders} aria-label="response headers" />
     ];
 
@@ -192,6 +235,8 @@ export function QueryRunner() {
                     </Menu.Item>
                 </Menu>
             </Flex>
+            {responseState !== -1 && responseState[0] === "2" && <Alert className = "response-number" success content={responseState} />}
+            {responseState !== -1 && (responseState[0] === "4" || responseState[0] === "5") && <Alert className = "response-number" danger content={responseState} />}
             {responseComponents[responseComponentIndex]}
         </>
     );
