@@ -1,6 +1,6 @@
 nav {
-    width: 300px;
-    min-width: 300px;
+    width: fit-content;
+    min-width: fit-content;
     padding: 24px;
     align-self: flex-start;
     position: -webkit-sticky;
