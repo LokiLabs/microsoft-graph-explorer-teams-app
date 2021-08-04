@@ -16,9 +16,14 @@
 
         "Connected Resources": {
             "Teams Channel ID": "Teams Channel ID",
+            "Teams Team ID": "Teams Team ID",
             "Chat": "Chat",
             "Chat ID": "Chat ID",
             "No Connected Resources": "You must connect to an instance of a team or a chat to make this request."
+        },
+
+        "Tab Config": {
+            "Caption": "Select save to finish adding the Graph Explorer Sample Teams app. By installing this app, you are granting it resource-specific consent permission against the Teams channel/chat."
         },
 
         "RSC Headers": {

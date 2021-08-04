@@ -1,5 +1,6 @@
 import React from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
+import { useTranslation } from "react-i18next";
 
 /**
  * The 'Config' component is used to display your group tabs
@@ -36,10 +37,13 @@ class TabConfig extends React.Component {
      */
     microsoftTeams.settings.setValidityState(true);
     var imageName = require('./teamsappzeronotes.svg');
+    
+    // Translations
+    const { t } = useTranslation();
     return (
       <center className = "center" >
         <img className = "image" src={imageName.default} alt = ''/>
-        <h4 className = "caption">Select save to finish adding the Graph Explorer Sample Teams app. By installing this app, you are granting it resource-specific consent permission against the Teams channel/chat. </h4>
+        <h4 className = "caption">{t('Tab Config.Caption')}</h4>
       </center>
     );
   }
