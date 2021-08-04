@@ -14,7 +14,6 @@ export function ProcessTeamsContext() {
     const [resourceList, setResourceList] = useState([]);
     const [title, setTitle] = useState(" ");
     microsoftTeams.getContext(function (context) {
-        console.log("test");
 
         //Check if this is a teams channel
         if (context.channelId && context.channelId.length !== 0) {
