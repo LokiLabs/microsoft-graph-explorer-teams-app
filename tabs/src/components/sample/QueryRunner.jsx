@@ -55,6 +55,7 @@ export function QueryRunner() {
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
     const [requestHeaders, setRequestHeaders] = useState([]);
     const [responseState, setReponseState] = useState(-1);
+    const [isLoading, setIsLoading] = useState(false);
 
     const requestItems = [
         t("Query Runner.Request body"),
@@ -75,6 +76,7 @@ export function QueryRunner() {
     };
 
     async function callGraph() {
+        setIsLoading(true);
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
         const url = RSC_API_URL + graphVersion + queryParameters;
         const cleanedHeaders = {};
@@ -106,6 +108,7 @@ export function QueryRunner() {
             const text = await graphResponse.text();
             setResponseBody(text);
         }
+        setIsLoading(false);
     }
 
     const deleteRow = (header) => {
@@ -199,7 +202,7 @@ export function QueryRunner() {
                             <Input fluid inverted value={query} showSuccessIndicator={false} required onChange={(evt) => setQuery(evt.target.value)} type="text" />
                         </Flex.Item>
                         <Flex.Item size="size.half">
-                            <Button content={t("Query Runner.Run query")} onClick={() => callGraph()} primary />
+                            <Button loading={isLoading} disabled={isLoading} content={t("Query Runner.Run query")} onClick={() => callGraph()} primary />
                         </Flex.Item>
                     </Flex>
                 </Flex.Item>
