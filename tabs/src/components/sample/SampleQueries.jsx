@@ -18,7 +18,7 @@ export function FetchSamples(props){
                 try {
                         const response = await fetch(devxApi, headers);
                         if (!response.ok) {
-                            throw response;
+                            return;
                     }
                     const res = await response.json();
                     var arr = [];
