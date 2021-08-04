@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDownIcon, ChevronEndIcon, Header, Flex, Table} from '@fluentui/react-northstar';
+import { ChevronDownIcon, ChevronEndIcon, Header, Flex} from '@fluentui/react-northstar';
 import { RSCList } from "./RSCList";
 import { QueryRunner } from './QueryRunner';
 import { useTranslation } from 'react-i18next';
@@ -38,8 +38,6 @@ const MainContent = () => {
 
     let secondSection;
     if (secondSectionActive) {
-        console.log("lets bring out the samples");
-        console.log(FetchSamples());
         secondSection =
             <div>
                 <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
@@ -47,7 +45,7 @@ const MainContent = () => {
                     <Header id="query-runner-header" className="pointer-header" as="h2" content={"SAMPLE QUERIES"} />
                 </Flex>
                 <div>
-                    <Table rows={FetchSamples()} aria-label="sample queries" />
+                    <FetchSamples />
                 </div>
             </div>;
     } else {
