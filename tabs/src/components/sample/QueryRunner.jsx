@@ -114,6 +114,7 @@ export function QueryRunner() {
 
     useEffect(() => {
         setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [graphVersion, query]);
 
     const [height] = useRangeKnob({

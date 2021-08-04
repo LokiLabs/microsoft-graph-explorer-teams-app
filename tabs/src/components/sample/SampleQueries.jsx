@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Table, OpenOutsideIcon, Button} from '@fluentui/react-northstar';
-import { GRAPH_URL } from "./TabConstants";
+import { GRAPH_URL, SAMPLE_QUERIES_URL} from "./TabConstants";
 import * as microsoftTeams from "@microsoft/teams-js";
+/* eslint-disable react/prop-types */
 
 export function FetchSamples(props){
     const [samples, setSamples] = useState([]);
-    console.log("FETCH SAMPLE");
     useEffect(() => {
         async function getSamplesList(samples, context) {
             microsoftTeams.getContext(async function (context) {
-                const devxApi = 'https://gi21devxapi-devtest.azurewebsites.net/samples?org=LokiLabs&branchName=interns/feature/app-mode-sample-queries';
+                const devxApi = SAMPLE_QUERIES_URL;
 
                 const headers = {
                 'Content-Type': 'application/json'
                 };
-                console.log("enetered the function");
     
                 try {
                     const response = await fetch(devxApi, headers);
                     if (!response.ok) {
-                        console.log("it didnt have a good response");
                         throw response;
                     }
                     const res = await response.json();
                     var arr = [];
-                console.log(res.teamsAppSampleQueries);
                 for(let i = 0; i < res.teamsAppSampleQueries.length; i++){
                     //filter through all the chats and teams
                     if( (context?.groupId && res.teamsAppSampleQueries[i]["requestUrl"].includes("chat"))||(context?.chatId &&  res.teamsAppSampleQueries[i]["requestUrl"].includes("teams")) ){
@@ -32,16 +29,10 @@ export function FetchSamples(props){
                     }
                     var query = {};
                     query.key = res.teamsAppSampleQueries[i]["id"];
-                    // eslint-disable-next-line react/prop-types
                     query.items = [res.teamsAppSampleQueries[i]["method"], res.teamsAppSampleQueries[i]["humanName"], createFillIn(res.teamsAppSampleQueries[i]["requestUrl"], props.setQuery)];
                     arr.push(query);
                     }
-                    console.log("Inside sampleQueries");
-                    console.log(arr);
-                    console.log(samples);
                 } catch (error) {
-                    console.log("failed the try catch");
-                    console.log(error);
                     return error;
                 }
                 setSamples(arr);
@@ -49,6 +40,7 @@ export function FetchSamples(props){
         }
         getSamplesList(samples);
         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -57,20 +49,16 @@ export function FetchSamples(props){
 }
 
 function createFillIn(url, setQuery){
-    const deleteButton = () => <Button
+    const sampleButton = () => <Button
         tabIndex={-1}
         icon={<OpenOutsideIcon className="button-icon" />}
         circular
         text
         iconOnly
-        aria-label="delete"
-        title="Delete request header"
+        aria-label="sample"
+        title="Sample Query"
     />;
-    var obj = {content: deleteButton(), onClick:e => {
-        console.log("delete button");
-        console.log(GRAPH_URL);
-        console.log(url);
-        console.log(GRAPH_URL + url);
+    var obj = {content: sampleButton(), onClick:e => {
         setQuery(GRAPH_URL + url.slice(1, -1));
     }};
     return obj;
