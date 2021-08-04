@@ -99,8 +99,13 @@ export function QueryRunner() {
         }
         setResponseHeaders(graphResponseHeaders);
         setReponseState(graphResponse.status + " " + graphResponse.statusText);
-        const text = await graphResponse.json();
-        setResponseBody(JSON.stringify(text, undefined, 4));
+        if (graphResponse.ok) {
+            const text = await graphResponse.json();
+            setResponseBody(JSON.stringify(text, undefined, 4));
+        } else {
+            const text = await graphResponse.text();
+            setResponseBody(text);
+        }
     }
 
     const deleteRow = (header) => {
