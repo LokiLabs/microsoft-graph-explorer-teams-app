@@ -10,7 +10,7 @@
             "Response body": "Response Body",
             "Response headers": "Response Headers",
             "Response": "Response",
-            "Warning": "To use Graph requests, you must connect the app to a resource in order to use resource-specific consent queries. Learn more here.",
+            "Warning": "You must connect the app to a resource in order to make Microsoft Graph requests that use resource-specific consent. For details, see {link to name of article(placeholder)} .",
             "Add": "ADD"
         },
 
@@ -18,7 +18,7 @@
             "Teams Channel ID": "Teams Channel ID",
             "Chat": "Chat",
             "Chat ID": "Chat ID",
-            "No Connected Resources": "No connected resources. Please connect to a Teams or Chats instance."
+            "No Connected Resources": "You must connect to an instance of a team or a chat to make this request."
         },
 
         "RSC Headers": {
@@ -49,7 +49,7 @@
             "TeamsTab.Create.Chat": "Create tabs in this chat.",
             "TeamsTab.Delete.Chat": "Delete this chat's tabs.",
             "TeamsTab.ReadWrite.Chat": "Manage this chat's tabs.",
-            "TeamsAppInstallation.Read.Chat": "Get which apps are installed in this chat.",
+            "TeamsAppInstallation.Read.Chat": "Get a list of the apps that are installed in this chat.",
             "OnlineMeeting.ReadBasic.Chat": "Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat."
         },
 
