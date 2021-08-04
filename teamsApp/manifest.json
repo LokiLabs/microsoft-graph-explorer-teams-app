@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "ToolkitApp",
+    "short": "Graph Explorer Teams app",
     "full": "This field is not used"
   },
   "description": {
-    "short": "Short description of ToolkitApp.",
-    "full": "Full description of ToolkitApp."
+    "short": "Conveniently make Microsoft Graph REST API requests from a channel or chat",
+    "full": "Utilize resource-specific consent with a team channel or chat to make supported Team Microsoft Graph REST API requests. With the ability to edit the request and view the response, and try any of the provided sample queries."
   },
   "accentColor": "#FFFFFF",
   "bots": [],
