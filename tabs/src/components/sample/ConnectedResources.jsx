@@ -45,12 +45,7 @@ export function ProcessTeamsContext() {
     );
 }
 
-function isAlreadyPresent(list, id) {
-    //if there aren't any contexts
-    return list.some((item => {
-        item.header?.includes(id);
-    }));
-}
+const isAlreadyPresent = (list, id) => list.some((i) => i.header?.includes(id));
 
 function copyText(id) {
     copy(id);
