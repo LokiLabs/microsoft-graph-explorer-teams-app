@@ -8,24 +8,24 @@ import { README_HEADER, MS_GRAPH_DOCS } from '../TabConstants';
 
 export function markdown(src) {
 
-    var rx_lt = /</g;
-    var rx_gt = />/g;
-    var rx_space = /\t|\r|\uf8ff/g;
-    var rx_escape = /\\([\\|`*_{}[\]()#+\-~])/g;
-    var rx_hr = /^([*\-=_] *){3,}$/gm;
-    var rx_blockquote = /\n *&gt; *([^]*?)(?=(\n|$){2})/g;
-    var rx_list = /\n( *)(?:[*\-+]|((\d+)|([a-z])|[A-Z])[.)]) +([^]*?)(?=(\n|$){2})/g;
-    var rx_listjoin = /<\/(ol|ul)>\n\n<\1>/g;
-    var rx_highlight = /(^|[^A-Za-z\d\\])(([*_])|(~)|(\^)|(--)|(\+\+)|`)(\2?)([^<]*?)\2\8(?!\2)(?=\W|_|$)/g;
-    var rx_code = /\n((```|~~~).*\n?([^]*?)\n?\2|(( {4}.*?\n)+))/g;
-    var rx_link = /((!?)\[(.*?)\]\((.*?)( ".*")?\)|\\([\\`*_{}[\]()#+\-.!~]))/g;
-    var rx_table = /\n(( *\|.*?\| *\n)+)/g;
-    var rx_thead = /^.*\n( *\|( *:?-+:?-+:? *\|)* *\n|)/;
-    var rx_row = /.*\n/g;
-    var rx_cell = /\||(.*?[^\\])\|/g;
-    var rx_heading = /(?=^|>|\n)([>\s]*?)(#{1,6}) (.*?)( #*)? *(?=\n|$)/g;
-    var rx_para = /(?=^|>|\n)\s*\n+([^<]+?)\n+\s*(?=\n|<|$)/g;
-    var rx_stash = /-\d+\uf8ff/g;
+    let rx_lt = /</g;
+    let rx_gt = />/g;
+    let rx_space = /\t|\r|\uf8ff/g;
+    let rx_escape = /\\([\\|`*_{}[\]()#+\-~])/g;
+    let rx_hr = /^([*\-=_] *){3,}$/gm;
+    let rx_blockquote = /\n *&gt; *([^]*?)(?=(\n|$){2})/g;
+    let rx_list = /\n( *)(?:[*\-+]|((\d+)|([a-z])|[A-Z])[.)]) +([^]*?)(?=(\n|$){2})/g;
+    let rx_listjoin = /<\/(ol|ul)>\n\n<\1>/g;
+    let rx_highlight = /(^|[^A-Za-z\d\\])(([*_])|(~)|(\^)|(--)|(\+\+)|`)(\2?)([^<]*?)\2\8(?!\2)(?=\W|_|$)/g;
+    let rx_code = /\n((```|~~~).*\n?([^]*?)\n?\2|(( {4}.*?\n)+))/g;
+    let rx_link = /((!?)\[(.*?)\]\((.*?)( ".*")?\)|\\([\\`*_{}[\]()#+\-.!~]))/g;
+    let rx_table = /\n(( *\|.*?\| *\n)+)/g;
+    let rx_thead = /^.*\n( *\|( *:?-+:?-+:? *\|)* *\n|)/;
+    let rx_row = /.*\n/g;
+    let rx_cell = /\||(.*?[^\\])\|/g;
+    let rx_heading = /(?=^|>|\n)([>\s]*?)(#{1,6}) (.*?)( #*)? *(?=\n|$)/g;
+    let rx_para = /(?=^|>|\n)\s*\n+([^<]+?)\n+\s*(?=\n|<|$)/g;
+    let rx_stash = /-\d+\uf8ff/g;
 
     function extractTextBetween(src, start, end) {
         try {
@@ -35,7 +35,7 @@ export function markdown(src) {
         }
     }
 
-    var match = extractTextBetween(src, README_HEADER, README_HEADER);
+    let match = extractTextBetween(src, README_HEADER, README_HEADER);
     const lenToRemove = match.length + 2 * README_HEADER.length;
     src = src.substring(lenToRemove);
     src = src.replace(/\(\//g, MS_GRAPH_DOCS);
@@ -56,7 +56,7 @@ export function markdown(src) {
 
     function list(src) {
         return src.replace(rx_list, function (all, ind, ol, num, low, content) {
-            var entry = element('li', highlight(content.split(
+            let entry = element('li', highlight(content.split(
                 RegExp('\n ?' + ind + '(?:(?:\\d+|[a-zA-Z])[.)]|[*\\-+]) +', 'g')).map(list).join('</li><li>')));
 
             return '\n' + (ol
@@ -84,8 +84,8 @@ export function markdown(src) {
         return str.replace(rx_escape, '$1');
     }
 
-    var stash = [];
-    var si = 0;
+    let stash = [];
+    let si = 0;
 
     src = '\n' + src + '\n';
 
@@ -121,7 +121,7 @@ export function markdown(src) {
 
     // table
     replace(rx_table, function (all, table) {
-        var sep = table.match(rx_thead)[1];
+        let sep = table.match(rx_thead)[1];
         return '\n' + element('table',
             table.replace(rx_row, function (row, ri) {
                 return row === sep ? '' : element('tr', row.replace(rx_cell, function (all, cell, ci) {

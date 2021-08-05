@@ -35,7 +35,7 @@ class TabConfig extends React.Component {
      * dialog.
      */
     microsoftTeams.settings.setValidityState(true);
-    var imageName = require('./teamsappzeronotes.svg');
+    const imageName = require('./teamsappzeronotes.svg');
     return (
       <center className = "center" >
         <img className = "image" src={imageName.default} alt = ''/>
