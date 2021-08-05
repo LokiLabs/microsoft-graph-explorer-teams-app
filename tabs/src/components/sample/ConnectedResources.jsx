@@ -6,13 +6,10 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
 
 export function ProcessTeamsContext() {
-
-    // Translations
-    const { t } = useTranslation();
-
     //Get the context of where the tab is currently
     const [resourceList, setResourceList] = useState([]);
     const [title, setTitle] = useState(" ");
+    const { t } = useTranslation();
 
     microsoftTeams.getContext(function (context) {
 

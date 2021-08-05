@@ -8,8 +8,6 @@ import { useTranslation } from "react-i18next";
 import "./style/QueryRunner.css";
 
 export function QueryRunner() {
-
-    // Translations
     const { t } = useTranslation();
 
     const addRequestHeader = () => {
