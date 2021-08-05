@@ -15,7 +15,7 @@ export function ProcessTeamsContext() {
 
         //Check if this is a teams channel
         if (context.channelId && context.channelId.length !== 0) {
-            if (!isAlreadyPresent(resourceList, context.channelId)) {
+            if (isAlreadyPresent(resourceList, context.channelId)) {
                 return;
             }
             let channelId = createItemWithCopy(context.channelId);
