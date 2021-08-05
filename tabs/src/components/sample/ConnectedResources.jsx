@@ -3,7 +3,6 @@ import { Button, List, Alert, ListItem } from '@fluentui/react-northstar';
 import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
 import copy from "copy-to-clipboard";
 import * as microsoftTeams from "@microsoft/teams-js";
-import "./style/ConnectedResources.css";
 import { useTranslation } from "react-i18next";
 
 export function ProcessTeamsContext() {
@@ -33,11 +32,11 @@ export function ProcessTeamsContext() {
                 return;
             }
             setTitle(t("Connected Resources.Chat"));
-            var chatId = createItemWithCopy(context.chatId);
+            let chatId = createItemWithCopy(context.chatId);
             chatId.header = t("Connected Resources.Chat ID") + ": " + context.chatId;
             setResourceList([chatId]);
         }
-        else {
+        else if (title === " ") {
             setTitle("");
             setResourceList([]);
         }
@@ -45,7 +44,7 @@ export function ProcessTeamsContext() {
     return (
         <div className="connected-resource">
             {resourceList.length !== 0 && <ListItem className="title" header={title} />}
-            {resourceList.length !== 0 && <List selectable defaultSelectedIndex={0} items={resourceList} />}
+            {resourceList.length !== 0 && <List defaultSelectedIndex={0} items={resourceList}/>} 
             {resourceList.length === 0 && !title && <Alert danger content={t("Connected Resources.No Connected Resources")} />}
         </div>
     );
@@ -58,7 +57,7 @@ function copyText(id) {
 }
 
 export function createItemWithCopy(id) {
-    var item = {};
+    let item = {};
 
     //Add the copy icon 
     item.endMedia = (

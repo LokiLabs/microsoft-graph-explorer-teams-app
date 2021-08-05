@@ -9,3 +9,7 @@
 .ui-dropdown__selected-items {
     max-width: min-content;
 }
+
+.response-number {
+    margin-bottom: 10px;
+}

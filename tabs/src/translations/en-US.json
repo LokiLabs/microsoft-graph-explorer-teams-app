@@ -61,7 +61,7 @@
         "Table of Contents" : {
             "Resource IDs": "Resource IDs",
             "Query Runner": "Query Runner",
-            "Resource-Specific Consent": "Resource-Specific Consent",
+            "Granted Resource-Specific Consent": "Granted Resource-Specific Consent",
             "Documentation Links": "Documentation Links"
         },
 
