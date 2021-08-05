@@ -19,7 +19,7 @@ export const Section = (props) => {
                 <div>
                     <Flex className="main-section" gap="gap.small" onClick={() => toggleShow(!isShow)}>
                         <ChevronDownIcon className="chevron" />
-                        <Header id="connected-resource-header" className="pointer-header" as="h2" content={t(translationString)} />
+                        <Header id={idString} className="pointer-header" as="h2" content={t(translationString)} />
                     </Flex>
                     {component}
                 </div>
