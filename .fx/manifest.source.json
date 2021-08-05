@@ -1,7 +1,7 @@
 {
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
     "manifestVersion": "1.9",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "id": "{appid}",
     "packageName": "com.microsoft.teams.extension",
     "developer": {
@@ -15,12 +15,12 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "ToolkitApp",
+        "short": "Graph Explorer",
         "full": "This field is not used"
-    },
-    "description": {
-        "short": "Short description of ToolkitApp.",
-        "full": "Full description of ToolkitApp."
+      },
+      "description": {
+        "short": "Conveniently make Microsoft Graph REST API requests from a channel or chat",
+        "full": "Utilize resource-specific consent with a team channel or chat to make supported Team Microsoft Graph REST API requests. With the ability to edit the request and view the response, and try any of the provided sample queries."
     },
     "accentColor": "#FFFFFF",
     "bots": [],
@@ -53,7 +53,33 @@
     "validDomains": [],
     "webApplicationInfo": {
         "id": "{appClientId}",
-        "resource": "{webApplicationInfoResource}"
+        "resource": "{webApplicationInfoResource}",
+        "applicationPermissions": [
+            "TeamSettings.Read.Group",
+            "TeamSettings.ReadWrite.Group",
+            "ChannelSettings.Read.Group",
+            "ChannelSettings.ReadWrite.Group",
+            "Channel.Create.Group",
+            "Channel.Delete.Group",
+            "ChannelMessage.Read.Group",
+            "TeamsAppInstallation.Read.Group",
+            "TeamsTab.Read.Group",
+            "TeamsTab.Create.Group",
+            "TeamsTab.ReadWrite.Group",
+            "TeamsTab.Delete.Group",
+            "TeamMember.Read.Group",
+            "ChatSettings.Read.Chat",
+            "ChatSettings.ReadWrite.Chat",
+            "ChatMessage.Read.Chat",
+            "ChatMember.Read.Chat",
+            "Chat.Manage.Chat",
+            "TeamsTab.Read.Chat",
+            "TeamsTab.Create.Chat",
+            "TeamsTab.Delete.Chat",
+            "TeamsTab.ReadWrite.Chat",
+            "TeamsAppInstallation.Read.Chat",
+            "OnlineMeeting.ReadBasic.Chat"
+        ]
     },
     "activities": {
         "activityTypes": [
