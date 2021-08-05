@@ -19,6 +19,8 @@ export function FetchSamples(props){
                 const headers = {
                     'Content-Type': 'application/json'
                 };
+
+                const arr = [];
     
                 try {
                         const response = await fetch(devxApi, headers);
@@ -26,7 +28,6 @@ export function FetchSamples(props){
                             return;
                     }
                     const res = await response.json();
-                    var arr = [];
                     for(let i = 0; i < res.teamsAppSampleQueries.length; i++){
 
                         //Filter through all the chats and teams such that it matches the context that this app is attached to
@@ -35,10 +36,10 @@ export function FetchSamples(props){
                         }
 
                         //Each sample query requires a row
-                        var query = createTableRow(props.setQuery, res.teamsAppSampleQueries[i]["requestUrl"].slice(1,));
+                        const query = createTableRow(props.setQuery, res.teamsAppSampleQueries[i]["requestUrl"].slice(1,));
                         query.key = res.teamsAppSampleQueries[i]["id"];
-                        var label = <TableCell className = {"table-cell"} content = {res.teamsAppSampleQueries[i]["method"]}/>;
-                        var button = <TableCell className = {"table-cell"} content = {createFillIn(res.teamsAppSampleQueries[i]["docLink"])}/>;
+                        const label = <TableCell className = {"table-method"} content = {res.teamsAppSampleQueries[i]["method"]}/>;
+                        const button = <TableCell className = {"table-link"} content = {createFillIn(res.teamsAppSampleQueries[i]["docLink"])}/>;
                         query.items = [label, res.teamsAppSampleQueries[i]["humanName"], button];
                         arr.push(query);
                     }
@@ -69,7 +70,7 @@ function createFillIn(url){
         title="Sample Query"
     />;
     //Open a new window for this sample query's documetnation
-    var obj = {content: sampleButton(), onClick: query => {
+    const obj = {content: sampleButton(), onClick: query => {
         window.open(url);
         query.stopPropagation();
     }};

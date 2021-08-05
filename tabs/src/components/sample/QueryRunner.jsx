@@ -18,8 +18,8 @@ export function QueryRunner(props) {
     // Translations
     const { t } = useTranslation();
 
-    var query = props.query;
-    var setQuery = props.setQuery;
+    const query = props.query;
+    const setQuery = props.setQuery;
 
     const addRequestHeader = () => {
         if (!requestHeaders.map(r => r.key).includes(userAddedHeader)) {
