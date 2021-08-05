@@ -27,10 +27,11 @@ export function FetchSamples(props){
                         if( (context?.groupId && res.teamsAppSampleQueries[i]["requestUrl"].includes("chat"))||(context?.chatId &&  res.teamsAppSampleQueries[i]["requestUrl"].includes("teams")) ){
                             continue;
                         }
-                        var query = {};
+                        // eslint-disable-next-line no-loop-func
+                        var query = {onClick: () => props.setQuery(GRAPH_URL + res.teamsAppSampleQueries[i]["requestUrl"].slice(1,))};
                         query.key = res.teamsAppSampleQueries[i]["id"];
                         var label = <TableCell className = {"table-cell"} content = {res.teamsAppSampleQueries[i]["method"]}/>;
-                        var button = <TableCell className = {"table-cell"} content = {createFillIn(res.teamsAppSampleQueries[i]["requestUrl"], props.setQuery)}/>;
+                        var button = <TableCell className = {"table-cell"} content = {createFillIn(res.teamsAppSampleQueries[i]["docLink"])}/>;
                         query.items = [label, res.teamsAppSampleQueries[i]["humanName"], button];
                         arr.push(query);
                     }
@@ -50,7 +51,7 @@ export function FetchSamples(props){
     );
 }
 
-function createFillIn(url, setQuery){
+function createFillIn(url){
     const sampleButton = () => <Button
         tabIndex={-1}
         icon={<OpenOutsideIcon className="button-icon" />}
@@ -60,8 +61,9 @@ function createFillIn(url, setQuery){
         aria-label="sample"
         title="Sample Query"
     />;
-    var obj = {content: sampleButton(), onClick:e => {
-        setQuery(GRAPH_URL + url.slice(1,));
+    var obj = {content: sampleButton(), onClick: query => {
+        window.open(url);
+        query.stopPropagation();
     }};
     return obj;
 }

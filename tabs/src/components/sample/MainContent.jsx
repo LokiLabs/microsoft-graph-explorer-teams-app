@@ -48,7 +48,7 @@ const MainContent = () => {
                     <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
                 </Flex>
                 <div>
-                    <FetchSamples setQuery = {setQuery} />
+                    <FetchSamples setQuery = {setQuery} query = {query}/>
                 </div>
             </div>;
     } else {
