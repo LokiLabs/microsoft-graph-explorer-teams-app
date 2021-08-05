@@ -16,7 +16,7 @@ export function RSCList() {
     ];
 
     useEffect(() => {
-        async function getRSCList(context) {
+        const getRSCList = async (context) => {
             let rscType;
             if (context?.groupId) {
                 rscType = "/teams/" + context?.groupId;
@@ -32,7 +32,7 @@ export function RSCList() {
                 const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
                 setRSCList(filteredRSCs);
             }
-        }
+        };
         getRSCList(context);
     }, [context]);
 
