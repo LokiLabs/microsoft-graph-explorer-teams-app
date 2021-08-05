@@ -10,10 +10,10 @@ export function RSCDocumentation() {
     useEffect(() => async () => {
         const response = await fetch(RSC_DOCUMENTATION_URL);
         const blob = await response.blob();
-        var text = await blob.text();
-        var lines = text.split('\n');
-        var refinedText = '';
-        for(var i = 0;i < lines.length;i++){
+        let text = await blob.text();
+        let lines = text.split('\n');
+        let refinedText = '';
+        for(let i = 0;i < lines.length;i++){
             // dead links in this section
             if(lines[i] === '## Enable RSC in your application'){
                 i++;
@@ -39,7 +39,7 @@ export function RSCDocumentation() {
             }
 
         }
-        var html = markdown(refinedText);
+        let html = markdown(refinedText);
         setRSCDocs(html);
     }, []);
     return (

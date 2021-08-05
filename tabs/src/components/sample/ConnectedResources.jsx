@@ -3,7 +3,6 @@ import { Button, List, Alert, ListItem } from '@fluentui/react-northstar';
 import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
 import copy from "copy-to-clipboard";
 import * as microsoftTeams from "@microsoft/teams-js";
-import "./style/ConnectedResources.css";
 import { useTranslation } from "react-i18next";
 
 export function ProcessTeamsContext() {
@@ -20,7 +19,7 @@ export function ProcessTeamsContext() {
             if (isAlreadyPresent(resourceList, context.channelId)) {
                 return;
             }
-            var channelId = createItemWithCopy(context.channelId);
+            let channelId = createItemWithCopy(context.channelId);
             channelId.header = t("Connected Resources.Teams Channel ID") + ": " + context.channelId;
             setTitle(context.teamName + " > " + context.channelName);
             setResourceList([channelId]);
@@ -31,7 +30,7 @@ export function ProcessTeamsContext() {
                 return;
             }
             setTitle(t("Connected Resources.Chat"));
-            var chatId = createItemWithCopy(context.chatId);
+            let chatId = createItemWithCopy(context.chatId);
             chatId.header = t("Connected Resources.Chat ID") + ": " + context.chatId;
             setResourceList([chatId]);
         }
@@ -56,7 +55,7 @@ function copyText(id) {
 }
 
 export function createItemWithCopy(id) {
-    var item = {};
+    let item = {};
 
     //Add the copy icon 
     item.endMedia = (

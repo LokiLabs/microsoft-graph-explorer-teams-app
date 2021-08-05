@@ -4,7 +4,7 @@ import { useData } from "./lib/useData";
 import * as axios from "axios";
 import { TeamsUserCredential, getResourceConfiguration, ResourceType } from "@microsoft/teamsfx";
 
-var functionName = process.env.REACT_APP_FUNC_NAME || "myFunc";
+let functionName = process.env.REACT_APP_FUNC_NAME || "myFunc";
 
 async function callFunction() {
   try {
