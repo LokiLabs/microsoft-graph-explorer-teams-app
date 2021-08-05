@@ -10,7 +10,11 @@ import PropTypes from 'prop-types';
 
 QueryRunner.propTypes = {
     query: PropTypes.string,
-    setQuery: PropTypes.func
+    setQuery: PropTypes.func,
+    requestType: PropTypes.string,
+    setRequestType: PropTypes.func,
+    requestBody: PropTypes.string,
+    setRequestBody: PropTypes.func,
 };
 
 export function QueryRunner(props) {
@@ -20,6 +24,10 @@ export function QueryRunner(props) {
 
     const query = props.query;
     const setQuery = props.setQuery;
+    const requestType = props.requestType;
+    const setRequestType = props.setRequestType;
+    const requestBody = props.requestBody;
+    const setRequestBody = props.setRequestBody;
 
     const addRequestHeader = () => {
         if (!requestHeaders.map(r => r.key).includes(userAddedHeader)) {
@@ -54,10 +62,8 @@ export function QueryRunner(props) {
 
     const [userAddedHeader, setUserAddedHeader] = useState("");
     const [userAddedValue, setUserAddedValue] = useState("");
-    const [requestType, setRequestType] = useState(requestTypes.GET);
     const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
     const [responseBody, setResponseBody] = useState("{}");
-    const [requestBody, setRequestBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
     const [responseComponentIndex, setResponseComponentIndex] = useState(0);
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);

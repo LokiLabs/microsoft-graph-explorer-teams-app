@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Table, TableCell, OpenOutsideIcon, Button} from '@fluentui/react-northstar';
-import { GRAPH_URL, SAMPLE_QUERIES_URL} from "./TabConstants";
+import { GRAPH_URL, SAMPLE_QUERIES_URL, requestTypes} from "./TabConstants";
 import * as microsoftTeams from "@microsoft/teams-js";
 import PropTypes from 'prop-types';
 
 FetchSamples.propTypes = {
-    query: PropTypes.string,
-    setQuery: PropTypes.func
+    setQuery: PropTypes.func,
+    setRequestType: PropTypes.func,
+    setRequestBody: PropTypes.func,
 };
 
 export function FetchSamples(props){
@@ -36,7 +37,7 @@ export function FetchSamples(props){
                         }
 
                         //Each sample query requires a row
-                        const query = createTableRow(props.setQuery, res.teamsAppSampleQueries[i]["requestUrl"].slice(1,));
+                        const query = createTableRow(props.setQuery, res.teamsAppSampleQueries[i]["requestUrl"].slice(1,), res.teamsAppSampleQueries[i]["method"], props.setRequestType, res.teamsAppSampleQueries[i]["postBody"], props.setRequestBody);
                         query.key = res.teamsAppSampleQueries[i]["id"];
                         const label = <TableCell className = {"table-method"} content = {res.teamsAppSampleQueries[i]["method"]}/>;
                         const button = <TableCell className = {"table-link"} content = {createFillIn(res.teamsAppSampleQueries[i]["docLink"])}/>;
@@ -69,7 +70,7 @@ function createFillIn(url){
         aria-label="sample"
         title="Sample Query"
     />;
-    //Open a new window for this sample query's documetnation
+    //Open a new window for this sample query's documentation
     const obj = {content: sampleButton(), onClick: query => {
         window.open(url);
         query.stopPropagation();
@@ -77,11 +78,21 @@ function createFillIn(url){
     return obj;
 }
 
-function createTableRow(setQuery, url){
+function createTableRow(setQuery, url, requestType, setRequestType, postBody, setPostBody){
     return {
-        onClick: () => setQuery(GRAPH_URL + url)
+        onClick: () => setQueryRunner(setQuery, url, requestType, setRequestType, postBody, setPostBody)
     };
 }
 
+function setQueryRunner(setQuery, url, requestType, setRequestType, postBody, setPostBody){
+    setQuery(GRAPH_URL + url);
+    setRequestType(requestTypes[requestType]);
+    if (postBody){
+        setPostBody(postBody);
+    }
+    else{
+        setPostBody("{}");
+    }
+}
 
 export default FetchSamples;

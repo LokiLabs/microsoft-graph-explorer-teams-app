@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDownIcon, ChevronEndIcon, Header, Flex} from '@fluentui/react-northstar';
-import { GRAPH_URL } from "./TabConstants";
+import { GRAPH_URL, requestTypes } from "./TabConstants";
 import { RSCList } from "./RSCList";
 import { QueryRunner } from './QueryRunner';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,8 @@ const MainContent = () => {
     const [fifthSectionActive, toggleFifthSection] = useState(false);
     
     const [query, setQuery] = useState(GRAPH_URL);
+    const [requestType, setRequestType] = useState(requestTypes.GET);
+    const [requestBody, setRequestBody] = useState("{}");
     const { t } = useTranslation();
 
 
@@ -48,7 +50,7 @@ const MainContent = () => {
                     <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
                 </Flex>
                 <div>
-                    <FetchSamples setQuery = {setQuery} query = {query}/>
+                    <FetchSamples setQuery = {setQuery} setRequestType = {setRequestType} setRequestBody = {setRequestBody}/>
                 </div>
             </div>;
     } else {
@@ -68,7 +70,7 @@ const MainContent = () => {
                     <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
                 </Flex>
                 <div>
-                    <QueryRunner query = {query} setQuery = {setQuery}/>
+                    <QueryRunner query = {query} setQuery = {setQuery} requestType = {requestType} setRequestType = {setRequestType} requestBody = {requestBody} setRequestBody = {setRequestBody}/>
                 </div>
             </div>;
     } else {
