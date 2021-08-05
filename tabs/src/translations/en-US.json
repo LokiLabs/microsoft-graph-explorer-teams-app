@@ -15,8 +15,8 @@
         },
 
         "Connected Resources": {
-            "Teams Channel ID": "Teams Channel ID",
-            "Teams Team ID": "Teams Team ID",
+            "Channel ID": "Channel ID",
+            "Team ID": "Team ID",
             "Chat": "Chat",
             "Chat ID": "Chat ID",
             "No Connected Resources": "You must connect to an instance of a team or a chat to make this request."

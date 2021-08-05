@@ -15,8 +15,8 @@
         },
 
         "Connected Resources": {
-            "Teams Channel ID": "(zh-cn) Teams Channel ID",
-            "Teams Team ID": "(zh-cn) Teams Team ID",
+            "Teams Channel ID": "(zh-cn) Channel ID",
+            "Teams Team ID": "(zh-cn) Team ID",
             "Chat": "(zh-cn) Chat",
             "Chat ID": "(zh-cn) Chat ID",
             "No Connected Resources": "(zh-cn) You must connect to an instance of a team or a chat to make this request."

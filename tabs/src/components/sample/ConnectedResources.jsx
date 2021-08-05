@@ -21,9 +21,9 @@ export function ProcessTeamsContext() {
                 return;
             }
             var teamId = createItemWithCopy(context.groupId);
-            teamId.header = t("Connected Resources.Teams Team ID") + ": " + context.teamId;
+            teamId.header = t("Connected Resources.Team ID") + ": " + context.teamId;
             var channelId = createItemWithCopy(context.channelId);
-            channelId.header = t("Connected Resources.Teams Channel ID") + ": " + context.channelId;
+            channelId.header = t("Connected Resources.Channel ID") + ": " + context.channelId;
             setTitle(context.teamName + " > " + context.channelName);
             setResourceList([teamId, channelId]);
         }
