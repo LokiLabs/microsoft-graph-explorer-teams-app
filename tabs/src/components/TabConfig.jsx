@@ -38,8 +38,7 @@ export function TabConfig() {
    * dialog.
    */
   microsoftTeams.settings.setValidityState(true);
-  var imageName = require('./teamsappzeronotes.svg');
-
+  const imageName = require('./teamsappzeronotes.svg');
 
   return (
     <center className="center" >
