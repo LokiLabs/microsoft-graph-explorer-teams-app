@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { requestTypes, graphVersions, GRAPH_URL, RSC_API_URL } from "./TabConstants";
+import { requestTypes, graphVersions, GRAPH_URL } from "./TabConstants";
 import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, Alert } from '@fluentui/react-northstar';
 import { useRangeKnob } from '@fluentui/docs-components';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
+import { makeGraphCall } from "./graph/useGraph";
 import { useTranslation } from "react-i18next";
 import "./style/QueryRunner.css";
 
@@ -74,20 +75,8 @@ export function QueryRunner() {
 
     async function callGraph() {
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
-        const url = RSC_API_URL + graphVersion + queryParameters;
-        const cleanedHeaders = {};
-        for (const header of requestHeaders) {
-            cleanedHeaders[header.items[0]] = header.items[1];
-        }
+        const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody);
 
-        let options = {
-            method: requestType,
-            headers: cleanedHeaders,
-        };
-        if (requestType !== requestTypes.GET) {
-            options.body = requestBody;
-        }
-        const graphResponse = await fetch(url, options);
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
             graphResponseHeaders.push({

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { CLIENT_APP_ID, RSC_API_URL } from './TabConstants';
+import { CLIENT_APP_ID, graphVersions, requestTypes } from './TabConstants';
 import { useTeamsFx } from "../sample/teams/useTeamsFx";
+import { makeGraphCall } from "./graph/useGraph";
 import { Table } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
 
@@ -16,33 +17,20 @@ export function RSCList() {
 
     useEffect(() => {
         async function getRSCList(context) {
+            let rscType;
             if (context?.groupId) {
-                let teamResponse = await fetch(RSC_API_URL + "beta/teams/" + context?.groupId + "/permissionGrants").then(response => response.json());
-                const teamRSCs = teamResponse.value;
-
-                if (teamRSCs) {
-                    let filteredRSCs = [];
-                    for (let i = 0; i < teamRSCs.length; i++) {
-                        if (teamRSCs[i].clientAppId === CLIENT_APP_ID) {
-                            filteredRSCs.push(teamRSCs[i].permission);
-                        }
-                    }
-                    setRSCList(filteredRSCs);
-                }
-
+                rscType = "/teams/" + context?.groupId;
             } else if (context?.chatId) {
-                let chatResponse = await fetch(RSC_API_URL + "beta/chats/" + context?.chatId + "/permissionGrants").then(response => response.json());
-                const chatRSCs = chatResponse.value;
+                rscType = "/chats/" + context?.chatId;
+            }
 
-                if (chatRSCs) {
-                    let filteredRSCs = [];
-                    for (let i = 0; i < chatRSCs.length; i++) {
-                        if (chatRSCs[i].clientAppId === CLIENT_APP_ID) {
-                            filteredRSCs.push(chatRSCs[i].permission);
-                        }
-                    }
-                    setRSCList(filteredRSCs);
-                }
+            const rscResponse = await makeGraphCall(requestTypes.GET, [], rscType + "/permissionGrants", graphVersions.beta);
+            const rscJson = await rscResponse.json();
+            const RSCs = rscJson.value;
+
+            if (RSCs) {
+                const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
+                setRSCList(filteredRSCs);
             }
         }
         getRSCList(context);
@@ -68,6 +56,7 @@ export function RSCList() {
         }}
             header={{ items }}
             rows={RSCRows}
-            aria-label="RSC Table" />
+            aria-label="RSC Table"
+        />
     );
 }
