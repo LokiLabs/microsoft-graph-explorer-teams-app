@@ -3,7 +3,7 @@ import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL, OFFICIAL_RSC_URL } from ".
 import { Button } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
 
-const DocumentationLinks = () => {
+export const DocumentationLinks = () => {
     const { t } = useTranslation();
 
     return (
@@ -14,5 +14,3 @@ const DocumentationLinks = () => {
         </div>
     );
 };
-
-export default DocumentationLinks;

@@ -1,102 +1,46 @@
 import React, { useState } from 'react';
-import { ChevronDownIcon, ChevronEndIcon, Header, Flex } from '@fluentui/react-northstar';
 import { RSCList } from "./RSCList";
 import { QueryRunner } from './QueryRunner';
-import { useTranslation } from 'react-i18next';
-import DocumentationLinks from "./DocumentationLinks";
-
+import { Section } from "./Section";
+import { DocumentationLinks } from "./DocumentationLinks";
 import { ProcessTeamsContext } from './ConnectedResources.jsx';
 
 const MainContent = () => {
-    const [firstSectionActive, toggleFirstSection] = useState(true);
-    const [secondSectionActive, toggleSecondSection] = useState(true);
-    const [thirdSectionActive, toggleThirdSection] = useState(false);
-    const [fourthSectionActive, toggleFourthSection] = useState(false);
-    const { t } = useTranslation();
-
-
-    let firstSection;
-    if (firstSectionActive) {
-        firstSection =
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="connected-resource-header" className="pointer-header" as="h2" content={t("Table of Contents.Connected Resources")} />
-                </Flex>
-                <ProcessTeamsContext />
-            </div>;
-    } else {
-        firstSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="connected-resource-header" className="pointer-header" as="h2" content={t("Table of Contents.Connected Resources")} />
-            </Flex>;
-    }
-
-    let secondSection;
-    if (secondSectionActive) {
-        secondSection =
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
-                </Flex>
-                <div>
-                    <QueryRunner />
-                </div>
-            </div>;
-    } else {
-        secondSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
-            </Flex>;
-    }
-
-    let thirdSection;
-    if (thirdSectionActive) {
-        thirdSection =
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleThirdSection(!thirdSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Granted Resource-Specific Consent")} />
-                </Flex>
-                <div>
-                    <RSCList />
-                </div>
-            </div>;
-    } else {
-        thirdSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleThirdSection(!thirdSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Granted Resource-Specific Consent")} />
-            </Flex>;
-    }
-
-    let fourthSection;
-    if (fourthSectionActive) {
-        fourthSection =
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="documentation-links-header" className="pointer-header" as="h2" content={t("Table of Contents.Documentation Links")} />
-                </Flex>
-                <DocumentationLinks />
-            </div>;
-    } else {
-        fourthSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="documentation-links-header" className="pointer-header" as="h2" content={t("Table of Contents.Documentation Links")} />
-            </Flex>;
-    }
+    const [resourceIDsActive, toggleResourceIDsActive] = useState(true);
+    const [queryRunnerActive, toggleQueryRunnerActive] = useState(true);
+    const [grantedRSCActive, toggleGrantedRSCActive] = useState(false);
+    const [documentationLinksActive, toggleDocumentationLinksActive] = useState(false);
 
     return (
         <main>
-            {firstSection}
-            {secondSection}
-            {thirdSection}
-            {fourthSection}
+            <Section
+                isShow={resourceIDsActive}
+                component={<ProcessTeamsContext />}
+                toggleShow={toggleResourceIDsActive}
+                translationString={"Table of Contents.Connected Resources"}
+                idString={"connected-resource-header"}
+            />
+            <Section
+                isShow={queryRunnerActive}
+                component={<QueryRunner />}
+                toggleShow={toggleQueryRunnerActive}
+                translationString={"Table of Contents.Query Runner"}
+                idString={"query-runner-header"}
+            />
+            <Section
+                isShow={grantedRSCActive}
+                component={<RSCList />}
+                toggleShow={toggleGrantedRSCActive}
+                translationString={"Table of Contents.Granted Resource-Specific Consent"}
+                idString={"resource-specific-consent-header"}
+            />
+            <Section
+                isShow={documentationLinksActive}
+                component={<DocumentationLinks />}
+                toggleShow={toggleDocumentationLinksActive}
+                translationString={"Table of Contents.Documentation Links"}
+                idString={"documentation-links-header"}
+            />
         </main>
     );
 };
