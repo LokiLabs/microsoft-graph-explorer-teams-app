@@ -9,14 +9,16 @@ export function ProcessTeamsContext() {
 
     // Translations
     const { t } = useTranslation();
+
     //Get the context of where the tab is currently
     const [resourceList, setResourceList] = useState([]);
     const [title, setTitle] = useState(" ");
+
     microsoftTeams.getContext(function (context) {
 
         //Check if this is a teams channel
         if (context.channelId && context.channelId.length !== 0) {
-            if (isAlreadyPresent(resourceList, context.channelId)) {
+            if (!isAlreadyPresent(resourceList, context.channelId)) {
                 return;
             }
             let channelId = createItemWithCopy(context.channelId);
@@ -39,20 +41,17 @@ export function ProcessTeamsContext() {
             setResourceList([]);
         }
     });
+
     return (
         <div className="connected-resource">
             {resourceList.length !== 0 && <ListItem className="title" header={title} />}
-            {resourceList.length !== 0 && <List defaultSelectedIndex={0} items={resourceList}/>} 
+            {resourceList.length !== 0 && <List defaultSelectedIndex={0} items={resourceList} />}
             {resourceList.length === 0 && !title && <Alert danger content={t("Connected Resources.No Connected Resources")} />}
         </div>
     );
 }
 
 const isAlreadyPresent = (list, id) => list.some((i) => i.header?.includes(id));
-
-function copyText(id) {
-    copy(id);
-}
 
 export function createItemWithCopy(id) {
     let item = {};
@@ -66,7 +65,7 @@ export function createItemWithCopy(id) {
             text
             iconOnly
             title="Copy"
-            onClick={() => copyText(id)}
+            onClick={() => copy(id)}
         />
     );
     return item;
