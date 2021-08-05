@@ -19,6 +19,7 @@
     "msteams-react-base-component": "^3.1.0",
     "node-fetch": "^2.6.1",
     "office-ui-fabric-react": "^7.172.1",
+    "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-i18next": "11.11.3",

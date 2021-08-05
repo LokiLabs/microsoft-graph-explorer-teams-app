@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Table, TableCell, OpenOutsideIcon, Button} from '@fluentui/react-northstar';
 import { GRAPH_URL, SAMPLE_QUERIES_URL} from "./TabConstants";
 import * as microsoftTeams from "@microsoft/teams-js";
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
+FetchSamples.propTypes = {
+    query: PropTypes.string,
+    setQuery: PropTypes.func
+};
 
 export function FetchSamples(props){
     const [samples, setSamples] = useState([]);
     useEffect(() => {
-        async function getSamplesList(FetchSamples) {
+        async function getSamplesList() {
             microsoftTeams.getContext(async function (context) {
                 const devxApi = SAMPLE_QUERIES_URL;
 
@@ -23,12 +28,14 @@ export function FetchSamples(props){
                     const res = await response.json();
                     var arr = [];
                     for(let i = 0; i < res.teamsAppSampleQueries.length; i++){
-                        //filter through all the chats and teams
+
+                        //Filter through all the chats and teams such that it matches the context that this app is attached to
                         if( (context?.groupId && res.teamsAppSampleQueries[i]["requestUrl"].includes("chat"))||(context?.chatId &&  res.teamsAppSampleQueries[i]["requestUrl"].includes("teams")) ){
                             continue;
                         }
-                        // eslint-disable-next-line no-loop-func
-                        var query = {onClick: () => props.setQuery(GRAPH_URL + res.teamsAppSampleQueries[i]["requestUrl"].slice(1,))};
+
+                        //Each sample query requires a row
+                        var query = createTableRow(props.setQuery, res.teamsAppSampleQueries[i]["requestUrl"].slice(1,));
                         query.key = res.teamsAppSampleQueries[i]["id"];
                         var label = <TableCell className = {"table-cell"} content = {res.teamsAppSampleQueries[i]["method"]}/>;
                         var button = <TableCell className = {"table-cell"} content = {createFillIn(res.teamsAppSampleQueries[i]["docLink"])}/>;
@@ -61,11 +68,18 @@ function createFillIn(url){
         aria-label="sample"
         title="Sample Query"
     />;
+    //Open a new window for this sample query's documetnation
     var obj = {content: sampleButton(), onClick: query => {
         window.open(url);
         query.stopPropagation();
     }};
     return obj;
+}
+
+function createTableRow(setQuery, url){
+    return {
+        onClick: () => setQuery(GRAPH_URL + url)
+    };
 }
 
 

@@ -85,7 +85,7 @@ const MainContent = () => {
             <div>
                 <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
                     <ChevronDownIcon className="chevron" />
-                    <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource-Specific Consent")} />
+                    <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Granted Resource-Specific Consent")} />
                 </Flex>
                 <div>
                     <RSCList />
@@ -95,7 +95,7 @@ const MainContent = () => {
         fourthSection =
             <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
                 <ChevronEndIcon className="chevron" />
-                <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource-Specific Consent")} />
+                <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Granted Resource-Specific Consent")} />
             </Flex>;
     }
 

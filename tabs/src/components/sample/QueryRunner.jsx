@@ -6,11 +6,20 @@ import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import { useTranslation } from "react-i18next";
 import "./style/QueryRunner.css";
+import PropTypes from 'prop-types';
 
-export function QueryRunner() {
+QueryRunner.propTypes = {
+    query: PropTypes.string,
+    setQuery: PropTypes.func
+};
+
+export function QueryRunner(props) {
 
     // Translations
     const { t } = useTranslation();
+
+    var query = props.query;
+    var setQuery = props.setQuery;
 
     const addRequestHeader = () => {
         if (!requestHeaders.map(r => r.key).includes(userAddedHeader)) {
@@ -47,7 +56,6 @@ export function QueryRunner() {
     const [userAddedValue, setUserAddedValue] = useState("");
     const [requestType, setRequestType] = useState(requestTypes.GET);
     const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
-    const [query, setQuery] = useState(GRAPH_URL);
     const [responseBody, setResponseBody] = useState("{}");
     const [requestBody, setRequestBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
