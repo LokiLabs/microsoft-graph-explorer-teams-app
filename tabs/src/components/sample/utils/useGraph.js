@@ -1,4 +1,4 @@
-import { RSC_API_URL, requestTypes } from "../TabConstants";
+import { DEVX_API_URL, requestTypes } from "../TabConstants";
 
 export const makeGraphCall = async (
     requestType,
@@ -6,8 +6,10 @@ export const makeGraphCall = async (
     queryParameters,
     graphVersion,
     requestBody) => {
-    const url = RSC_API_URL + graphVersion + queryParameters;
+    const url = DEVX_API_URL + "/" + graphVersion + queryParameters;
     const cleanedHeaders = {};
+
+    console.log(url);
 
     for (const header of requestHeaders) {
         cleanedHeaders[header.items[0]] = header.items[1];
