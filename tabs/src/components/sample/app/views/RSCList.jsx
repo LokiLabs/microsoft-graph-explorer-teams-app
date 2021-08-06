@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { CLIENT_APP_ID, graphVersions, requestTypes } from './TabConstants';
-import { useTeamsFx } from "../sample/utils/useTeamsFx";
-import { makeGraphCall } from "./utils/useGraph";
+import { CLIENT_APP_ID, graphVersions, requestTypes } from "../../TabConstants";
+import { useTeamsFx } from "../../utils/useTeamsFx";
+import { makeGraphCall } from "../../utils/useGraph";
 import { Table } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
 

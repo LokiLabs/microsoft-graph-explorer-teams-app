@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { requestTypes, graphVersions, GRAPH_URL } from "./TabConstants";
+import { requestTypes, graphVersions, GRAPH_URL } from "../../TabConstants";
 import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, Alert } from '@fluentui/react-northstar';
 import { useRangeKnob } from '@fluentui/docs-components';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
-import { makeGraphCall } from "./utils/useGraph";
+import { makeGraphCall } from "../../utils/useGraph";
 import { useTranslation } from "react-i18next";
-import "./style/QueryRunner.css";
 import PropTypes from 'prop-types';
 
 QueryRunner.propTypes = {

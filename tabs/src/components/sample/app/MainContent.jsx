@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { RSCList } from "./RSCList";
-import { QueryRunner } from './QueryRunner';
+import { RSCList } from "./views/RSCList";
+import { QueryRunner } from './views/QueryRunner';
 import { Section } from "./Section";
-import { DocumentationLinks } from "./DocumentationLinks";
-import { ProcessTeamsContext } from './ConnectedResources.jsx';
-import { FetchSamples } from "./SampleQueries";
-import { requestTypes, GRAPH_URL } from './TabConstants';
+import { DocumentationLinks } from "./views/DocumentationLinks";
+import { ProcessTeamsContext } from './views/ConnectedResources.jsx';
+import { FetchSamples } from './views/SampleQueries';
+import { requestTypes, GRAPH_URL } from '../TabConstants';
 
 const MainContent = () => {
     const [resourceIDsActive, toggleResourceIDsActive] = useState(true);

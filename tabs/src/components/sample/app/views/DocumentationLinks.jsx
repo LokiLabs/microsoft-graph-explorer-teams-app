@@ -1,5 +1,5 @@
 import React from "react";
-import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL, OFFICIAL_RSC_URL } from "./TabConstants";
+import { GRAPH_EXPLORER_URL, GRAPH_EXPLORER_DOCS_URL, OFFICIAL_RSC_URL } from "../../TabConstants";
 import { Button } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
 

@@ -1,5 +1,5 @@
 import React from "react";
-import useHeadingsData from "./useHeadingsData";
+import useHeadingsData from "../utils/useHeadingsData";
 import { Menu } from "@fluentui/react-northstar";
 import { useTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
