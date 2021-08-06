@@ -15,7 +15,6 @@ const getNestedHeadings = (headingElements) => {
       lastKnownH2.items.push({ id, title });
     }
   });
-  console.log(nestedHeadings);
   return nestedHeadings;
 };
 
@@ -29,8 +28,6 @@ const useHeadingsData = () => {
     setNestedHeadings(newNestedHeadings);
   }, []);
 
-
-  // console.log(nestedHeadings);
   return nestedHeadings;
 };
 
