@@ -6,7 +6,7 @@ import { useTeamsFx } from "./sample/utils/useTeamsFx";
 import Privacy from "./Privacy";
 import TermsOfUse from "./TermsOfUse";
 import Tab from "./Tab";
-import TabConfig from "./TabConfig";
+import { TabConfig } from "./TabConfig";
 import { useTranslation } from "react-i18next";
 import { useTeams } from "msteams-react-base-component";
 import { changeLanguage } from "./i18n";
@@ -23,7 +23,7 @@ export default function App() {
     changeLanguage(i18n, isTeams.context.locale);
   }
   return (
-    <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee" }}>
+    <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee", minHeight: "50vh" }}>
       <Router>
         <Route exact path="/">
           <Redirect to="/tab" />

@@ -23,7 +23,7 @@ const MainContent = () => {
                 isShow={resourceIDsActive}
                 component={<ProcessTeamsContext />}
                 toggleShow={toggleResourceIDsActive}
-                translationString={"Table of Contents.Connected Resources"}
+                translationString={"Table of Contents.Resource IDs"}
                 idString={"connected-resource-header"}
             />
             <Section
