@@ -18,8 +18,8 @@ const Headings = ({ headings }) => {
 
   const items = [
     {
-      key: 'connected-resource',
-      content: t("Table of Contents.Connected Resources"),
+      key: 'resource_ids',
+      content: t("Table of Contents.Resource IDs"),
       onClick: scrollHeadingIntoView(headings[0])
     },
     {

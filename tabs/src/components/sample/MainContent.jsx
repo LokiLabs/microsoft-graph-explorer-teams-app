@@ -28,7 +28,7 @@ const MainContent = () => {
             <div>
                 <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
                     <ChevronDownIcon className="chevron" />
-                    <Header id="connected-resource-header" className="pointer-header" as="h2" content={t("Table of Contents.Connected Resources")} />
+                    <Header id="connected-resource-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource IDs")} />
                 </Flex>
                 <ProcessTeamsContext />
             </div>;
@@ -36,7 +36,7 @@ const MainContent = () => {
         firstSection =
             <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
                 <ChevronEndIcon className="chevron" />
-                <Header id="connected-resource-header" className="pointer-header" as="h2" content={t("Table of Contents.Connected Resources")} />
+                <Header id="connected-resource-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource IDs")} />
             </Flex>;
     }
 

@@ -19,10 +19,12 @@ export function ProcessTeamsContext() {
             if (isAlreadyPresent(resourceList, context.channelId)) {
                 return;
             }
-            let channelId = createItemWithCopy(context.channelId);
-            channelId.header = t("Connected Resources.Teams Channel ID") + ": " + context.channelId;
+            var teamId = createItemWithCopy(context.groupId);
+            teamId.header = t("Connected Resources.Team ID") + ": " + context.teamId;
+            var channelId = createItemWithCopy(context.channelId);
+            channelId.header = t("Connected Resources.Channel ID") + ": " + context.channelId;
             setTitle(context.teamName + " > " + context.channelName);
-            setResourceList([channelId]);
+            setResourceList([teamId, channelId]);
         }
         //Check if it is a chat
         else if (context.chatId && context.chatId.length !== 0) {
