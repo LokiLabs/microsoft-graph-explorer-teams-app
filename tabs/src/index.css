@@ -3,7 +3,7 @@
 @import url("components/sample/style/MainContent.css");
 @import url("components/sample/style/TableOfContents.css");
 @import url("components/sample/style/QueryRunner.css");
-@import url("components/sample/style/Welcome.css");
+@import url("components/sample/style/Tab.css");
 @import url("components/sample/style/DocumentationLinks.css");
 * {
   box-sizing: border-box;

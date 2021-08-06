@@ -1,8 +1,14 @@
 import React from "react";
-import { Welcome } from "./sample/Welcome";
+
+import Layout from "./sample/Layout";
+import TableOfContents from "./sample/TableOfContents";
+import MainContent from "./sample/MainContent";
 
 export default function Tab() {
-  return <div>
-    <Welcome showFunction={ false } />
-  </div>;
+  return (
+    <Layout>
+      <TableOfContents />
+      <MainContent />
+    </Layout>
+  );
 }
