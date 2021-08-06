@@ -28,7 +28,7 @@ const MainContent = () => {
             <div>
                 <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
                     <ChevronDownIcon className="chevron" />
-                    <Header id="connected-resource-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource IDs")} />
+                    <Header id="resource-ids-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource IDs")} />
                 </Flex>
                 <ProcessTeamsContext />
             </div>;
@@ -36,7 +36,7 @@ const MainContent = () => {
         firstSection =
             <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
                 <ChevronEndIcon className="chevron" />
-                <Header id="connected-resource-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource IDs")} />
+                <Header id="resource-ids-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource IDs")} />
             </Flex>;
     }
 
@@ -47,7 +47,7 @@ const MainContent = () => {
             <div>
                 <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
                     <ChevronDownIcon className="chevron" />
-                    <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
+                    <Header id="sample-queries-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
                 </Flex>
                 <div>
                     <FetchSamples setQuery = {setQuery} setRequestType = {setRequestType} setRequestBody = {setRequestBody}/>
@@ -57,7 +57,7 @@ const MainContent = () => {
         secondSection =
             <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
                 <ChevronEndIcon className="chevron" />
-                <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
+                <Header id="sample-queries-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
             </Flex>;
     }
     
