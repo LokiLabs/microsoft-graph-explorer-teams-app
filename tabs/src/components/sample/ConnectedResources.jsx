@@ -20,7 +20,7 @@ export function ProcessTeamsContext() {
                 return;
             }
             const teamId = createItemWithCopy(context.groupId);
-            teamId.header = t("Connected Resources.Team ID") + ": " + context.teamId;
+            teamId.header = t("Connected Resources.Team ID") + ": " + context.groupId;
             const channelId = createItemWithCopy(context.channelId);
             channelId.header = t("Connected Resources.Channel ID") + ": " + context.channelId;
             setTitle(context.teamName + " > " + context.channelName);

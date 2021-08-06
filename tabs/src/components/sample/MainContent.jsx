@@ -11,7 +11,7 @@ import { ProcessTeamsContext } from './ConnectedResources.jsx';
 
 const MainContent = () => {
     const [firstSectionActive, toggleFirstSection] = useState(true);
-    const [secondSectionActive, toggleSecondSection] = useState(true);
+    const [secondSectionActive, toggleSecondSection] = useState(false);
     const [thirdSectionActive, toggleThirdSection] = useState(true);
     const [fourthSectionActive, toggleFourthSection] = useState(false);
     const [fifthSectionActive, toggleFifthSection] = useState(false);
