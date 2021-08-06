@@ -23,7 +23,7 @@ export default function App() {
     changeLanguage(i18n, isTeams.context.locale);
   }
   return (
-    <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee" }}>
+    <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee", minHeight: "50vh" }}>
       <Router>
         <Route exact path="/">
           <Redirect to="/tab" />
