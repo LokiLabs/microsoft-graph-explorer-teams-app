@@ -24,13 +24,15 @@ export function RSCList() {
                 rscType = "/chats/" + context?.chatId;
             }
 
-            const rscResponse = await makeGraphCall(requestTypes.GET, [], rscType + "/permissionGrants", graphVersions.beta);
-            const rscJson = await rscResponse.json();
-            const RSCs = rscJson.value;
+            if (context) {
+                const rscResponse = await makeGraphCall(requestTypes.GET, [], rscType + "/permissionGrants", graphVersions.beta);
+                const rscJson = await rscResponse.json();
+                const RSCs = rscJson.value;
 
-            if (RSCs) {
-                const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
-                setRSCList(filteredRSCs);
+                if (RSCs) {
+                    const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
+                    setRSCList(filteredRSCs);
+                }
             }
         };
         getRSCList(context);

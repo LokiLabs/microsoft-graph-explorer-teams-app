@@ -15,20 +15,11 @@ export const Section = (props) => {
 
     return (
         <>
-            {isShow ?
-                <div>
-                    <Flex className="main-section" gap="gap.small" onClick={() => toggleShow(!isShow)}>
-                        <ChevronDownIcon className="chevron" />
-                        <Header id={idString} className="pointer-header" as="h2" content={t(translationString)} />
-                    </Flex>
-                    {component}
-                </div>
-                :
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleShow(!isShow)}>
-                    <ChevronEndIcon className="chevron" />
-                    <Header id={idString} className="pointer-header" as="h2" content={t(translationString)} />
-                </Flex>
-            }
+            <Flex className="main-section" gap="gap.small" onClick={() => toggleShow(!isShow)}>
+                {isShow ? <ChevronDownIcon className="chevron" /> : <ChevronEndIcon className="chevron" />}
+                <Header id={idString} className="pointer-header" as="h2" content={t(translationString)} />
+            </Flex>
+            {isShow && component}
         </>
     );
 };
