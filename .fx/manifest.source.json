@@ -83,11 +83,11 @@
     },
     "activities": {
         "activityTypes": [
-          {
-            "type": "pendingFinanceApprovalRequests",
-            "description": "Test Activity Type",
-            "templateText": "Internal spending team has a pending finance approval request"
-          }
+            {
+                "type": "graphExplorerSampleNotification",
+                "description": "Test Activity Type",
+                "templateText": "Graph Explorer sending a test activity feed notification"
+            }
         ]
     }
 }

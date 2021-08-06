@@ -6,6 +6,7 @@
 @import url("components/sample/style/QueryRunner.css");
 @import url("components/sample/style/Welcome.css");
 @import url("components/sample/style/DocumentationLinks.css");
+@import url("components/sample/style/SampleQueries.css");
 * {
   box-sizing: border-box;
   margin: 0px;

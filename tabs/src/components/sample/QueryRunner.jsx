@@ -6,11 +6,28 @@ import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import { useTranslation } from "react-i18next";
 import "./style/QueryRunner.css";
+import PropTypes from 'prop-types';
 
-export function QueryRunner() {
+QueryRunner.propTypes = {
+    query: PropTypes.string,
+    setQuery: PropTypes.func,
+    requestType: PropTypes.string,
+    setRequestType: PropTypes.func,
+    requestBody: PropTypes.string,
+    setRequestBody: PropTypes.func,
+};
+
+export function QueryRunner(props) {
 
     // Translations
     const { t } = useTranslation();
+
+    const query = props.query;
+    const setQuery = props.setQuery;
+    const requestType = props.requestType;
+    const setRequestType = props.setRequestType;
+    const requestBody = props.requestBody;
+    const setRequestBody = props.setRequestBody;
 
     const addRequestHeader = () => {
         if (!requestHeaders.map(r => r.key).includes(userAddedHeader)) {
@@ -45,11 +62,8 @@ export function QueryRunner() {
 
     const [userAddedHeader, setUserAddedHeader] = useState("");
     const [userAddedValue, setUserAddedValue] = useState("");
-    const [requestType, setRequestType] = useState(requestTypes.GET);
     const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
-    const [query, setQuery] = useState(GRAPH_URL);
     const [responseBody, setResponseBody] = useState("{}");
-    const [requestBody, setRequestBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
     const [responseComponentIndex, setResponseComponentIndex] = useState(0);
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
@@ -117,6 +131,7 @@ export function QueryRunner() {
 
     useEffect(() => {
         setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [graphVersion, query]);
 
     const [height] = useRangeKnob({

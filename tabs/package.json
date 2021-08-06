@@ -19,6 +19,7 @@
     "msteams-react-base-component": "^3.1.0",
     "node-fetch": "^2.6.1",
     "office-ui-fabric-react": "^7.172.1",
+    "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-i18next": "11.11.3",
@@ -30,6 +31,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
+    "prepare": "cd .. && husky install tabs/.husky",
     "lint": "eslint --fix --max-warnings 0 src/*.jsx src/components/sample/*.jsx src/components/*.jsx src/components/sample/lib/*.js"
   },
   "eslintConfig": {
@@ -57,6 +59,7 @@
     "eslint": "^7.31.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.1",
     "prettier": "2.3.2"
   }
 }
