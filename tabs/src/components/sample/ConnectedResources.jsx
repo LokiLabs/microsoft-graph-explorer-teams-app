@@ -42,7 +42,7 @@ export function ProcessTeamsContext() {
     return (
         <div className="connected-resource">
             {resourceList.length !== 0 && <ListItem className="title" header={title} />}
-            {resourceList.length !== 0 && <List defaultSelectedIndex={0} items={resourceList} />}
+            {resourceList.length !== 0 && <List items={resourceList} />}
             {resourceList.length === 0 && !title && <Alert danger content={t("Connected Resources.No Connected Resources")} />}
         </div>
     );
