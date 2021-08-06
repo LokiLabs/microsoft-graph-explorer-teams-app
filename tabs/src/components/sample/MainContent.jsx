@@ -22,110 +22,78 @@ const MainContent = () => {
     const { t } = useTranslation();
 
 
-    let firstSection;
+    let firstSectionHeader = 
+    <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
+        {firstSectionActive ? <ChevronDownIcon className="chevron" /> : <ChevronEndIcon className="chevron" />}
+        <Header id="resource-ids-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource IDs")} />
+    </Flex>;
+
+    let firstSectionContent;
     if (firstSectionActive) {
-        firstSection = 
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="resource-ids-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource IDs")} />
-                </Flex>
-                <ProcessTeamsContext />
-            </div>;
-    } else {
-        firstSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleFirstSection(!firstSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="resource-ids-header" className="pointer-header" as="h2" content={t("Table of Contents.Resource IDs")} />
-            </Flex>;
+        firstSectionContent = <ProcessTeamsContext />;
     }
 
 
-    let secondSection;
+    let secondSectionHeader =
+    <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
+        {secondSectionActive ? <ChevronDownIcon className="chevron" /> : <ChevronEndIcon className="chevron" />}
+        <Header id="sample-queries-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
+    </Flex>;
+
+    let secondSectionContent;
     if (secondSectionActive) {
-        secondSection =
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="sample-queries-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
-                </Flex>
-                <div>
-                    <FetchSamples setQuery = {setQuery} setRequestType = {setRequestType} setRequestBody = {setRequestBody}/>
-                </div>
-            </div>;
-    } else {
-        secondSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleSecondSection(!secondSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="sample-queries-header" className="pointer-header" as="h2" content={t("Table of Contents.Sample Queries")} />
-            </Flex>;
+        secondSectionContent = <FetchSamples setQuery = {setQuery} setRequestType = {setRequestType} setRequestBody = {setRequestBody}/>;
     }
     
-    let thirdSection;
+
+    let thirdSectionHeader =
+    <Flex className="main-section" gap="gap.small" onClick={() => toggleThirdSection(!thirdSectionActive)}>
+        {thirdSectionActive ? <ChevronDownIcon className="chevron" /> : <ChevronEndIcon className="chevron" />}
+        <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
+    </Flex>;
+
+    let thirdSectionContent;
     if (thirdSectionActive) {
-        thirdSection =
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleThirdSection(!thirdSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
-                </Flex>
-                <div>
-                    <QueryRunner query = {query} setQuery = {setQuery} requestType = {requestType} setRequestType = {setRequestType} requestBody = {requestBody} setRequestBody = {setRequestBody}/>
-                </div>
-            </div>;
-    } else {
-        thirdSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleThirdSection(!thirdSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="query-runner-header" className="pointer-header" as="h2" content={t("Table of Contents.Query Runner")} />
-            </Flex>;
+        thirdSectionContent = <QueryRunner query = {query} setQuery = {setQuery} requestType = {requestType} setRequestType = {setRequestType} requestBody = {requestBody} setRequestBody = {setRequestBody}/>;
     }
 
-    let fourthSection;
+
+    let fourthSectionHeader =
+    <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
+        {fourthSectionActive ? <ChevronDownIcon className="chevron" /> : <ChevronEndIcon className="chevron" />}
+        <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Granted Resource-Specific Consent")} />
+    </Flex>;
+
+    let fourthSectionContent;
     if (fourthSectionActive) {
-        fourthSection =
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Granted Resource-Specific Consent")} />
-                </Flex>
-                <div>
-                    <RSCList />
-                </div>
-            </div>;
-    } else {
-        fourthSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleFourthSection(!fourthSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="resource-specific-consent-header" className="pointer-header" as="h2" content={t("Table of Contents.Granted Resource-Specific Consent")} />
-            </Flex>;
+        fourthSectionContent = <RSCList />;
     }
 
-    let fifthSection;
+
+    let fifthSectionHeader = 
+    <Flex className="main-section" gap="gap.small" onClick={() => toggleFifthSection(!fifthSectionActive)}>
+        {fifthSectionActive ? <ChevronDownIcon className="chevron" /> : <ChevronEndIcon className="chevron" />}
+        <Header id="documentation-links-header" className="pointer-header" as="h2" content={t("Table of Contents.Documentation Links")} />
+    </Flex>;
+
+    let fifthSectionContent;
     if (fifthSectionActive) {
-        fifthSection =
-            <div>
-                <Flex className="main-section" gap="gap.small" onClick={() => toggleFifthSection(!fifthSectionActive)}>
-                    <ChevronDownIcon className="chevron" />
-                    <Header id="documentation-links-header" className="pointer-header" as="h2" content={t("Table of Contents.Documentation Links")} />
-                </Flex>
-                <DocumentationLinks />
-            </div>;
-    } else {
-        fifthSection =
-            <Flex className="main-section" gap="gap.small" onClick={() => toggleFifthSection(!fifthSectionActive)}>
-                <ChevronEndIcon className="chevron" />
-                <Header id="documentation-links-header" className="pointer-header" as="h2" content={t("Table of Contents.Documentation Links")} />
-            </Flex>;
+        fifthSectionContent = <DocumentationLinks />;
     }
+    
 
     return (
         <main>
-            {firstSection}
-            {secondSection}
-            {thirdSection}
-            {fourthSection}
-            {fifthSection}
+            {firstSectionHeader}
+            {firstSectionContent}
+            {secondSectionHeader}
+            {secondSectionContent}
+            {thirdSectionHeader}
+            {thirdSectionContent}
+            {fourthSectionHeader}
+            {fourthSectionContent}
+            {fifthSectionHeader}
+            {fifthSectionContent}
         </main>
     );
 };
