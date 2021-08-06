@@ -4,7 +4,7 @@ import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, 
 import { useRangeKnob } from '@fluentui/docs-components';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
-import { makeGraphCall } from "./graph/useGraph";
+import { makeGraphCall } from "./utils/useGraph";
 import { useTranslation } from "react-i18next";
 import "./style/QueryRunner.css";
 
