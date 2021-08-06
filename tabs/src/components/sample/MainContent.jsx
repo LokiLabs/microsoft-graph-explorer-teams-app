@@ -4,12 +4,18 @@ import { QueryRunner } from './QueryRunner';
 import { Section } from "./Section";
 import { DocumentationLinks } from "./DocumentationLinks";
 import { ProcessTeamsContext } from './ConnectedResources.jsx';
+import { FetchSamples } from "./SampleQueries";
+import { requestTypes, GRAPH_URL } from './TabConstants';
 
 const MainContent = () => {
     const [resourceIDsActive, toggleResourceIDsActive] = useState(true);
     const [queryRunnerActive, toggleQueryRunnerActive] = useState(true);
     const [grantedRSCActive, toggleGrantedRSCActive] = useState(false);
     const [documentationLinksActive, toggleDocumentationLinksActive] = useState(false);
+    const [sampleQueriesActive, toggleSampleQueries] = useState(true);
+    const [query, setQuery] = useState(GRAPH_URL);
+    const [requestType, setRequestType] = useState(requestTypes.GET);
+    const [requestBody, setRequestBody] = useState("{}");
 
     return (
         <main>
@@ -21,8 +27,24 @@ const MainContent = () => {
                 idString={"connected-resource-header"}
             />
             <Section
+                isShow={sampleQueriesActive}
+                component={<FetchSamples
+                    setQuery={setQuery}
+                    setRequestType={setRequestType}
+                    setRequestBody={setRequestBody} />}
+                toggleShow={toggleSampleQueries}
+                translationString={"Table of Contents.Sample Queries"}
+                idString={"sample-queries-header"}
+            />
+            <Section
                 isShow={queryRunnerActive}
-                component={<QueryRunner />}
+                component={<QueryRunner
+                    query={query}
+                    setQuery={setQuery}
+                    requestType={requestType}
+                    setRequestType={setRequestType}
+                    requestBody={requestBody}
+                    setRequestBody={setRequestBody} />}
                 toggleShow={toggleQueryRunnerActive}
                 translationString={"Table of Contents.Query Runner"}
                 idString={"query-runner-header"}
