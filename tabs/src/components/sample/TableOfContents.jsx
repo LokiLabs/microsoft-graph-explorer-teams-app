@@ -23,11 +23,7 @@ const Headings = ({ headings, activeId } ) => {
   const { t } = useTranslation();
 
   const checkIfActive = (menuItemKey, activeHeaderId) => {
-    if (menuItemKey === activeHeaderId) {
-      return true;
-    } else {
-      return false;
-    }
+    return (menuItemKey === activeHeaderId);
   };
 
   const items = [
