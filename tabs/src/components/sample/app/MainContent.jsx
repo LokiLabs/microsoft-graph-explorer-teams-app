@@ -24,7 +24,7 @@ const MainContent = () => {
                 component={<ProcessTeamsContext />}
                 toggleShow={toggleResourceIDsActive}
                 translationString={"Table of Contents.Resource IDs"}
-                idString={"connected-resource-header"}
+                idString={"resource-ids-header"}
             />
             <Section
                 isShow={sampleQueriesActive}
