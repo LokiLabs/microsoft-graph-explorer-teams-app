@@ -71,17 +71,15 @@ function createFillIn(url) {
 
 function createTableRow(setQuery, url, requestType, setRequestType, postBody, setPostBody) {
     return {
-        onClick: () => setQueryRunner(setQuery, url, requestType, setRequestType, postBody, setPostBody)
+        onClick: () => {
+            setQuery(GRAPH_URL + url);
+            setRequestType(requestTypes[requestType]);
+            if (postBody) {
+                setPostBody(postBody);
+            }
+            else {
+                setPostBody("{}");
+            }
+        }
     };
-}
-
-function setQueryRunner(setQuery, url, requestType, setRequestType, postBody, setPostBody) {
-    setQuery(GRAPH_URL + url);
-    setRequestType(requestTypes[requestType]);
-    if (postBody) {
-        setPostBody(postBody);
-    }
-    else {
-        setPostBody("{}");
-    }
 }
