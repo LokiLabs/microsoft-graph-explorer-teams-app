@@ -19,7 +19,8 @@
             "Team ID": "Team ID",
             "Chat": "Chat",
             "Chat ID": "Chat ID",
-            "No Connected Resources": "You must connect to an instance of a team or a chat to make this request."
+            "No Connected Resources": "You must connect to an instance of a team or a chat to make this request.",
+            "copied": "Copied to clipboard"
         },
 
         "Tab Config": {
