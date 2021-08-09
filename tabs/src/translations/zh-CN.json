@@ -19,7 +19,8 @@
             "Teams Team ID": "(zh-cn) Team ID",
             "Chat": "(zh-cn) Chat",
             "Chat ID": "(zh-cn) Chat ID",
-            "No Connected Resources": "(zh-cn) You must connect to an instance of a team or a chat to make this request."
+            "No Connected Resources": "(zh-cn) You must connect to an instance of a team or a chat to make this request.",
+            "copied": "(zh-cn) Copied to clipboard"
         },
 
         "Tab Config": {

@@ -64,6 +64,8 @@ function copyText(id, setPopUp) {
 
 export function CreateItemWithCopy(props) {
     const [popUp, setPopUp] = useState(false);
+    // Translations
+    const { t } = useTranslation();
     let endMedia = (
         <Popup trigger={        
         <Button
@@ -79,7 +81,7 @@ export function CreateItemWithCopy(props) {
         position = 'before' 
         align= 'center' 
         on="context"
-        content="Copied to clipboard" />
+        content={t("Connected Resources.copied")} />
     );
     let item = <ListItem header = {props.header} endMedia = {endMedia}/>;
     //Add the copy icon 
