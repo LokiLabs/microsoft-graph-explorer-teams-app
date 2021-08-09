@@ -11,43 +11,34 @@ FetchSamples.propTypes = {
 };
 
 export function FetchSamples(props) {
+    const setQuery = props.setQuery;
+    const setRequestType = props.setRequestType;
+    const setRequestBody = props.setRequestBody;
+
     const [samples, setSamples] = useState([]);
     useEffect(() => {
         async function getSamplesList() {
             microsoftTeams.getContext(async function (context) {
-                const devxApi = SAMPLE_QUERIES_URL;
 
                 const headers = {
                     'Content-Type': 'application/json'
                 };
 
-                const arr = [];
-
-                try {
-                    const response = await fetch(devxApi, headers);
-                    if (!response.ok) {
-                        return;
-                    }
+                const response = await fetch(SAMPLE_QUERIES_URL, headers);
+                if (response.ok) {
                     const res = await response.json();
-                    for (let i = 0; i < res.teamsAppSampleQueries.length; i++) {
-
-                        //Filter through all the chats and teams such that it matches the context that this app is attached to
-                        if ((context?.groupId && res.teamsAppSampleQueries[i]["requestUrl"].includes("chat")) || (context?.chatId && res.teamsAppSampleQueries[i]["requestUrl"].includes("teams"))) {
-                            continue;
-                        }
-
-                        //Each sample query requires a row
-                        const query = createTableRow(props.setQuery, res.teamsAppSampleQueries[i]["requestUrl"].slice(1,), res.teamsAppSampleQueries[i]["method"], props.setRequestType, res.teamsAppSampleQueries[i]["postBody"], props.setRequestBody);
-                        query.key = res.teamsAppSampleQueries[i]["id"];
-                        const label = <TableCell className={"table-method"} content={res.teamsAppSampleQueries[i]["method"]} />;
-                        const button = <TableCell className={"table-link"} content={createFillIn(res.teamsAppSampleQueries[i]["docLink"])} />;
-                        query.items = [label, res.teamsAppSampleQueries[i]["humanName"], button];
-                        arr.push(query);
-                    }
-                } catch (error) {
-                    return error;
+                    const teamsAppQueries = res.teamsAppSampleQueries
+                        .filter(s => (context?.groupId && s["requestUrl"].includes("teams")) || (context?.chatId && s["requestUrl"].includes("chat")))
+                        .map(s => {
+                            const query = createTableRow(setQuery, s["requestUrl"].slice(1,), s["method"], setRequestType, s["postBody"], setRequestBody);
+                            query.key = s["id"];
+                            const label = <TableCell className={"table-method"} content={s["method"]} />;
+                            const button = <TableCell className={"table-link"} content={createFillIn(s["docLink"])} />;
+                            query.items = [label, s["humanName"], button];
+                            return query;
+                        });
+                    setSamples(teamsAppQueries);
                 }
-                setSamples(arr);
             });
         }
         getSamplesList(samples);
@@ -61,23 +52,21 @@ export function FetchSamples(props) {
 }
 
 function createFillIn(url) {
-    const sampleButton = () => <Button
-        tabIndex={-1}
-        icon={<OpenOutsideIcon className="button-icon" />}
-        circular
-        text
-        iconOnly
-        aria-label="sample"
-        title="Sample Query"
-    />;
-    //Open a new window for this sample query's documentation
-    const obj = {
-        content: sampleButton(), onClick: query => {
+    return {
+        content: <Button
+            tabIndex={-1}
+            icon={<OpenOutsideIcon className="button-icon" />}
+            circular
+            text
+            iconOnly
+            aria-label="sample"
+            title="Sample Query"
+        />,
+        onClick: query => {
             window.open(url);
             query.stopPropagation();
         }
     };
-    return obj;
 }
 
 function createTableRow(setQuery, url, requestType, setRequestType, postBody, setPostBody) {
