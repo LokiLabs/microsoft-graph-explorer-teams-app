@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 
 const Monaco = ( props ) => {
-  // eslint-disable-next-line react/prop-types
   let { body, height, onChange, readOnly } = props;
 
   if (body && typeof body !== 'string') {
@@ -42,19 +41,17 @@ function formatJsonStringForAllBrowsers(body) {
    * 2. Convert back to javascript object
    * 3. format the string (works for all browsers)
    */
-  try {
-    body = JSON.stringify(body).replace(/(?:\\[rnt]|[\r\n\t]+)+/g, '');
-    body = JSON.parse(body);
-  } catch (error) {
-    console.log('format error', error);
-  }
 
+  body = JSON.stringify(body).replace(/(?:\\[rnt]|[\r\n\t]+)+/g, '');
+  body = JSON.parse(body);
   return JSON.stringify(body, null, 4);
 }
 
 Monaco.propTypes= {
     body: PropTypes.string,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    readOnly: PropTypes.bool,
+    height: PropTypes.number
 };
 
 
