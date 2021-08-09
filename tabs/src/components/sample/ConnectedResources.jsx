@@ -79,7 +79,7 @@ export function CreateItemWithCopy(props) {
         position = 'before' 
         align= 'center' 
         on="context"
-        content="Copied" />
+        content="Copied to clipboard" />
     );
     let item = <ListItem header = {props.header} endMedia = {endMedia}/>;
     //Add the copy icon 
