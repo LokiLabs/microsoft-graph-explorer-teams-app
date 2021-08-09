@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { requestTypes, graphVersions, GRAPH_URL } from "../../TabConstants";
-import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, Alert } from '@fluentui/react-northstar';
-import { useRangeKnob } from '@fluentui/docs-components';
+import { graphVersions, GRAPH_URL } from "../../TabConstants";
+import { Button } from '@fluentui/react-northstar';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import { makeGraphCall } from "../../utils/useGraph";
-import { useTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
+import { QueryInput } from "./runner/QueryInput";
+import { Request } from "./runner/Request";
+import { Response } from "./runner/Response";
 
 QueryRunner.propTypes = {
     query: PropTypes.string,
@@ -18,9 +19,6 @@ QueryRunner.propTypes = {
 };
 
 export function QueryRunner(props) {
-
-    // Translations
-    const { t } = useTranslation();
 
     const query = props.query;
     const setQuery = props.setQuery;
@@ -71,24 +69,6 @@ export function QueryRunner(props) {
     const [responseState, setReponseState] = useState(-1);
     const [isLoading, setIsLoading] = useState(false);
 
-    const requestItems = [
-        t("Query Runner.Request body"),
-        t("Query Runner.Request headers")
-    ];
-
-    const responseItems = [
-        t("Query Runner.Response body"),
-        t("Query Runner.Response headers")
-    ];
-
-    const requestTableHeaders = {
-        items: [t("Query Runner.Key"), t("Query Runner.Value"), ''],
-    };
-
-    const responseTableHeaders = {
-        items: [t("Query Runner.Key"), t("Query Runner.Value")],
-    };
-
     async function callGraph() {
         setIsLoading(true);
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
@@ -119,131 +99,39 @@ export function QueryRunner(props) {
 
     useEffect(() => {
         setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [graphVersion, query]);
-
-    const [height] = useRangeKnob({
-        name: 'height',
-        initialValue: '120px',
-        min: '20px',
-        max: '300px',
-        step: 10,
-    });
-
-    const requestComponents = [
-        <TextArea key="requestBody" fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)}
-            variables={{
-                height,
-            }}
-        />,
-        <>
-            <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
-            <Flex gap="gap.small" className="pad-vertical">
-                <Flex.Item>
-                    <Input
-                        fluid={true}
-                        inverted={true}
-                        id="key"
-                        value={userAddedHeader}
-                        showSuccessIndicator={false}
-                        required
-                        onChange={(evt) => setUserAddedHeader(evt.target.value)}
-                        type="text" />
-                </Flex.Item>
-                <Flex.Item>
-                    <Input
-                        fluid={true}
-                        inverted={true}
-                        id="value"
-                        value={userAddedValue}
-                        showSuccessIndicator={false}
-                        required
-                        onChange={(evt) => setUserAddedValue(evt.target.value)}
-                        type="text" />
-                </Flex.Item>
-                <Flex.Item>
-                    <Button content={t("Query Runner.Add")} onClick={() => addRequestHeader()} primary />
-                </Flex.Item>
-            </Flex>
-        </>
-    ];
-
-    const responseComponents = [
-        <TextArea key="responseBody" fluid={true} inverted={true} resize="both" value={responseBody}
-            variables={{
-                height,
-            }}
-        />,
-        <Table key="responseHeaders" compact header={responseTableHeaders} rows={responseHeaders} aria-label="response headers" />
-    ];
 
     return (
         <>
-            <Flex gap="gap.small">
-                <Dropdown
-                    inverted={true}
-                    fluid={true}
-                    items={Object.keys(requestTypes).map(key => requestTypes[key])}
-                    id="requestType"
-                    placeholder={requestType}
-                    onChange={(evt, selected) => setRequestType(Object.keys(requestTypes).map(key => requestTypes[key])[selected.highlightedIndex])}
-                    className="dropdown"
-                />
-                <Dropdown
-                    inverted={true}
-                    fluid={true}
-                    items={Object.keys(graphVersions).map(key => graphVersions[key])}
-                    id="graphVersion"
-                    placeholder={graphVersion}
-                    onChange={(evt, selected) => setGraphVersion(Object.keys(graphVersions).map(key => graphVersions[key])[selected.highlightedIndex])}
-                    className="dropdown"
-                />
-
-                <Flex.Item grow>
-                    <Flex gap="gap.small">
-                        <Flex.Item grow>
-                            <Input fluid inverted value={query} showSuccessIndicator={false} required onChange={(evt) => setQuery(evt.target.value)} type="text" />
-                        </Flex.Item>
-                        <Flex.Item size="size.half">
-                            <Button loading={isLoading} disabled={isLoading} content={t("Query Runner.Run query")} onClick={() => callGraph()} primary />
-                        </Flex.Item>
-                    </Flex>
-                </Flex.Item>
-            </Flex>
-
-            <Flex padding="padding.medium">
-                <Menu
-                    defaultActiveIndex={0}
-                    underlined
-                    primary
-                    accessibility={tabListBehavior}>
-                    <Menu.Item index={0} onClick={() => setRequestComponentIndex(0)}>
-                        <Menu.ItemContent>{requestItems[0]}</Menu.ItemContent>
-                    </Menu.Item>
-                    <Menu.Item index={1} onClick={() => setRequestComponentIndex(1)}>
-                        <Menu.ItemContent>{requestItems[1]}</Menu.ItemContent>
-                    </Menu.Item>
-                </Menu>
-            </Flex>
-            {requestComponents[requestComponentIndex]}
-
-            <Flex padding="padding.medium">
-                <Menu
-                    defaultActiveIndex={0}
-                    underlined
-                    primary
-                    accessibility={tabListBehavior}>
-                    <Menu.Item index={0} onClick={() => setResponseComponentIndex(0)}>
-                        <Menu.ItemContent>{responseItems[0]}</Menu.ItemContent>
-                    </Menu.Item>
-                    <Menu.Item index={1} onClick={() => setResponseComponentIndex(1)}>
-                        <Menu.ItemContent>{responseItems[1]}</Menu.ItemContent>
-                    </Menu.Item>
-                </Menu>
-            </Flex>
-            {responseState !== -1 && responseState[0] === "2" && <Alert className="response-number" success content={responseState} />}
-            {responseState !== -1 && (responseState[0] === "4" || responseState[0] === "5") && <Alert className="response-number" danger content={responseState} />}
-            {responseComponents[responseComponentIndex]}
+            <QueryInput
+                requestType={requestType}
+                setRequestType={setRequestType}
+                graphVersion={graphVersion}
+                setGraphVersion={setGraphVersion}
+                query={query}
+                setQuery={setQuery}
+                callGraph={callGraph}
+                isLoading={isLoading}
+            />
+            <Request
+                userAddedValue={userAddedValue}
+                setUserAddedValue={setUserAddedValue}
+                userAddedHeader={userAddedHeader}
+                setUserAddedHeader={setUserAddedHeader}
+                requestBody={requestBody}
+                setRequestBody={setRequestBody}
+                addRequestHeader={addRequestHeader}
+                requestComponentIndex={requestComponentIndex}
+                setRequestComponentIndex={setRequestComponentIndex}
+                requestHeaders={requestHeaders}
+            />
+            <Response
+                responseBody={responseBody}
+                responseHeaders={responseHeaders}
+                responseComponentIndex={responseComponentIndex}
+                setResponseComponentIndex={setResponseComponentIndex}
+                responseState={responseState}
+            />
         </>
     );
 }
