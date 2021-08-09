@@ -7,10 +7,9 @@ export function localizeUrl(url, i18n) {
     return url.replace("{LOCALE}", i18n.language);
 }
 
-// Application ID for Graph explorer (official site)
-export const CLIENT_APP_ID = "de8bc8b5-d9f9-48b1-a8ad-b748da725064";
+// Application ID for Graph Explorer Teams app registration on Azure
+export const CLIENT_APP_ID = "09dbe221-5dfe-4c5b-8860-49b398ee5052";
 
-// TODO: Change this URL to `https://gi21devxapi-devtest.azurewebsites.net` once the DevX API `interns/feature/ge-app-mode-proxy-endpoint` branch is merged into `interns/dev`. ADO ticket #39398
 export const DEVX_API_URL = "https://graphwebapi.azurewebsites.net/graphproxy";
 export const SAMPLE_QUERIES_URL = "https://gi21devxapi-devtest.azurewebsites.net/samples?org=LokiLabs&branchName=interns/feature/app-mode-sample-queries";
 export const GRAPH_URL = "https://graph.microsoft.com/";
