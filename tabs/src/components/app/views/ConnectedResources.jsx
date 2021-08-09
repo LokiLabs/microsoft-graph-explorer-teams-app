@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Button, List, Alert, ListItem } from '@fluentui/react-northstar';
+import { Button, List, Alert, ListItem, Popup } from '@fluentui/react-northstar';
 import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
 import copy from "copy-to-clipboard";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
+
 
 export function ProcessTeamsContext() {
     //Get the context of where the tab is currently
@@ -18,10 +19,8 @@ export function ProcessTeamsContext() {
             if (isAlreadyPresent(resourceList, context.channelId)) {
                 return;
             }
-            const teamId = createItemWithCopy(context.groupId);
-            teamId.header = t("Connected Resources.Team ID") + ": " + context.groupId;
-            const channelId = createItemWithCopy(context.channelId);
-            channelId.header = t("Connected Resources.Channel ID") + ": " + context.channelId;
+            const teamId = <CreateItemWithCopy id={context.groupId} header={t("Connected Resources.Team ID") + ": " + context.groupId} />;
+            const channelId = <CreateItemWithCopy id={context.channelId} header={t("Connected Resources.Channel ID") + ": " + context.channelId} />;
             setTitle(context.teamName + " > " + context.channelName);
             setResourceList([teamId, channelId]);
         }
@@ -31,7 +30,7 @@ export function ProcessTeamsContext() {
                 return;
             }
             setTitle(t("Connected Resources.Chat"));
-            let chatId = createItemWithCopy(context.chatId);
+            let chatId = <CreateItemWithCopy id={context.chatId} header={t("Connected Resources.Chat ID") + ": " + context.chatId} />;
             chatId.header = t("Connected Resources.Chat ID") + ": " + context.chatId;
             setResourceList([chatId]);
         }
@@ -50,22 +49,40 @@ export function ProcessTeamsContext() {
     );
 }
 
-const isAlreadyPresent = (list, id) => list.some((i) => i.header?.includes(id));
-
-export function createItemWithCopy(id) {
-    let item = {};
-
-    //Add the copy icon 
-    item.endMedia = (
-        <Button
-            aria-label="copy"
-            icon={<ClipboardCopiedToIcon className="button-icon" />}
-            size="medium"
-            text
-            iconOnly
-            title="Copy"
-            onClick={() => copy(id)}
-        />
+const isAlreadyPresent = (list, id) => list.some((i) => i?.props.header?.includes(id));
+function copyText(id, setPopUp) {
+    copy(id);
+    setPopUp(true);
+    //make the pop up disappear after a period of time
+    setTimeout(
+        () =>
+            setPopUp(false),
+        1000,
     );
+}
+
+export function CreateItemWithCopy(props) {
+    const [popUp, setPopUp] = useState(false);
+    // Translations
+    const { t } = useTranslation();
+    let endMedia = (
+        <Popup trigger={
+            <Button
+                aria-label="copy"
+                icon={<ClipboardCopiedToIcon className="button-icon" />}
+                size="medium"
+                text
+                iconOnly
+                title="Copy"
+                onClick={() => copyText(props.id, setPopUp)}
+            />}
+            open={popUp}
+            position='before'
+            align='center'
+            on="context"
+            content={t("Connected Resources.copied")} />
+    );
+    let item = <ListItem header={props.header} endMedia={endMedia} />;
+    //Add the copy icon 
     return item;
 }
