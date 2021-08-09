@@ -120,14 +120,6 @@ export function QueryRunner() {
         setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
     }, [graphVersion, query]);
 
-    // const [height] = useRangeKnob({
-    //     name: 'height',
-    //     initialValue: '120px',
-    //     min: '20px',
-    //     max: '300px',
-    //     step: 10,
-    // });
-
     const requestComponents = [
         <Monaco
             key="requestBody"

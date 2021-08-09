@@ -62,7 +62,7 @@ export function createItemWithCopy(id) {
         <Button
             aria-label="copy"
             icon={<ClipboardCopiedToIcon className="button-icon" />}
-            size="small"
+            size="medium"
             text
             iconOnly
             title="Copy"
