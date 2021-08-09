@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
-import { Button, Flex, Menu, TextArea, Table, tabListBehavior, Input } from '@fluentui/react-northstar';
+import { Button, Flex, Menu, Table, tabListBehavior, Input } from '@fluentui/react-northstar';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
+import Monaco from '../Monaco';
 
 Request.propTypes = {
     userAddedValue: PropTypes.string,
@@ -81,17 +82,13 @@ export function Request(props) {
     };
 
     const requestComponents = [
-        <TextArea
+        <Monaco
             key="requestBody"
-            fluid={true}
-            inverted={true}
-            resize="both"
-            value={requestBody}
-            onChange={(evt) => setRequestBody(evt.target.value)}
-            variables={{
-                height,
-            }}
-        />,
+            body={requestBody}
+            height={height}
+            onChange={(evt) => setRequestBody(evt)}
+        />
+        ,
         <>
             <Table
                 header={requestTableHeaders}

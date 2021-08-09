@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { QueryInput } from "./runner/QueryInput";
 import { Request } from "./runner/Request";
 import { Response } from "./runner/Response";
-import { useRangeKnob } from '@fluentui/docs-components';
 
 QueryRunner.propTypes = {
     query: PropTypes.string,
@@ -31,14 +30,6 @@ export function QueryRunner(props) {
     const [requestHeaders, setRequestHeaders] = useState([]);
     const [responseState, setReponseState] = useState(-1);
     const [isLoading, setIsLoading] = useState(false);
-
-    const [height] = useRangeKnob({
-        name: 'height',
-        initialValue: '120px',
-        min: '20px',
-        max: '300px',
-        step: 10,
-    });
 
     async function callGraph() {
         setIsLoading(true);
@@ -81,13 +72,13 @@ export function QueryRunner(props) {
                 setRequestBody={setRequestBody}
                 requestHeaders={requestHeaders}
                 setRequestHeaders={setRequestHeaders}
-                height={height}
+                height={200}
             />
             <Response
                 responseBody={responseBody}
                 responseHeaders={responseHeaders}
                 responseState={responseState}
-                height={height}
+                height={200}
             />
         </>
     );
