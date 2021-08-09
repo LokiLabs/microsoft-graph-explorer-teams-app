@@ -14,17 +14,16 @@ export function ProcessTeamsContext() {
     //Get the context of where the tab is currently
     const [resourceList, setResourceList] = useState([]);
     const [title, setTitle] = useState(" ");
+
     microsoftTeams.getContext(function (context) {
 
         //Check if this is a teams channel
         if (context.channelId && context.channelId.length !== 0) {
-            if (isAlreadyPresent(resourceList, context.channelId)) {
+            if (isAlreadyPresent(resourceList, context.chatId)) {
                 return;
             }
-            const teamId = createItemWithCopy(context.groupId);
-            teamId.header = t("Connected Resources.Team ID") + ": " + context.groupId;
-            const channelId = createItemWithCopy(context.channelId);
-            channelId.header = t("Connected Resources.Channel ID") + ": " + context.channelId;
+            const teamId = <CreateItemWithCopy id = {context.groupId} header = {t("Connected Resources.Team ID") + ": " + context.groupId}/>;
+            const channelId = <CreateItemWithCopy id = {context.channelId} header = {t("Connected Resources.Channel ID") + ": " + context.channelId}/>;
             setTitle(context.teamName + " > " + context.channelName);
             setResourceList([teamId, channelId]);
         }
@@ -34,7 +33,7 @@ export function ProcessTeamsContext() {
                 return;
             }
             setTitle(t("Connected Resources.Chat"));
-            let chatId = createItemWithCopy(context.chatId);
+            let chatId = <CreateItemWithCopy id = {context.chatId} header = {t("Connected Resources.Chat ID") + ": " + context.chatId}/>;
             chatId.header = t("Connected Resources.Chat ID") + ": " + context.chatId;
             setResourceList([chatId]);
         }
@@ -52,17 +51,21 @@ export function ProcessTeamsContext() {
     );
 }
 
-const isAlreadyPresent = (list, id) => list.some((i) => i.header?.includes(id));
-
-function copyText(id) {
+const isAlreadyPresent = (list, id) => list.some((i) => i?.props.header?.includes(id));
+function copyText(id, setPopUp) {
     copy(id);
+    setPopUp(true);
+    //make the pop up disappear after a period of time
+    setTimeout(
+        () =>
+          setPopUp(false),
+        1000,
+      );
 }
 
-export function createItemWithCopy(id) {
-    let item = {};
-
-    //Add the copy icon 
-    item.endMedia = (
+export function CreateItemWithCopy(props) {
+    const [popUp, setPopUp] = useState(false);
+    let endMedia = (
         <Popup trigger={        
         <Button
             aria-label="copy"
@@ -71,12 +74,15 @@ export function createItemWithCopy(id) {
             text
             iconOnly
             title="Copy"
-            onClick={() => copyText(id)}
+            onClick={() => copyText(props.id, setPopUp)}
         />}     
+        open ={popUp}
         position = 'before' 
         align= 'center' 
-        on="click"
+        on="context"
         content="Copied" />
     );
+    let item = <ListItem header = {props.header} endMedia = {endMedia}/>;
+    //Add the copy icon 
     return item;
 }
