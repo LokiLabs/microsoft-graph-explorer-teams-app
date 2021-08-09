@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 import { Button, Flex, Menu, TextArea, Table, tabListBehavior, Input } from '@fluentui/react-northstar';
+import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
+import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 
 Request.propTypes = {
     userAddedValue: PropTypes.string,
@@ -10,8 +12,8 @@ Request.propTypes = {
     setUserAddedHeader: PropTypes.func,
     requestBody: PropTypes.string,
     setRequestBody: PropTypes.func,
-    addRequestHeader: PropTypes.func,
     requestHeaders: PropTypes.array,
+    setRequestHeaders: PropTypes.func,
     height: PropTypes.any
 };
 
@@ -19,15 +21,13 @@ export function Request(props) {
 
     const requestBody = props.requestBody;
     const setRequestBody = props.setRequestBody;
-    const userAddedHeader = props.userAddedHeader;
-    const setUserAddedHeader = props.setUserAddedHeader;
-    const userAddedValue = props.userAddedValue;
-    const setUserAddedValue = props.setUserAddedValue;
-    const addRequestHeader = props.addRequestHeader;
     const requestHeaders = props.requestHeaders;
+    const setRequestHeaders = props.setRequestHeaders;
     const height = props.height;
 
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
+    const [userAddedHeader, setUserAddedHeader] = useState("");
+    const [userAddedValue, setUserAddedValue] = useState("");
 
     // Translations
     const { t } = useTranslation();
@@ -43,6 +43,41 @@ export function Request(props) {
             t("Query Runner.Value"),
             ''
         ],
+    };
+
+    const addRequestHeader = () => {
+        if (!requestHeaders.map(r => r.key).includes(userAddedHeader)) {
+            const headerCopy = (' ' + userAddedHeader).slice(1);
+            const valueCopy = (' ' + userAddedValue).slice(1);
+            setUserAddedHeader("");
+            setUserAddedValue("");
+            const deleteButton = () => <Button
+                tabIndex={-1}
+                icon={<TrashCanIcon className="button-icon" />}
+                circular
+                text
+                iconOnly
+                aria-label="delete"
+                title="Delete request header"
+            />;
+            const newHeaderValue = {
+                key: headerCopy,
+                items: [headerCopy, valueCopy, {
+                    content: deleteButton(),
+                    truncateContent: true,
+                    accessibility: gridCellWithFocusableElementBehavior,
+                    onClick: e => {
+                        deleteRow(headerCopy);
+                        e.stopPropagation();
+                    },
+                }],
+            };
+            setRequestHeaders([...requestHeaders, newHeaderValue]);
+        }
+    };
+
+    const deleteRow = (header) => {
+        setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header));
     };
 
     const requestComponents = [

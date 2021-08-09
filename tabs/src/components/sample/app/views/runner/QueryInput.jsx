@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { requestTypes, graphVersions } from '../../../TabConstants';
+import React, { useEffect } from 'react';
+import { requestTypes, graphVersions, GRAPH_URL } from '../../../TabConstants';
 import { Button, Input, Flex, Dropdown } from '@fluentui/react-northstar';
 import { useTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
@@ -29,6 +29,10 @@ export function QueryInput(props) {
 
     // Translations
     const { t } = useTranslation();
+
+    useEffect(() => {
+        setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
+    }, [graphVersion, query]);
 
     return (
         <Flex gap="gap.small">

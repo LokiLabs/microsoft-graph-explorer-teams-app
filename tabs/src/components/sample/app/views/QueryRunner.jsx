@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { graphVersions, GRAPH_URL } from "../../TabConstants";
-import { Button } from '@fluentui/react-northstar';
-import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
-import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import { makeGraphCall } from "../../utils/useGraph";
 import PropTypes from 'prop-types';
 import { QueryInput } from "./runner/QueryInput";
@@ -28,39 +25,6 @@ export function QueryRunner(props) {
     const requestBody = props.requestBody;
     const setRequestBody = props.setRequestBody;
 
-    const addRequestHeader = () => {
-        if (!requestHeaders.map(r => r.key).includes(userAddedHeader)) {
-            const headerCopy = (' ' + userAddedHeader).slice(1);
-            const valueCopy = (' ' + userAddedValue).slice(1);
-            setUserAddedHeader("");
-            setUserAddedValue("");
-            const deleteButton = () => <Button
-                tabIndex={-1}
-                icon={<TrashCanIcon className="button-icon" />}
-                circular
-                text
-                iconOnly
-                aria-label="delete"
-                title="Delete request header"
-            />;
-            const newHeaderValue = {
-                key: headerCopy,
-                items: [headerCopy, valueCopy, {
-                    content: deleteButton(),
-                    truncateContent: true,
-                    accessibility: gridCellWithFocusableElementBehavior,
-                    onClick: e => {
-                        deleteRow(headerCopy);
-                        e.stopPropagation();
-                    },
-                }],
-            };
-            setRequestHeaders([...requestHeaders, newHeaderValue]);
-        }
-    };
-
-    const [userAddedHeader, setUserAddedHeader] = useState("");
-    const [userAddedValue, setUserAddedValue] = useState("");
     const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
     const [responseBody, setResponseBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
@@ -100,14 +64,6 @@ export function QueryRunner(props) {
         setIsLoading(false);
     }
 
-    const deleteRow = (header) => {
-        setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header));
-    };
-
-    useEffect(() => {
-        setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
-    }, [graphVersion, query]);
-
     return (
         <>
             <QueryInput
@@ -121,14 +77,10 @@ export function QueryRunner(props) {
                 isLoading={isLoading}
             />
             <Request
-                userAddedValue={userAddedValue}
-                setUserAddedValue={setUserAddedValue}
-                userAddedHeader={userAddedHeader}
-                setUserAddedHeader={setUserAddedHeader}
                 requestBody={requestBody}
                 setRequestBody={setRequestBody}
-                addRequestHeader={addRequestHeader}
                 requestHeaders={requestHeaders}
+                setRequestHeaders={setRequestHeaders}
                 height={height}
             />
             <Response
