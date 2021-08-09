@@ -52,7 +52,7 @@ function formatJsonStringForAllBrowsers(body) {
   return JSON.stringify(body, null, 4);
 }
 
-Monaco.protoTypes = {
+Monaco.propTypes= {
     body: PropTypes.string,
     onChange: PropTypes.func.isRequired
 };
