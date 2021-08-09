@@ -1,9 +1,13 @@
-export const GRAPH_EXPLORER_URL = "https://developer.microsoft.com/en-us/graph/graph-explorer";
-export const GRAPH_EXPLORER_DOCS_URL = "https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0";
+export const UNLOCALIZED_GRAPH_EXPLORER_URL = "https://developer.microsoft.com/{LOCALE}/graph/graph-explorer";
+export const UNLOCALIZED_GRAPH_EXPLORER_DOCS_URL = "https://docs.microsoft.com/{LOCALE}/graph/api/resources/teams-api-overview?view=graph-rest-1.0";
+export const UNLOCALIZED_OFFICIAL_RSC_URL = "https://docs.microsoft.com/{LOCALE}/microsoftteams/platform/graph-api/rsc/resource-specific-consent#:~:text=Resource-specific%20consent%20%28RSC%29%20is%20a%20Microsoft%20Teams%20and,manage%20specific%20resources%E2%80%94either%20teams%20or%20chats%E2%80%94within%20an%20organization.";
+export const UNLOCALIZED_MS_GRAPH_DOCS = "https://docs.microsoft.com/{LOCALE}/";
 export const RSC_DOCUMENTATION_URL = "https://raw.githubusercontent.com/MicrosoftDocs/msteams-docs/master/msteams-platform/graph-api/rsc/resource-specific-consent.md";
-export const OFFICIAL_RSC_URL = "https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent#:~:text=Resource-specific%20consent%20%28RSC%29%20is%20a%20Microsoft%20Teams%20and,manage%20specific%20resources%E2%80%94either%20teams%20or%20chats%E2%80%94within%20an%20organization.";
 export const README_HEADER = "---";
-export const MS_GRAPH_DOCS = "(https://docs.microsoft.com/en-us/";
+
+export function localizeUrl(url, i18n) {
+    return url.replace("{LOCALE}", i18n.language);
+}
 
 // Application ID for Graph explorer (official site)
 export const CLIENT_APP_ID = "de8bc8b5-d9f9-48b1-a8ad-b748da725064";
