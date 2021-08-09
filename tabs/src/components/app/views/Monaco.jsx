@@ -12,9 +12,8 @@ const Monaco = ( props ) => {
 
   return (
     <MonacoEditor
-      width='5 !important'
-      height={height ? height : '300px'}
-      value={body ? body : ''}
+      height={ height || '300px' }
+      value={ body || '' }
       language='json'
       options={{
         lineNumbers: 'off',
