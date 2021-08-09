@@ -121,10 +121,10 @@ export function Request(props) {
                         type="text" />
                 </Flex.Item>
                 <Flex.Item>
-                        <Button
-                            content={t("Query Runner.Add")}
-                            onClick={() => addRequestHeader()}
-                            primary fluid />
+                    <Button
+                        content={t("Query Runner.Add")}
+                        onClick={() => addRequestHeader()}
+                        primary fluid />
                 </Flex.Item>
             </Flex>
         </>
