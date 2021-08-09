@@ -5,8 +5,7 @@ import copy from "copy-to-clipboard";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
 
-//const testing = <Button icon={<ClipboardCopiedToIcon />} title="Show popup" />;
-    
+
 export function ProcessTeamsContext() {
 
     // Translations
@@ -19,7 +18,7 @@ export function ProcessTeamsContext() {
 
         //Check if this is a teams channel
         if (context.channelId && context.channelId.length !== 0) {
-            if (isAlreadyPresent(resourceList, context.chatId)) {
+            if (isAlreadyPresent(resourceList, context.channelId)) {
                 return;
             }
             const teamId = <CreateItemWithCopy id = {context.groupId} header = {t("Connected Resources.Team ID") + ": " + context.groupId}/>;
