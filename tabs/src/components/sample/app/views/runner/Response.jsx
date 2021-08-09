@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
-import { useRangeKnob } from '@fluentui/docs-components';
 import { Flex, Menu, TextArea, Table, tabListBehavior, Alert } from '@fluentui/react-northstar';
 
 Response.propTypes = {
     responseBody: PropTypes.string,
     responseHeaders: PropTypes.array,
     responseState: PropTypes.number,
+    height: PropTypes.any
 };
 
 export function Response(props) {
@@ -15,6 +15,7 @@ export function Response(props) {
     const responseBody = props.responseBody;
     const responseHeaders = props.responseHeaders;
     const responseState = props.responseState;
+    const height = props.height;
 
     const [responseComponentIndex, setResponseComponentIndex] = useState(0);
 
@@ -25,14 +26,6 @@ export function Response(props) {
         t("Query Runner.Response body"),
         t("Query Runner.Response headers")
     ];
-
-    const [height] = useRangeKnob({
-        name: 'height',
-        initialValue: '120px',
-        min: '20px',
-        max: '300px',
-        step: 10,
-    });
 
     const responseTableHeaders = {
         items: [

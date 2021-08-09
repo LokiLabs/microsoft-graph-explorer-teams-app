@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
-import { useRangeKnob } from '@fluentui/docs-components';
 import { Button, Flex, Menu, TextArea, Table, tabListBehavior, Input } from '@fluentui/react-northstar';
 
 Request.propTypes = {
@@ -12,7 +11,8 @@ Request.propTypes = {
     requestBody: PropTypes.string,
     setRequestBody: PropTypes.func,
     addRequestHeader: PropTypes.func,
-    requestHeaders: PropTypes.array
+    requestHeaders: PropTypes.array,
+    height: PropTypes.any
 };
 
 export function Request(props) {
@@ -25,9 +25,9 @@ export function Request(props) {
     const setUserAddedValue = props.setUserAddedValue;
     const addRequestHeader = props.addRequestHeader;
     const requestHeaders = props.requestHeaders;
+    const height = props.height;
 
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
-
 
     // Translations
     const { t } = useTranslation();
@@ -44,14 +44,6 @@ export function Request(props) {
             ''
         ],
     };
-
-    const [height] = useRangeKnob({
-        name: 'height',
-        initialValue: '120px',
-        min: '20px',
-        max: '300px',
-        step: 10,
-    });
 
     const requestComponents = [
         <TextArea
