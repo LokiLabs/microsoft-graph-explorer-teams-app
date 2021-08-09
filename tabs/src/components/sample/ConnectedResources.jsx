@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Button, List, Alert, ListItem } from '@fluentui/react-northstar';
+import { Button, List, Alert, ListItem, Popup } from '@fluentui/react-northstar';
 import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
 import copy from "copy-to-clipboard";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
 
+//const testing = <Button icon={<ClipboardCopiedToIcon />} title="Show popup" />;
+    
 export function ProcessTeamsContext() {
 
     // Translations
@@ -61,6 +63,7 @@ export function createItemWithCopy(id) {
 
     //Add the copy icon 
     item.endMedia = (
+        <Popup trigger={        
         <Button
             aria-label="copy"
             icon={<ClipboardCopiedToIcon className="button-icon" />}
@@ -69,7 +72,11 @@ export function createItemWithCopy(id) {
             iconOnly
             title="Copy"
             onClick={() => copyText(id)}
-        />
+        />}     
+        position = 'before' 
+        align= 'center' 
+        on="click"
+        content="Copied" />
     );
     return item;
 }
