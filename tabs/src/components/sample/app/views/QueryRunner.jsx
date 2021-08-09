@@ -63,8 +63,6 @@ export function QueryRunner(props) {
     const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
     const [responseBody, setResponseBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
-    const [responseComponentIndex, setResponseComponentIndex] = useState(0);
-    const [requestComponentIndex, setRequestComponentIndex] = useState(0);
     const [requestHeaders, setRequestHeaders] = useState([]);
     const [responseState, setReponseState] = useState(-1);
     const [isLoading, setIsLoading] = useState(false);
@@ -121,15 +119,11 @@ export function QueryRunner(props) {
                 requestBody={requestBody}
                 setRequestBody={setRequestBody}
                 addRequestHeader={addRequestHeader}
-                requestComponentIndex={requestComponentIndex}
-                setRequestComponentIndex={setRequestComponentIndex}
                 requestHeaders={requestHeaders}
             />
             <Response
                 responseBody={responseBody}
                 responseHeaders={responseHeaders}
-                responseComponentIndex={responseComponentIndex}
-                setResponseComponentIndex={setResponseComponentIndex}
                 responseState={responseState}
             />
         </>

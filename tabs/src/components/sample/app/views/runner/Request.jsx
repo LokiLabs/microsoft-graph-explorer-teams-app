@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 import { useRangeKnob } from '@fluentui/docs-components';
@@ -12,8 +12,6 @@ Request.propTypes = {
     requestBody: PropTypes.string,
     setRequestBody: PropTypes.func,
     addRequestHeader: PropTypes.func,
-    requestComponentIndex: PropTypes.number,
-    setRequestComponentIndex: PropTypes.func,
     requestHeaders: PropTypes.array
 };
 
@@ -26,9 +24,9 @@ export function Request(props) {
     const userAddedValue = props.userAddedValue;
     const setUserAddedValue = props.setUserAddedValue;
     const addRequestHeader = props.addRequestHeader;
-    const requestComponentIndex = props.requestComponentIndex;
-    const setRequestComponentIndex = props.setRequestComponentIndex;
     const requestHeaders = props.requestHeaders;
+
+    const [requestComponentIndex, setRequestComponentIndex] = useState(0);
 
 
     // Translations

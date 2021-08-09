@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 import { useRangeKnob } from '@fluentui/docs-components';
@@ -7,8 +7,6 @@ import { Flex, Menu, TextArea, Table, tabListBehavior, Alert } from '@fluentui/r
 Response.propTypes = {
     responseBody: PropTypes.string,
     responseHeaders: PropTypes.array,
-    responseComponentIndex: PropTypes.number,
-    setResponseComponentIndex: PropTypes.func,
     responseState: PropTypes.number,
 };
 
@@ -16,9 +14,9 @@ export function Response(props) {
 
     const responseBody = props.responseBody;
     const responseHeaders = props.responseHeaders;
-    const responseComponentIndex = props.responseComponentIndex;
-    const setResponseComponentIndex = props.setResponseComponentIndex;
     const responseState = props.responseState;
+
+    const [responseComponentIndex, setResponseComponentIndex] = useState(0);
 
     // Translations
     const { t } = useTranslation();
