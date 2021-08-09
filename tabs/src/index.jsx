@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App";
+import App from "./App";
 import "./index.css";
 
-import './components/i18n';
+import './i18n';
 
 ReactDOM.render(
   <App />,

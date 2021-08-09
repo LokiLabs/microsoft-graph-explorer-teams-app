@@ -32,7 +32,7 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "prepare": "cd .. && husky install tabs/.husky",
-    "lint": "eslint --fix --max-warnings 0 src/*.jsx src/components/sample/*.jsx src/components/*.jsx src/components/sample/**/*.jsx src/components/sample/**/**/*.jsx src/components/sample/**/**/*.jsx src/components/sample/**/**/**/*.jsx"
+    "lint": "eslint --fix --max-warnings 0 src/*.jsx src/components/*.jsx src/components/*.jsx src/components/**/*.jsx src/components/**/**/*.jsx src/components/**/**/*.jsx src/components/**/**/**/*.jsx"
   },
   "eslintConfig": {
     "extends": [
