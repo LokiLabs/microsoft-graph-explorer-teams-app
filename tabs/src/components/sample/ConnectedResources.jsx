@@ -42,7 +42,7 @@ export function ProcessTeamsContext() {
     return (
         <div className="connected-resource">
             {resourceList.length !== 0 && <ListItem className="title" header={title} />}
-            {resourceList.length !== 0 && <List defaultSelectedIndex={0} items={resourceList}/>} 
+            {resourceList.length !== 0 && <List defaultSelectedIndex={0} items={resourceList}/>}
             {resourceList.length === 0 && !title && <Alert danger content={t("Connected Resources.No Connected Resources")} />}
         </div>
     );
@@ -57,12 +57,12 @@ function copyText(id) {
 export function createItemWithCopy(id) {
     let item = {};
 
-    //Add the copy icon 
+    //Add the copy icon
     item.endMedia = (
         <Button
             aria-label="copy"
             icon={<ClipboardCopiedToIcon className="button-icon" />}
-            size="medium"
+            size="small"
             text
             iconOnly
             title="Copy"

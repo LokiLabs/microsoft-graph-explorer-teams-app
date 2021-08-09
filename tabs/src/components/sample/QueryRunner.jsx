@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { requestTypes, graphVersions, GRAPH_URL, RSC_API_URL } from "./TabConstants";
-import { Button, Input, Flex, Menu, TextArea, Table, tabListBehavior, Dropdown, Alert } from '@fluentui/react-northstar';
-import { useRangeKnob } from '@fluentui/docs-components';
+import { Button, Input, Flex, Menu, Table, tabListBehavior, Dropdown, Alert } from '@fluentui/react-northstar';
+//import { useRangeKnob } from '@fluentui/docs-components';
 import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 import { useTranslation } from "react-i18next";
 import "./style/QueryRunner.css";
+import Monaco from "./Monaco";
 
 export function QueryRunner() {
 
@@ -119,20 +120,22 @@ export function QueryRunner() {
         setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
     }, [graphVersion, query]);
 
-    const [height] = useRangeKnob({
-        name: 'height',
-        initialValue: '120px',
-        min: '20px',
-        max: '300px',
-        step: 10,
-    });
+    // const [height] = useRangeKnob({
+    //     name: 'height',
+    //     initialValue: '120px',
+    //     min: '20px',
+    //     max: '300px',
+    //     step: 10,
+    // });
 
     const requestComponents = [
-        <TextArea key="requestBody" fluid={true} inverted={true} resize="both" value={requestBody} onChange={(evt) => setRequestBody(evt.target.value)}
-            variables={{
-                height,
-            }}
-        />,
+        <Monaco
+            key="requestBody"
+            body={requestBody}
+            height='300px'
+            onChange={(evt) => setRequestBody(evt)}
+        />
+        ,
         <>
             <Table header={requestTableHeaders} rows={requestHeaders} aria-label="request headers" />
             <Flex gap="gap.small" className="pad-vertical">
@@ -166,11 +169,13 @@ export function QueryRunner() {
     ];
 
     const responseComponents = [
-        <TextArea key="responseBody" fluid={true} inverted={true} resize="both" value={responseBody}
-            variables={{
-                height,
-            }}
-        />,
+        <Monaco
+            key="responseBody"
+            body={responseBody}
+            readOnly={true}
+            height='300px'
+        />
+        ,
         <Table key="responseHeaders" compact header={responseTableHeaders} rows={responseHeaders} aria-label="response headers" />
     ];
 
