@@ -7,12 +7,10 @@ import { useTranslation } from "react-i18next";
 
 
 export function ProcessTeamsContext() {
-
-    // Translations
-    const { t } = useTranslation();
     //Get the context of where the tab is currently
     const [resourceList, setResourceList] = useState([]);
     const [title, setTitle] = useState(" ");
+    const { t } = useTranslation();
 
     microsoftTeams.getContext(function (context) {
 
@@ -21,8 +19,8 @@ export function ProcessTeamsContext() {
             if (isAlreadyPresent(resourceList, context.channelId)) {
                 return;
             }
-            const teamId = <CreateItemWithCopy id = {context.groupId} header = {t("Connected Resources.Team ID") + ": " + context.groupId}/>;
-            const channelId = <CreateItemWithCopy id = {context.channelId} header = {t("Connected Resources.Channel ID") + ": " + context.channelId}/>;
+            const teamId = <CreateItemWithCopy id={context.groupId} header={t("Connected Resources.Team ID") + ": " + context.groupId} />;
+            const channelId = <CreateItemWithCopy id={context.channelId} header={t("Connected Resources.Channel ID") + ": " + context.channelId} />;
             setTitle(context.teamName + " > " + context.channelName);
             setResourceList([teamId, channelId]);
         }
@@ -32,7 +30,7 @@ export function ProcessTeamsContext() {
                 return;
             }
             setTitle(t("Connected Resources.Chat"));
-            let chatId = <CreateItemWithCopy id = {context.chatId} header = {t("Connected Resources.Chat ID") + ": " + context.chatId}/>;
+            let chatId = <CreateItemWithCopy id={context.chatId} header={t("Connected Resources.Chat ID") + ": " + context.chatId} />;
             chatId.header = t("Connected Resources.Chat ID") + ": " + context.chatId;
             setResourceList([chatId]);
         }
@@ -41,10 +39,11 @@ export function ProcessTeamsContext() {
             setResourceList([]);
         }
     });
+
     return (
         <div className="connected-resource">
             {resourceList.length !== 0 && <ListItem className="title" header={title} />}
-            {resourceList.length !== 0 && <List defaultSelectedIndex={0} items={resourceList}/>} 
+            {resourceList.length !== 0 && <List items={resourceList} />}
             {resourceList.length === 0 && !title && <Alert danger content={t("Connected Resources.No Connected Resources")} />}
         </div>
     );
@@ -57,9 +56,9 @@ function copyText(id, setPopUp) {
     //make the pop up disappear after a period of time
     setTimeout(
         () =>
-          setPopUp(false),
+            setPopUp(false),
         1000,
-      );
+    );
 }
 
 export function CreateItemWithCopy(props) {
@@ -67,23 +66,23 @@ export function CreateItemWithCopy(props) {
     // Translations
     const { t } = useTranslation();
     let endMedia = (
-        <Popup trigger={        
-        <Button
-            aria-label="copy"
-            icon={<ClipboardCopiedToIcon className="button-icon" />}
-            size="medium"
-            text
-            iconOnly
-            title="Copy"
-            onClick={() => copyText(props.id, setPopUp)}
-        />}     
-        open ={popUp}
-        position = 'before' 
-        align= 'center' 
-        on="context"
-        content={t("Connected Resources.copied")} />
+        <Popup trigger={
+            <Button
+                aria-label="copy"
+                icon={<ClipboardCopiedToIcon className="button-icon" />}
+                size="medium"
+                text
+                iconOnly
+                title="Copy"
+                onClick={() => copyText(props.id, setPopUp)}
+            />}
+            open={popUp}
+            position='before'
+            align='center'
+            on="context"
+            content={t("Connected Resources.copied")} />
     );
-    let item = <ListItem header = {props.header} endMedia = {endMedia}/>;
+    let item = <ListItem header={props.header} endMedia={endMedia} />;
     //Add the copy icon 
     return item;
 }

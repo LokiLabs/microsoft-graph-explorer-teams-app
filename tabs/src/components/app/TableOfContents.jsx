@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import useHeadingsData from "./useHeadingsData";
-import useIntersectionObserver from "./useIntersectionObserver";
+import useHeadingsData from "../utils/useHeadingsData";
+import useIntersectionObserver from "../utils/useIntersectionObserver";
 import { Menu } from "@fluentui/react-northstar";
 import { useTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
