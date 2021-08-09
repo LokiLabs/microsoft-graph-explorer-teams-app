@@ -15,10 +15,16 @@
         },
 
         "Connected Resources": {
-            "Teams Channel ID": "(zh-cn) Teams Channel ID",
+            "Teams Channel ID": "(zh-cn) Channel ID",
+            "Teams Team ID": "(zh-cn) Team ID",
             "Chat": "(zh-cn) Chat",
             "Chat ID": "(zh-cn) Chat ID",
-            "No Connected Resources": "(zh-cn) You must connect to an instance of a team or a chat to make this request."
+            "No Connected Resources": "(zh-cn) You must connect to an instance of a team or a chat to make this request.",
+            "copied": "(zh-cn) Copied to clipboard"
+        },
+
+        "Tab Config": {
+            "Caption": "(zh-cn) Select save to finish adding the Graph Explorer Sample Teams app. By installing this app, you are granting it resource-specific consent permission against the Teams channel/chat."
         },
 
         "RSC Headers": {
@@ -54,7 +60,7 @@
         },
 
         "Table of Contents" : {
-            "Connected Resources": "(zh-cn) Connected Resources",
+            "Resource IDs": "(zh-cn) Resource IDs",
             "Query Runner": "(zh-cn) Query Runner",
             "Resource-Specific Consent": "(zh-cn) Resource-Specific Consent",
             "Documentation Links": "(zh-cn) Documentation Links"

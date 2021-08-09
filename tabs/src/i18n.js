@@ -4,14 +4,14 @@ import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import enUS from '../translations/en-US.json';
-import deDE from '../translations/de-DE.json';
-import esES from '../translations/es-ES.json';
-import frFR from '../translations/fr-FR.json';
-import jaJP from '../translations/ja-JP.json';
-import ptBR from '../translations/pt-BR.json';
-import ruRU from '../translations/ru-RU.json';
-import zhCN from '../translations/zh-CN.json';
+import enUS from './translations/en-US.json';
+import deDE from './translations/de-DE.json';
+import esES from './translations/es-ES.json';
+import frFR from './translations/fr-FR.json';
+import jaJP from './translations/ja-JP.json';
+import ptBR from './translations/pt-BR.json';
+import ruRU from './translations/ru-RU.json';
+import zhCN from './translations/zh-CN.json';
 
 import "@microsoft/teams-js";
 
@@ -33,7 +33,7 @@ const supportedLangs = [
   'ja-JP',
   'pt-BR',
   'ru-RU',
-  'zh-CN', 
+  'zh-CN',
 ];
 
 // We need to abstract the language changing because we want to:
@@ -77,12 +77,12 @@ i18n
   .init({
     detection: {
       order: [
-        'querystring', 
-        'path', 
-        'cookie', 
-        'localStorage', 
-        'sessionStorage', 
-        'navigator', 
+        'querystring',
+        'path',
+        'cookie',
+        'localStorage',
+        'sessionStorage',
+        'navigator',
         'htmlTag'
       ],
       lookupQuerystring: 'lng',
@@ -90,7 +90,7 @@ i18n
       lookupLocalStorage: 'i18nextLng',
       lookupSessionStorage: 'i18nextLng',
       lookupFromPathIndex: 0,
-  
+
       // cache user language
       caches: ['localStorage'],
       excludeCacheFor: ['cimode'],
