@@ -6,6 +6,7 @@
 @import url("components/style/Tab.css");
 @import url("components/style/DocumentationLinks.css");
 @import url("components/style/SampleQueries.css");
+@import url("components/style/RSCList.css");
 * {
   box-sizing: border-box;
   margin: 0px;

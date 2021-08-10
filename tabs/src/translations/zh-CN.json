@@ -58,7 +58,8 @@
             "TeamsTab.Delete.Chat": "(zh-cn) Delete this chat's tabs.",
             "TeamsTab.ReadWrite.Chat": "(zh-cn) Manage this chat's tabs.",
             "TeamsAppInstallation.Read.Chat": "(zh-cn) Get a list of the apps that are installed in this chat.",
-            "OnlineMeeting.ReadBasic.Chat": "(zh-cn) Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat."
+            "OnlineMeeting.ReadBasic.Chat": "(zh-cn) Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat.",
+            "No resource available to grant permissions to" : "(zh-cn) No resource (team or chat) available to grant permissions to."
         },
 
         "Table of Contents" : {
