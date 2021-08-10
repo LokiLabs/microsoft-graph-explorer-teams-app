@@ -83,6 +83,6 @@ export function CreateItemWithCopy(props) {
             content={t("Connected Resources.copied")} />
     );
     let item = <ListItem header={props.header} endMedia={endMedia} />;
-    //Add the copy icon 
+    //Add the copy icon
     return item;
 }
