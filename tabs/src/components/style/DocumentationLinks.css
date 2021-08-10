@@ -1,14 +1,3 @@
-.documentation-links {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-@media (max-width: 900px) {
-    .documentation-links {
-        flex-direction: column;
-    }
-    .documentation-links button {
-        margin-bottom: 2%;
-    }
+.documentation-link {
+    font-size: medium
 }
