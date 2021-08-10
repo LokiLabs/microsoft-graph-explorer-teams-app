@@ -42,7 +42,10 @@ export function QueryRunner(props) {
     async function callGraph() {
         setIsLoading(true);
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
-        const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody, locale);
+        const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody, locale)
+        .catch(() => {
+            setResponseState("400 Bad request");
+        });
         setIsLoading(false);
 
         let graphResponseHeaders = [];
