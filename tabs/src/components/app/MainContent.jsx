@@ -16,12 +16,15 @@ const MainContent = () => {
     const [query, setQuery] = useState(GRAPH_URL);
     const [requestType, setRequestType] = useState(requestTypes.GET);
     const [requestBody, setRequestBody] = useState("{}");
+    const [ isConnectedToResource, setIsConnectedToResource ] = useState(false);
 
     return (
         <main>
             <Section
                 isShow={resourceIDsActive}
-                component={<ProcessTeamsContext />}
+                component={<ProcessTeamsContext 
+                    setIsConnectedToResource={setIsConnectedToResource}
+                />}
                 toggleShow={toggleResourceIDsActive}
                 translationString={"Table of Contents.Resource IDs"}
                 idString={"resource-ids-header"}
@@ -44,7 +47,9 @@ const MainContent = () => {
                     requestType={requestType}
                     setRequestType={setRequestType}
                     requestBody={requestBody}
-                    setRequestBody={setRequestBody} />}
+                    setRequestBody={setRequestBody}
+                    isConnectedToResource={isConnectedToResource}
+                />}
                 toggleShow={toggleQueryRunnerActive}
                 translationString={"Table of Contents.Query Runner"}
                 idString={"query-runner-header"}

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { QueryInput } from "./runner/QueryInput";
 import { Request } from "./runner/Request";
 import { Response } from "./runner/Response";
-import { useRangeKnob } from '@fluentui/docs-components';
 
 QueryRunner.propTypes = {
     query: PropTypes.string,
@@ -14,6 +13,7 @@ QueryRunner.propTypes = {
     setRequestType: PropTypes.func,
     requestBody: PropTypes.string,
     setRequestBody: PropTypes.func,
+    isConnectedToResource: PropTypes.bool
 };
 
 export function QueryRunner(props) {
@@ -24,6 +24,7 @@ export function QueryRunner(props) {
     const setRequestType = props.setRequestType;
     const requestBody = props.requestBody;
     const setRequestBody = props.setRequestBody;
+    const isConnectedToResource = props.isConnectedToResource;
 
     const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
     const [responseBody, setResponseBody] = useState("{}");
@@ -31,14 +32,6 @@ export function QueryRunner(props) {
     const [requestHeaders, setRequestHeaders] = useState([]);
     const [responseState, setReponseState] = useState(-1);
     const [isLoading, setIsLoading] = useState(false);
-
-    const [height] = useRangeKnob({
-        name: 'height',
-        initialValue: '120px',
-        min: '20px',
-        max: '300px',
-        step: 10,
-    });
 
     async function callGraph() {
         setIsLoading(true);
@@ -67,6 +60,7 @@ export function QueryRunner(props) {
     return (
         <>
             <QueryInput
+                isConnectedToResource={isConnectedToResource}
                 requestType={requestType}
                 setRequestType={setRequestType}
                 graphVersion={graphVersion}
@@ -82,13 +76,13 @@ export function QueryRunner(props) {
                 setRequestBody={setRequestBody}
                 requestHeaders={requestHeaders}
                 setRequestHeaders={setRequestHeaders}
-                height={height}
+                height={200}
             />
             <Response
                 responseBody={responseBody}
                 responseHeaders={responseHeaders}
                 responseState={responseState}
-                height={height}
+                height={200}
             />
         </>
     );

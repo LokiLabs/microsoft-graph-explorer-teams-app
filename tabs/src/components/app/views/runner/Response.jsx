@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
-import { Flex, Menu, TextArea, Table, tabListBehavior, Alert } from '@fluentui/react-northstar';
+import { Flex, Menu, Table, tabListBehavior, Alert } from '@fluentui/react-northstar';
+import Monaco from '../Monaco';
 
 Response.propTypes = {
     responseBody: PropTypes.string,
@@ -34,15 +35,11 @@ export function Response(props) {
         ],
     };
     const responseComponents = [
-        <TextArea
+        <Monaco
             key="responseBody"
-            fluid={true}
-            inverted={true}
-            resize="both"
-            value={responseBody}
-            variables={{
-                height,
-            }}
+            body={responseBody}
+            readOnly={true}
+            height={height}
         />,
         <Table
             key="responseHeaders"
