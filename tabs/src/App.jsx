@@ -37,7 +37,7 @@ export default function App() {
           <Loader style={{ margin: 100 }} />
         ) : (
           <>
-            <Provider theme={theme || teamsTheme} >
+            <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee" }} >
               <Route exact path="/privacy" component={Privacy} />
               <Route exact path="/termsofuse" component={TermsOfUse} />
               <Route exact path="/tab" component={Tab} />
