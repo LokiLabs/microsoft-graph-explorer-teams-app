@@ -14,6 +14,7 @@ QueryRunner.propTypes = {
     setRequestType: PropTypes.func,
     requestBody: PropTypes.string,
     setRequestBody: PropTypes.func,
+    isConnectedToResource: PropTypes.bool
 };
 
 export function QueryRunner(props) {
@@ -24,6 +25,7 @@ export function QueryRunner(props) {
     const setRequestType = props.setRequestType;
     const requestBody = props.requestBody;
     const setRequestBody = props.setRequestBody;
+    const isConnectedToResource = props.isConnectedToResource;
 
     const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
     const [responseBody, setResponseBody] = useState("{}");
@@ -67,6 +69,7 @@ export function QueryRunner(props) {
     return (
         <>
             <QueryInput
+                isConnectedToResource={isConnectedToResource}
                 requestType={requestType}
                 setRequestType={setRequestType}
                 graphVersion={graphVersion}
