@@ -1,7 +1,6 @@
 import React from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
-import { Provider } from "@fluentui/react-northstar";
 import { useTeamsFx } from "./components/utils/useTeamsFx";
 
 /**
@@ -44,11 +43,9 @@ export function TabConfig() {
   const imageName = require('./teamsappzeronotes.svg');
 
   return (
-    <Provider >
-      <center className="center" >
-        <img className="image" src={imageName.default} alt='' />
-        <h4 className="caption" style={{color: theme.siteVariables.focusOuterBorderColor}}>{t('Tab Config.Caption')}</h4>
-      </center>
-    </Provider>
+    <center className="center" >
+      <img className="image" src={imageName.default} alt='' />
+      <h4 className="caption" style={{color: theme.siteVariables.focusOuterBorderColor}}>{t('Tab Config.Caption')}</h4>
+    </center>
   );
 }
