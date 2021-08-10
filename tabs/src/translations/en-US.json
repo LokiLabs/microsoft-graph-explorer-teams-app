@@ -58,7 +58,8 @@
             "TeamsTab.Delete.Chat": "Delete this chat's tabs.",
             "TeamsTab.ReadWrite.Chat": "Manage this chat's tabs.",
             "TeamsAppInstallation.Read.Chat": "Get a list of the apps that are installed in this chat.",
-            "OnlineMeeting.ReadBasic.Chat": "Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat."
+            "OnlineMeeting.ReadBasic.Chat": "Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat.",
+            "No resource available to grant permissions to" : "No resource available to grant permissions to."
         },
 
         "Table of Contents" : {
