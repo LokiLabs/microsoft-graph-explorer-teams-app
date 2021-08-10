@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { graphVersions, GRAPH_URL } from "../../TabConstants";
 import { makeGraphCall } from "../../utils/useGraph";
 import PropTypes from 'prop-types';
@@ -6,6 +6,7 @@ import { QueryInput } from "./runner/QueryInput";
 import { Request } from "./runner/Request";
 import { Response } from "./runner/Response";
 import { useRangeKnob } from '@fluentui/docs-components';
+import { LocaleContext } from "../../../App";
 
 QueryRunner.propTypes = {
     query: PropTypes.string,
@@ -25,6 +26,8 @@ export function QueryRunner(props) {
     const requestBody = props.requestBody;
     const setRequestBody = props.setRequestBody;
 
+    const locale = useContext(LocaleContext);
+
     const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
     const [responseBody, setResponseBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
@@ -43,7 +46,7 @@ export function QueryRunner(props) {
     async function callGraph() {
         setIsLoading(true);
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
-        const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody);
+        const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody, locale);
 
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
