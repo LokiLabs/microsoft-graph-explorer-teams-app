@@ -124,7 +124,7 @@ export function Request(props) {
                     <Button
                         content={t("Query Runner.Add")}
                         onClick={() => addRequestHeader()}
-                        primary />
+                        primary fluid />
                 </Flex.Item>
             </Flex>
         </>
