@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Table, TableCell, OpenOutsideIcon, Button } from '@fluentui/react-northstar';
 import { GRAPH_URL, SAMPLE_QUERIES_URL, requestTypes } from "../../TabConstants";
+import { LocaleContext } from "../../../App";
 import * as microsoftTeams from "@microsoft/teams-js";
 import PropTypes from 'prop-types';
 
@@ -14,6 +15,7 @@ export function FetchSamples(props) {
     const setQuery = props.setQuery;
     const setRequestType = props.setRequestType;
     const setRequestBody = props.setRequestBody;
+    const locale = useContext(LocaleContext);
 
     const [samples, setSamples] = useState([]);
     useEffect(() => {
@@ -21,7 +23,8 @@ export function FetchSamples(props) {
             microsoftTeams.getContext(async function (context) {
 
                 const headers = {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept-Language': locale
                 };
 
                 const response = await fetch(SAMPLE_QUERIES_URL, headers);
