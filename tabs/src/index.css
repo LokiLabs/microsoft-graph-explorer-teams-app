@@ -4,7 +4,7 @@
 @import url("components/style/TableOfContents.css");
 @import url("components/style/QueryRunner.css");
 @import url("components/style/Tab.css");
-@import url("components/style/DocumentationLinks.css");
+@import url("components/style/MediumFontLink.css");
 @import url("components/style/SampleQueries.css");
 * {
   box-sizing: border-box;
