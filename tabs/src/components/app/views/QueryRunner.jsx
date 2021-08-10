@@ -74,6 +74,7 @@ export function QueryRunner(props) {
                 isLoading={isLoading}
             />
             <Request
+                requestType={requestType}
                 requestBody={requestBody}
                 setRequestBody={setRequestBody}
                 requestHeaders={requestHeaders}
