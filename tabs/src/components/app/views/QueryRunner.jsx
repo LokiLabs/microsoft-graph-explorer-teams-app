@@ -36,13 +36,17 @@ export function QueryRunner(props) {
     const [responseBody, setResponseBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
     const [requestHeaders, setRequestHeaders] = useState([]);
-    const [responseState, setReponseState] = useState(-1);
+    const [responseState, setResponseState] = useState(-1);
     const [isLoading, setIsLoading] = useState(false);
 
     async function callGraph() {
         setIsLoading(true);
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
-        const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody, locale);
+        const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody, locale)
+        .catch(() => {
+            setResponseState("400 Bad request");
+        });
+        setIsLoading(false);
 
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
@@ -52,7 +56,7 @@ export function QueryRunner(props) {
             });
         }
         setResponseHeaders(graphResponseHeaders);
-        setReponseState(graphResponse.status + " " + graphResponse.statusText);
+        setResponseState(graphResponse.status + " " + graphResponse.statusText);
         if (graphResponse.ok) {
             const text = await graphResponse.json();
             setResponseBody(JSON.stringify(text, undefined, 4));
@@ -60,7 +64,6 @@ export function QueryRunner(props) {
             const text = await graphResponse.text();
             setResponseBody(text);
         }
-        setIsLoading(false);
     }
 
     return (
