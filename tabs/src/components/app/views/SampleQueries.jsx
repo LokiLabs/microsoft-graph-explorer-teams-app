@@ -23,7 +23,7 @@ export function FetchSamples(props) {
             microsoftTeams.getContext(async function (context) {
 
                 const headers = {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'Application/json',
                     'Accept-Language': locale
                 };
 
