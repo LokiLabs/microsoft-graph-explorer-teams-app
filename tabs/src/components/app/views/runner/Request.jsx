@@ -54,7 +54,7 @@ export function Request(props) {
         circular
         text
         iconOnly
-        aria-label="delete"
+        aria-label={t("Query Runner.Delete")}
         title={t("Query Runner.Delete request header")}
     />;
 

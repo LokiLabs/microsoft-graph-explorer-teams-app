@@ -12,7 +12,8 @@
             "Response": "Response",
             "Warning": "You must connect the app to a resource in order to make Microsoft Graph requests that use resource-specific consent. For details, see {link to name of article(placeholder)} .",
             "Add": "ADD",
-            "Delete request header": "Delete request header"
+            "Delete request header": "Delete request header",
+            "Delete": "delete"
         },
 
         "Connected Resources": {
