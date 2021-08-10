@@ -12,8 +12,8 @@ export function RSCList() {
     const { t } = useTranslation();
 
     const items = [
-        {"className": "header", "content": t('RSC Headers.Permissions')},
-        {"className": "header", "content": t('RSC Headers.Descriptions')}
+        { "className": "header", "content": t('RSC Headers.Permissions') },
+        { "className": "header", "content": t('RSC Headers.Descriptions') }
     ];
 
     useEffect(() => {
@@ -23,12 +23,12 @@ export function RSCList() {
                 rscType = "/teams/" + context?.groupId;
             } else if (context?.chatId) {
                 rscType = "/chats/" + context?.chatId;
-            } else if (context){
+            } else if (!context) {
                 setAlert(true);
             }
 
             if (context) {
-                try{
+                try {
                     const rscResponse = await makeGraphCall(requestTypes.GET, [], rscType + "/permissionGrants", graphVersions.beta);
                     const rscJson = await rscResponse.json();
                     const RSCs = rscJson.value;
@@ -36,25 +36,25 @@ export function RSCList() {
                     if (RSCs && RSCs.length > 0) {
                         const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
                         const RSCRows = filteredRSCs
-                        .map(perm => ({
-                            key: perm, items: [
-                                {
-                                    content: perm,
-                                    truncateContent: true
-                                },
-                                {
-                                    content: t('RSC Descriptions.' + perm),
-                                    truncateContent: true,
-                                }
-                            ],
-                        }));
+                            .map(perm => ({
+                                key: perm, items: [
+                                    {
+                                        content: perm,
+                                        truncateContent: true
+                                    },
+                                    {
+                                        content: t('RSC Descriptions.' + perm),
+                                        truncateContent: true,
+                                    }
+                                ],
+                            }));
                         setAlert(false);
                         setRSCList(RSCRows);
                     }
-                    else{
+                    else {
                         setAlert(true);
                     }
-                } catch{
+                } catch {
                     setAlert(true);
                 }
             }
@@ -67,17 +67,17 @@ export function RSCList() {
         <div>
             {RSCList?.length > 0 && (
                 <>
-                    <Table className = "table" variables={{
+                    <Table className="table" variables={{
                         cellContentOverflow: 'none',
                     }}
-                        header={{items}}
+                        header={{ items }}
                         rows={RSCList}
                         aria-label="RSC Table" />
                 </>
             )}
             {alert && (
                 <>
-                    <Alert danger content={t('RSC Descriptions.No resource available to grant permissions to')}/>
+                    <Alert danger content={t('RSC Descriptions.No resource available to grant permissions to')} />
                 </>
             )}
         </div>
