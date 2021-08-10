@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Table, TableCell, OpenOutsideIcon, Button } from '@fluentui/react-northstar';
+import { Table, TableCell, OpenOutsideIcon, Button, Loader } from '@fluentui/react-northstar';
 import { GRAPH_URL, SAMPLE_QUERIES_URL, requestTypes } from "../../TabConstants";
 import * as microsoftTeams from "@microsoft/teams-js";
+import { useTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 
 FetchSamples.propTypes = {
@@ -16,10 +17,14 @@ export function FetchSamples(props) {
     const setRequestBody = props.setRequestBody;
 
     const [samples, setSamples] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const { t } = useTranslation();
+
     useEffect(() => {
         async function getSamplesList() {
             microsoftTeams.getContext(async function (context) {
-
+                console.log('i am coming here');
                 const headers = {
                     'Content-Type': 'application/json'
                 };
@@ -38,6 +43,7 @@ export function FetchSamples(props) {
                             return query;
                         });
                     setSamples(teamsAppQueries);
+                    setIsLoading(false);
                 }
             });
         }
@@ -46,9 +52,19 @@ export function FetchSamples(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return (
-        <Table rows={samples} aria-label="sample queries" />
-    );
+    if (isLoading) {
+        return (
+            <Loader
+                size='medium'
+                label={t("Sample Queries.loading")}
+            />
+        );
+    } else {
+        return (
+            <Table rows={samples} aria-label="sample queries" />
+        );
+    }
+
 }
 
 function createFillIn(url) {

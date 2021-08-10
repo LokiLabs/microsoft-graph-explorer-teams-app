@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { CLIENT_APP_ID, graphVersions, requestTypes } from "../../TabConstants";
 import { useTeamsFx } from "../../utils/useTeamsFx";
 import { makeGraphCall } from "../../utils/useGraph";
-import { Table } from '@fluentui/react-northstar';
+import { Table, Loader } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
 
 export function RSCList() {
     const [RSCList, setRSCList] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const { context } = useTeamsFx();
     const { t } = useTranslation();
 
@@ -32,6 +33,7 @@ export function RSCList() {
                 if (RSCs) {
                     const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
                     setRSCList(filteredRSCs);
+                    setIsLoading(false);
                 }
             }
         };
@@ -52,13 +54,23 @@ export function RSCList() {
             ],
         }));
 
-    return (
-        <Table variables={{
-            cellContentOverflow: 'none',
-        }}
-            header={{ items }}
-            rows={RSCRows}
-            aria-label="RSC Table"
-        />
-    );
+    if (isLoading) {
+        return (
+            <Loader
+                size='medium'
+                label={t("RSC.loading")}
+            />
+        );
+    } else {
+        return (
+            <Table variables={{
+                cellContentOverflow: 'none',
+            }}
+                header={{ items }}
+                rows={RSCRows}
+                aria-label="RSC Table"
+            />
+        );
+    }
+
 }
