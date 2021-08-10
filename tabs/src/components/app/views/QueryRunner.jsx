@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { GRAPH_URL } from "../../TabConstants";
+import React, { useContext, useState } from "react";
+import { graphVersions, GRAPH_URL } from "../../TabConstants";
 import { makeGraphCall } from "../../utils/useGraph";
 import PropTypes from 'prop-types';
 import { QueryInput } from "./runner/QueryInput";
 import { Request } from "./runner/Request";
 import { Response } from "./runner/Response";
-import { useRangeKnob } from '@fluentui/docs-components';
+import { LocaleContext } from "../../../App";
 
 QueryRunner.propTypes = {
     query: PropTypes.string,
@@ -16,6 +16,7 @@ QueryRunner.propTypes = {
     setRequestBody: PropTypes.func,
     graphVersion: PropTypes.string,
     setGraphVersion: PropTypes.func,
+    isConnectedToResource: PropTypes.bool
 };
 
 export function QueryRunner(props) {
@@ -28,6 +29,9 @@ export function QueryRunner(props) {
     const setRequestBody = props.setRequestBody;
     const graphVersion = props.graphVersion;
     const setGraphVersion = props.setGraphVersion;
+    const isConnectedToResource = props.isConnectedToResource;
+
+    const locale = useContext(LocaleContext);
 
     const [responseBody, setResponseBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
@@ -35,18 +39,10 @@ export function QueryRunner(props) {
     const [responseState, setReponseState] = useState(-1);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [height] = useRangeKnob({
-        name: 'height',
-        initialValue: '120px',
-        min: '20px',
-        max: '300px',
-        step: 10,
-    });
-
     async function callGraph() {
         setIsLoading(true);
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
-        const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody);
+        const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody, locale);
 
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
@@ -70,6 +66,7 @@ export function QueryRunner(props) {
     return (
         <>
             <QueryInput
+                isConnectedToResource={isConnectedToResource}
                 requestType={requestType}
                 setRequestType={setRequestType}
                 graphVersion={graphVersion}
@@ -80,17 +77,18 @@ export function QueryRunner(props) {
                 isLoading={isLoading}
             />
             <Request
+                requestType={requestType}
                 requestBody={requestBody}
                 setRequestBody={setRequestBody}
                 requestHeaders={requestHeaders}
                 setRequestHeaders={setRequestHeaders}
-                height={height}
+                height={200}
             />
             <Response
                 responseBody={responseBody}
                 responseHeaders={responseHeaders}
                 responseState={responseState}
-                height={height}
+                height={200}
             />
         </>
     );

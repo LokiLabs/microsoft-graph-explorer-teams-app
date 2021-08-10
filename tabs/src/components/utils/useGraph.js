@@ -5,13 +5,16 @@ export const makeGraphCall = async (
     requestHeaders,
     queryParameters,
     graphVersion,
-    requestBody) => {
+    requestBody,
+    locale) => {
     const url = DEVX_API_URL + "/" + graphVersion + queryParameters;
     const cleanedHeaders = {};
 
     for (const header of requestHeaders) {
         cleanedHeaders[header.items[0]] = header.items[1];
     }
+
+    cleanedHeaders["Accept-Language"] = locale;
 
     let options = {
         method: requestType,
