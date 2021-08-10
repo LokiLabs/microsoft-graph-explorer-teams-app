@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { graphVersions, GRAPH_URL } from "../../TabConstants";
+import { GRAPH_URL } from "../../TabConstants";
 import { makeGraphCall } from "../../utils/useGraph";
 import PropTypes from 'prop-types';
 import { QueryInput } from "./runner/QueryInput";
