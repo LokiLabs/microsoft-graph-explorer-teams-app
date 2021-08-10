@@ -2,6 +2,7 @@ import React from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
 import { Provider } from "@fluentui/react-northstar";
+import { useTeamsFx } from "./components/utils/useTeamsFx";
 
 /**
  * The 'Config' component is used to display your group tabs
@@ -12,6 +13,7 @@ import { Provider } from "@fluentui/react-northstar";
 export function TabConfig() {
   // Translations
   const { t } = useTranslation();
+  const { theme } = useTeamsFx();
 
   // Initialize the Microsoft Teams SDK
   microsoftTeams.initialize();
@@ -45,7 +47,7 @@ export function TabConfig() {
     <Provider >
       <center className="center" >
         <img className="image" src={imageName.default} alt='' />
-        <h4 className="caption">{t('Tab Config.Caption')}</h4>
+        <h4 className="caption" style={{color: theme.siteVariables.focusOuterBorderColor}}>{t('Tab Config.Caption')}</h4>
       </center>
     </Provider>
   );

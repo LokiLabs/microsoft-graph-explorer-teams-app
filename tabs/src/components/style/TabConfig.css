@@ -7,7 +7,7 @@
   flex-grow: 1;
   height: 40vh;
   width: 100vw;
-  background-color: #fff;
+  background-color: transparent;
   position: relative;
 }
 
@@ -19,5 +19,6 @@
   flex-grow: 1;
   height: 60vh;
   width: 100vw;
+  background-color: transparent;
   position: relative;
 }

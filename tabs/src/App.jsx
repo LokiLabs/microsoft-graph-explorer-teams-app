@@ -29,23 +29,23 @@ export default function App() {
 
   return (
     <LocaleContext.Provider value={locale}>
-      <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee", minHeight: "50vh" }}>
-        <Router>
-          <Route exact path="/">
-            <Redirect to="/tab" />
-          </Route>
-          {loading ? (
-            <Loader style={{ margin: 100 }} />
-          ) : (
-            <>
+      <Router>
+        <Route exact path="/">
+          <Redirect to="/tab" />
+        </Route>
+        {loading ? (
+          <Loader style={{ margin: 100 }} />
+        ) : (
+          <>
+            <Provider theme={theme || teamsTheme} >
               <Route exact path="/privacy" component={Privacy} />
               <Route exact path="/termsofuse" component={TermsOfUse} />
               <Route exact path="/tab" component={Tab} />
-              <Route exact path="/config" component={TabConfig} />
-            </>
-          )}
-        </Router>
-      </Provider>
+            </Provider>
+            <Route exact path="/config" component={TabConfig} />
+          </>
+        )}
+      </Router>
     </LocaleContext.Provider>
   );
 }
