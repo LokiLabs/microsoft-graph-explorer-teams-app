@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Button, List, Alert, ListItem, Popup } from '@fluentui/react-northstar';
-import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
+import { Button, List, Alert, ListItem, Popup, ClipboardCopiedToIcon } from '@fluentui/react-northstar';
 import copy from "copy-to-clipboard";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
@@ -83,6 +82,6 @@ export function CreateItemWithCopy(props) {
             content={t("Connected Resources.copied")} />
     );
     let item = <ListItem header={props.header} endMedia={endMedia} />;
-    //Add the copy icon 
+    //Add the copy icon
     return item;
 }
