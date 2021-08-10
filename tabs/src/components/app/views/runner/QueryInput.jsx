@@ -44,7 +44,7 @@ export function QueryInput(props) {
                 fluid={true}
                 items={Object.keys(requestTypes).map(key => requestTypes[key])}
                 id="requestType"
-                placeholder={requestType}
+                value={requestType}
                 onChange={(evt, selected) => setRequestType(Object.keys(requestTypes)
                     .map(key => requestTypes[key])[selected.highlightedIndex])}
                 className="dropdown"
@@ -54,7 +54,7 @@ export function QueryInput(props) {
                 fluid={true}
                 items={Object.keys(graphVersions).map(key => graphVersions[key])}
                 id="graphVersion"
-                placeholder={graphVersion}
+                value={graphVersion}
                 onChange={(evt, selected) => setGraphVersion(Object.keys(graphVersions)
                     .map(key => graphVersions[key])[selected.highlightedIndex])}
                 className="dropdown"

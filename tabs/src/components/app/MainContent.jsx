@@ -5,7 +5,7 @@ import { Section } from "./Section";
 import { DocumentationLinks } from "./views/DocumentationLinks";
 import { ProcessTeamsContext } from './views/ConnectedResources.jsx';
 import { FetchSamples } from './views/SampleQueries';
-import { requestTypes, GRAPH_URL } from '../TabConstants';
+import { requestTypes, GRAPH_URL, graphVersions } from '../TabConstants';
 
 const MainContent = () => {
     const [resourceIDsActive, toggleResourceIDsActive] = useState(true);
@@ -16,13 +16,14 @@ const MainContent = () => {
     const [query, setQuery] = useState(GRAPH_URL);
     const [requestType, setRequestType] = useState(requestTypes.GET);
     const [requestBody, setRequestBody] = useState("{}");
-    const [ isConnectedToResource, setIsConnectedToResource ] = useState(false);
+    const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
+    const [isConnectedToResource, setIsConnectedToResource] = useState(false);
 
     return (
         <main>
             <Section
                 isShow={resourceIDsActive}
-                component={<ProcessTeamsContext 
+                component={<ProcessTeamsContext
                     setIsConnectedToResource={setIsConnectedToResource}
                 />}
                 toggleShow={toggleResourceIDsActive}
@@ -34,7 +35,8 @@ const MainContent = () => {
                 component={<FetchSamples
                     setQuery={setQuery}
                     setRequestType={setRequestType}
-                    setRequestBody={setRequestBody} />}
+                    setRequestBody={setRequestBody}
+                    setGraphVersion={setGraphVersion} />}
                 toggleShow={toggleSampleQueries}
                 translationString={"Table of Contents.Sample Queries"}
                 idString={"sample-queries-header"}
@@ -48,6 +50,8 @@ const MainContent = () => {
                     setRequestType={setRequestType}
                     requestBody={requestBody}
                     setRequestBody={setRequestBody}
+                    graphVersion={graphVersion}
+                    setGraphVersion={setGraphVersion}
                     isConnectedToResource={isConnectedToResource}
                 />}
                 toggleShow={toggleQueryRunnerActive}

@@ -38,7 +38,6 @@ export function ProcessTeamsContext(props) {
             }
             setTitle(t("Connected Resources.Chat"));
             let chatId = <CreateItemWithCopy id={context.chatId} header={t("Connected Resources.Chat ID") + ": " + context.chatId} />;
-            chatId.header = t("Connected Resources.Chat ID") + ": " + context.chatId;
             setResourceList([chatId]);
         }
         else if (title === " ") {

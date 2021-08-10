@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { graphVersions, GRAPH_URL } from "../../TabConstants";
+import { GRAPH_URL } from "../../TabConstants";
 import { makeGraphCall } from "../../utils/useGraph";
 import PropTypes from 'prop-types';
 import { QueryInput } from "./runner/QueryInput";
@@ -14,6 +14,8 @@ QueryRunner.propTypes = {
     setRequestType: PropTypes.func,
     requestBody: PropTypes.string,
     setRequestBody: PropTypes.func,
+    graphVersion: PropTypes.string,
+    setGraphVersion: PropTypes.func,
     isConnectedToResource: PropTypes.bool
 };
 
@@ -25,11 +27,12 @@ export function QueryRunner(props) {
     const setRequestType = props.setRequestType;
     const requestBody = props.requestBody;
     const setRequestBody = props.setRequestBody;
+    const graphVersion = props.graphVersion;
+    const setGraphVersion = props.setGraphVersion;
     const isConnectedToResource = props.isConnectedToResource;
 
     const locale = useContext(LocaleContext);
 
-    const [graphVersion, setGraphVersion] = useState(graphVersions.beta);
     const [responseBody, setResponseBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
     const [requestHeaders, setRequestHeaders] = useState([]);
