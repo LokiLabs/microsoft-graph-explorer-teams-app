@@ -36,7 +36,7 @@ export function QueryRunner(props) {
     const [responseBody, setResponseBody] = useState("{}");
     const [responseHeaders, setResponseHeaders] = useState([]);
     const [requestHeaders, setRequestHeaders] = useState([]);
-    const [responseState, setReponseState] = useState(-1);
+    const [responseState, setResponseState] = useState(-1);
     const [isLoading, setIsLoading] = useState(false);
 
     async function callGraph() {
@@ -53,7 +53,7 @@ export function QueryRunner(props) {
             });
         }
         setResponseHeaders(graphResponseHeaders);
-        setReponseState(graphResponse.status + " " + graphResponse.statusText);
+        setResponseState(graphResponse.status + " " + graphResponse.statusText);
         if (graphResponse.ok) {
             const text = await graphResponse.json();
             setResponseBody(JSON.stringify(text, undefined, 4));
