@@ -1,7 +1,8 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { requestTypes, graphVersions, GRAPH_URL } from '../../../TabConstants';
-import { Button, Input, Flex, Dropdown } from '@fluentui/react-northstar';
+import { Button, Flex, Dropdown } from '@fluentui/react-northstar';
+import { TextField } from 'office-ui-fabric-react';
 import { useTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 
@@ -28,9 +29,25 @@ export function QueryInput(props) {
     const callGraph = props.callGraph;
     const isLoading = props.isLoading;
     const isConnectedToResource = props.isConnectedToResource;
+    const [element, setElement] = useState(null);
 
     // Translations
     const { t } = useTranslation();
+
+    function isInputOverflowing(element, input) {
+
+        function getTextWidth(text) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            if (context === null) {
+                return 0;
+            }
+            context.font = getComputedStyle(document.body).font;
+            return context.measureText(text).width + 5;
+        }
+
+        return !!element && getTextWidth(input) > element.scrollWidth;
+    }
 
     useEffect(() => {
         setQuery(GRAPH_URL + graphVersion + query.substring(GRAPH_URL.length + graphVersion.length, query.length));
@@ -63,14 +80,19 @@ export function QueryInput(props) {
             <Flex.Item grow>
                 <Flex gap="gap.small">
                     <Flex.Item grow>
-                        <Input
-                            fluid
-                            inverted
-                            value={query}
-                            showSuccessIndicator={false}
-                            required
-                            onChange={(evt) => setQuery(evt.target.value)}
-                            type="text" />
+                        <div ref={(el) => { setElement(el); }}>
+                            <TextField
+                                fluid
+                                inverted
+                                value={query}
+                                showSuccessIndicator={false}
+                                required={false}
+                                onChange={(evt) => setQuery(evt.target.value)}
+                                multiline={isInputOverflowing(element,query)}
+                                autoAdjustHeight
+                                resizable={false}
+                                type="text" />
+                        </div>
                     </Flex.Item>
                     <Flex.Item size="size.half">
                         <Button
