@@ -23,38 +23,35 @@ export function RSCList() {
                 rscType = "/teams/" + context?.groupId;
             } else if (context?.chatId) {
                 rscType = "/chats/" + context?.chatId;
-            } else if (!context) {
-                setAlert(true);
             }
 
             if (context) {
-                try {
-                    const rscResponse = await makeGraphCall(requestTypes.GET, [], rscType + "/permissionGrants", graphVersions.beta);
-                    const rscJson = await rscResponse.json();
-                    const RSCs = rscJson.value;
+                const rscResponse = await makeGraphCall(requestTypes.GET, [], rscType + "/permissionGrants", graphVersions.beta);
+                if (!rscResponse.ok) {
+                    setAlert(true);
+                }
+                const rscJson = await rscResponse.json();
+                const RSCs = rscJson.value;
 
-                    if (RSCs && RSCs.length > 0) {
-                        const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
-                        const RSCRows = filteredRSCs
-                            .map(perm => ({
-                                key: perm, items: [
-                                    {
-                                        content: perm,
-                                        truncateContent: true
-                                    },
-                                    {
-                                        content: t('RSC Descriptions.' + perm),
-                                        truncateContent: true,
-                                    }
-                                ],
-                            }));
-                        setAlert(false);
-                        setRSCList(RSCRows);
-                    }
-                    else {
-                        setAlert(true);
-                    }
-                } catch {
+                if (RSCs && RSCs.length > 0) {
+                    const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
+                    const RSCRows = filteredRSCs
+                        .map(perm => ({
+                            key: perm, items: [
+                                {
+                                    content: perm,
+                                    truncateContent: true
+                                },
+                                {
+                                    content: t('RSC Descriptions.' + perm),
+                                    truncateContent: true,
+                                }
+                            ],
+                        }));
+                    setAlert(false);
+                    setRSCList(RSCRows);
+                }
+                else {
                     setAlert(true);
                 }
             }
