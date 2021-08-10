@@ -1,6 +1,7 @@
 import React from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
+import { Provider } from "@fluentui/react-northstar";
 
 /**
  * The 'Config' component is used to display your group tabs
@@ -41,9 +42,11 @@ export function TabConfig() {
   const imageName = require('./teamsappzeronotes.svg');
 
   return (
-    <center className="center" >
-      <img className="image" src={imageName.default} alt='' />
-      <h4 className="caption">{t('Tab Config.Caption')}</h4>
-    </center>
+    <Provider >
+      <center className="center" >
+        <img className="image" src={imageName.default} alt='' />
+        <h4 className="caption">{t('Tab Config.Caption')}</h4>
+      </center>
+    </Provider>
   );
 }
