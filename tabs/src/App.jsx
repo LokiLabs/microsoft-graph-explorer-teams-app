@@ -34,7 +34,7 @@ export default function App() {
           <Redirect to="/tab" />
         </Route>
         {loading ? (
-          <Loader style={{ margin: 100 }} />
+          <Loader />
         ) : (
           <>
             <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee" }} >
