@@ -43,6 +43,7 @@ export function QueryRunner(props) {
         setIsLoading(true);
         const queryParameters = query.substring(GRAPH_URL.length + graphVersion.length, query.length);
         const graphResponse = await makeGraphCall(requestType, requestHeaders, queryParameters, graphVersion, requestBody, locale);
+        setIsLoading(false);
 
         let graphResponseHeaders = [];
         for (const p of graphResponse.headers.entries()) {
@@ -60,7 +61,6 @@ export function QueryRunner(props) {
             const text = await graphResponse.text();
             setResponseBody(text);
         }
-        setIsLoading(false);
     }
 
     return (
