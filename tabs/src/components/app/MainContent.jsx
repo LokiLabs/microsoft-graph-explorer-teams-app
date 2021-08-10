@@ -12,7 +12,7 @@ const MainContent = () => {
     const [queryRunnerActive, toggleQueryRunnerActive] = useState(true);
     const [grantedRSCActive, toggleGrantedRSCActive] = useState(false);
     const [documentationLinksActive, toggleDocumentationLinksActive] = useState(false);
-    const [sampleQueriesActive, toggleSampleQueries] = useState(true);
+    const [sampleQueriesActive, toggleSampleQueries] = useState(false);
     const [query, setQuery] = useState(GRAPH_URL);
     const [requestType, setRequestType] = useState(requestTypes.GET);
     const [requestBody, setRequestBody] = useState("{}");
