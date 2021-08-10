@@ -55,7 +55,7 @@ export function Request(props) {
         text
         iconOnly
         aria-label="delete"
-        title="Delete request header"
+        title={t("Query Runner.Delete request header")}
     />;
 
     const newHeaderValue = (headerCopy, valueCopy) => {

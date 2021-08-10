@@ -11,7 +11,8 @@
             "Response headers": "(zh-cn) Response Headers",
             "Response": "(zh-cn) Response",
             "Warning": "(zh-cn) ou must connect the app to a resource in order to make Microsoft Graph requests that use resource-specific consent. For details, see {link to name of article (placeholder)}.",
-            "Add": "(zh-cn) ADD"
+            "Add": "(zh-cn) ADD",
+            "Delete request header": "(zh-cn) Delete request header"
         },
 
         "Connected Resources": {
