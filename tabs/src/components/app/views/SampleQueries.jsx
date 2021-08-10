@@ -28,7 +28,7 @@ export function FetchSamples(props) {
     useEffect(() => {
         async function getSamplesList() {
             microsoftTeams.getContext(async function (context) {
-                console.log('i am coming here');
+
                 const headers = {
                     'Content-Type': 'Application/json',
                     'Accept-Language': locale
@@ -60,19 +60,11 @@ export function FetchSamples(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (isLoading) {
-        return (
-            <Loader
-                size='medium'
-                label={t("Sample Queries.loading")}
-            />
-        );
-    } else {
-        return (
-            <Table rows={samples} aria-label="sample queries" />
-        );
-    }
-
+    return (
+        <>
+            {isLoading ? <Loader size='medium' label={t("Sample Queries.loading")} /> : <Table rows={samples} aria-label="sample queries" /> }
+        </>
+    );
 }
 
 function createFillIn(url) {

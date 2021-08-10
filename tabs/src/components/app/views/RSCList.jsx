@@ -63,33 +63,29 @@ export function RSCList() {
         getRSCList(context);
     }, [context, t]);
 
-    if (isLoading) {
-        return (
-            <Loader
-                size='medium'
-                label={t("RSC.loading")}
-            />
-        );
-    } else {
-        return (
+    return (
+        <>
+        {isLoading ?
+            <Loader size='medium' label={t("RSC.loading")} />
+        :
             <div>
-              {RSCList?.length > 0 && (
-                  <>
-                      <Table className="table" variables={{
-                          cellContentOverflow: 'none',
-                      }}
-                          header={{ items }}
-                          rows={RSCList}
-                          aria-label="RSC Table" />
-                  </>
-              )}
-              {alert && (
-                  <>
-                      <Alert danger content={t('RSC Descriptions.No resource available to grant permissions to')} />
-                  </>
-              )}
-           </div>
-        );
-    }
-
+                {RSCList?.length > 0 && (
+                    <>
+                        <Table className="table" variables={{
+                            cellContentOverflow: 'none',
+                        }}
+                            header={{ items }}
+                            rows={RSCList}
+                            aria-label="RSC Table" />
+                    </>
+                )}
+                {alert && (
+                    <>
+                        <Alert danger content={t('RSC Descriptions.No resource available to grant permissions to')} />
+                    </>
+                )}
+            </div>
+        }
+        </>
+    );
 }
