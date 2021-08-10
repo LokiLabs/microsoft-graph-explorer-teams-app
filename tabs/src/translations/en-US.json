@@ -11,7 +11,9 @@
             "Response headers": "Response Headers",
             "Response": "Response",
             "Warning": "You must connect the app to a resource in order to make Microsoft Graph requests that use resource-specific consent. For details, see {link to name of article(placeholder)} .",
-            "Add": "ADD"
+            "Add": "ADD",
+            "Delete request header": "Delete request header",
+            "Delete": "delete"
         },
 
         "Connected Resources": {
@@ -56,7 +58,8 @@
             "TeamsTab.Delete.Chat": "Delete this chat's tabs.",
             "TeamsTab.ReadWrite.Chat": "Manage this chat's tabs.",
             "TeamsAppInstallation.Read.Chat": "Get a list of the apps that are installed in this chat.",
-            "OnlineMeeting.ReadBasic.Chat": "Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat."
+            "OnlineMeeting.ReadBasic.Chat": "Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat.",
+            "No resource available to grant permissions to" : "No resource (team or chat) available to grant permissions to."
         },
 
         "Table of Contents" : {

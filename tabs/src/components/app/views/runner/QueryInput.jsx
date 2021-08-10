@@ -13,7 +13,8 @@ QueryInput.propTypes = {
     query: PropTypes.string,
     setQuery: PropTypes.func,
     callGraph: PropTypes.func,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    isConnectedToResource: PropTypes.bool
 };
 
 export function QueryInput(props) {
@@ -26,6 +27,7 @@ export function QueryInput(props) {
     const setQuery = props.setQuery;
     const callGraph = props.callGraph;
     const isLoading = props.isLoading;
+    const isConnectedToResource = props.isConnectedToResource;
 
     // Translations
     const { t } = useTranslation();
@@ -42,7 +44,7 @@ export function QueryInput(props) {
                 fluid={true}
                 items={Object.keys(requestTypes).map(key => requestTypes[key])}
                 id="requestType"
-                placeholder={requestType}
+                value={requestType}
                 onChange={(evt, selected) => setRequestType(Object.keys(requestTypes)
                     .map(key => requestTypes[key])[selected.highlightedIndex])}
                 className="dropdown"
@@ -52,7 +54,7 @@ export function QueryInput(props) {
                 fluid={true}
                 items={Object.keys(graphVersions).map(key => graphVersions[key])}
                 id="graphVersion"
-                placeholder={graphVersion}
+                value={graphVersion}
                 onChange={(evt, selected) => setGraphVersion(Object.keys(graphVersions)
                     .map(key => graphVersions[key])[selected.highlightedIndex])}
                 className="dropdown"
@@ -73,7 +75,7 @@ export function QueryInput(props) {
                     <Flex.Item size="size.half">
                         <Button
                             loading={isLoading}
-                            disabled={isLoading}
+                            disabled={isLoading || !isConnectedToResource}
                             content={t("Query Runner.Run query")}
                             onClick={() => callGraph()}
                             primary />
