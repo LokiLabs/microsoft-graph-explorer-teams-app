@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
-import { Button, Flex, Menu, TextArea, Table, tabListBehavior, Input, TrashCanIcon } from '@fluentui/react-northstar';
+import { Button, Flex, Menu, Table, tabListBehavior, Input, TrashCanIcon } from '@fluentui/react-northstar';
 import { gridCellWithFocusableElementBehavior } from '@fluentui/accessibility';
 import { requestTypes } from '../../../TabConstants';
 import Monaco from '../Monaco';

@@ -44,7 +44,7 @@ export function ProcessTeamsContext(props) {
             setResourceList([]);
         }
     });
-    
+
     setIsConnectedToResource(resourceList.length !== 0 && title);
 
     return (
