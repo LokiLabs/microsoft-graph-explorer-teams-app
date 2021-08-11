@@ -51,8 +51,9 @@ export function FetchSamples(props) {
                             return query;
                         });
                     setSamples(teamsAppQueries);
-                    setIsLoading(false);
                 }
+
+                setIsLoading(false);
             });
         }
         getSamplesList(samples);
