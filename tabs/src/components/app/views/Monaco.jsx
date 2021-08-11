@@ -1,10 +1,13 @@
 import React from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import PropTypes from 'prop-types';
+import { useTeamsFx } from "../../utils/useTeamsFx";
 
 
 const Monaco = ( props ) => {
   let { body, height, onChange, readOnly } = props;
+
+  const { themeString } = useTeamsFx();
 
   if (body && typeof body !== 'string') {
     body = formatJsonStringForAllBrowsers(body);
@@ -28,7 +31,7 @@ const Monaco = ( props ) => {
         wordWrap: 'on'
       }}
       onChange={onChange}
-      theme='vs'
+      theme={themeString === 'default' ? 'vs' : 'vs-dark'}
     />
   );
 };
