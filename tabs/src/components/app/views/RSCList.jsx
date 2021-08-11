@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import { CLIENT_APP_ID, graphVersions, requestTypes } from "../../TabConstants";
 import { useTeamsFx } from "../../utils/useTeamsFx";
 import { makeGraphCall } from "../../utils/useGraph";
-import { Table } from '@fluentui/react-northstar';
+import { Table, Alert } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
 
 export function RSCList() {
     const [RSCList, setRSCList] = useState([]);
+    const [alert, setAlert] = useState(false);
     const { context } = useTeamsFx();
     const { t } = useTranslation();
 
     const items = [
-        t('RSC Headers.Permissions'),
-        t('RSC Headers.Descriptions')
+        { "className": "header", "content": t('RSC Headers.Permissions') },
+        { "className": "header", "content": t('RSC Headers.Descriptions') }
     ];
 
     useEffect(() => {
@@ -26,39 +27,56 @@ export function RSCList() {
 
             if (context) {
                 const rscResponse = await makeGraphCall(requestTypes.GET, [], rscType + "/permissionGrants", graphVersions.beta);
+                if (!rscResponse.ok) {
+                    setAlert(true);
+                }
                 const rscJson = await rscResponse.json();
                 const RSCs = rscJson.value;
 
-                if (RSCs) {
+                if (RSCs && RSCs.length > 0) {
                     const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
-                    setRSCList(filteredRSCs);
+                    const RSCRows = filteredRSCs
+                        .map(perm => ({
+                            key: perm, items: [
+                                {
+                                    content: perm,
+                                    truncateContent: true
+                                },
+                                {
+                                    content: t('RSC Descriptions.' + perm),
+                                    truncateContent: true,
+                                }
+                            ],
+                        }));
+                    setAlert(false);
+                    setRSCList(RSCRows);
+                }
+                else {
+                    setAlert(true);
                 }
             }
         };
         getRSCList(context);
-    }, [context]);
+    }, [context, t]);
 
-    const RSCRows = RSCList
-        .map(perm => ({
-            key: perm, items: [
-                {
-                    content: perm,
-                    truncateContent: true
-                },
-                {
-                    content: t('RSC Descriptions.' + perm),
-                    truncateContent: true,
-                }
-            ],
-        }));
 
     return (
-        <Table variables={{
-            cellContentOverflow: 'none',
-        }}
-            header={{ items }}
-            rows={RSCRows}
-            aria-label="RSC Table"
-        />
+        <div>
+            {RSCList?.length > 0 && (
+                <>
+                    <Table className="table" variables={{
+                        cellContentOverflow: 'none',
+                    }}
+                        header={{ items }}
+                        rows={RSCList}
+                        aria-label="RSC Table" />
+                </>
+            )}
+            {alert && (
+                <>
+                    <Alert danger content={t('RSC Descriptions.No resource available to grant permissions to')} />
+                </>
+            )}
+        </div>
     );
 }

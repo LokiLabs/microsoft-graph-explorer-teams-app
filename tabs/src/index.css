@@ -4,19 +4,18 @@
 @import url("components/style/TableOfContents.css");
 @import url("components/style/QueryRunner.css");
 @import url("components/style/Tab.css");
-@import url("components/style/DocumentationLinks.css");
+@import url("components/style/MediumFontLink.css");
 @import url("components/style/SampleQueries.css");
+@import url("components/style/RSCList.css");
 * {
   box-sizing: border-box;
   margin: 0px;
 }
 
 body {
-  margin: 5em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eeeeee;
 }
 
 main {
@@ -41,7 +40,6 @@ main {
 .center {
   text-align: center;
   display: 'flex';
-  background-color: #fff;
   margin: unset;
   overflow: hidden;
   position: relative;

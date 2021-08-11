@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 import { Button, Flex, Menu, TextArea, Table, tabListBehavior, Input, TrashCanIcon } from '@fluentui/react-northstar';
-import { gridCellWithFocusableElementBehavior, } from '@fluentui/accessibility';
+import { gridCellWithFocusableElementBehavior } from '@fluentui/accessibility';
+import { requestTypes } from '../../../TabConstants';
+import Monaco from '../Monaco';
 
 Request.propTypes = {
+    requestType: PropTypes.string,
     userAddedValue: PropTypes.string,
     setUserAddedValue: PropTypes.func,
     userAddedHeader: PropTypes.string,
@@ -23,6 +26,7 @@ export function Request(props) {
     const requestHeaders = props.requestHeaders;
     const setRequestHeaders = props.setRequestHeaders;
     const height = props.height;
+    const requestType = props.requestType;
 
     const [requestComponentIndex, setRequestComponentIndex] = useState(0);
     const [userAddedHeader, setUserAddedHeader] = useState("");
@@ -44,34 +48,38 @@ export function Request(props) {
         ],
     };
 
+    const deleteButton = () => <Button
+        tabIndex={-1}
+        icon={<TrashCanIcon className="button-icon" />}
+        circular
+        text
+        iconOnly
+        aria-label={t("Query Runner.Delete")}
+        title={t("Query Runner.Delete request header")}
+    />;
+
+    const newHeaderValue = (headerCopy, valueCopy) => {
+        return {
+            key: headerCopy,
+            items: [headerCopy, valueCopy, {
+                content: deleteButton(),
+                truncateContent: true,
+                accessibility: gridCellWithFocusableElementBehavior,
+                onClick: e => {
+                    deleteRow(headerCopy);
+                    e.stopPropagation();
+                },
+            }],
+        };
+    };
+
     const addRequestHeader = () => {
         if (!requestHeaders.map(r => r.key).includes(userAddedHeader)) {
             const headerCopy = (' ' + userAddedHeader).slice(1);
             const valueCopy = (' ' + userAddedValue).slice(1);
             setUserAddedHeader("");
             setUserAddedValue("");
-            const deleteButton = () => <Button
-                tabIndex={-1}
-                icon={<TrashCanIcon className="button-icon" />}
-                circular
-                text
-                iconOnly
-                aria-label="delete"
-                title="Delete request header"
-            />;
-            const newHeaderValue = {
-                key: headerCopy,
-                items: [headerCopy, valueCopy, {
-                    content: deleteButton(),
-                    truncateContent: true,
-                    accessibility: gridCellWithFocusableElementBehavior,
-                    onClick: e => {
-                        deleteRow(headerCopy);
-                        e.stopPropagation();
-                    },
-                }],
-            };
-            setRequestHeaders([...requestHeaders, newHeaderValue]);
+            setRequestHeaders([...requestHeaders, newHeaderValue(headerCopy, valueCopy)]);
         }
     };
 
@@ -79,18 +87,23 @@ export function Request(props) {
         setRequestHeaders(requestHeaders => requestHeaders.filter(r => r.key !== header));
     };
 
+    useEffect(() => {
+        if (requestType !== requestTypes.GET && requestType !== requestTypes.DELETE) {
+            setRequestHeaders([newHeaderValue("Content-Type", "Application/json")]);
+        } else {
+            setRequestHeaders([]);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [requestType]);
+
     const requestComponents = [
-        <TextArea
+        <Monaco
             key="requestBody"
-            fluid={true}
-            inverted={true}
-            resize="both"
-            value={requestBody}
-            onChange={(evt) => setRequestBody(evt.target.value)}
-            variables={{
-                height,
-            }}
-        />,
+            body={requestBody}
+            height={height}
+            onChange={(evt) => setRequestBody(evt)}
+        />
+        ,
         <>
             <Table
                 header={requestTableHeaders}

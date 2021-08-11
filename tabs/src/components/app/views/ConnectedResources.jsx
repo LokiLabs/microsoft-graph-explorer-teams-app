@@ -3,12 +3,19 @@ import { Button, List, Alert, ListItem, Popup, ClipboardCopiedToIcon } from '@fl
 import copy from "copy-to-clipboard";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
+import PropTypes from 'prop-types';
 
 
-export function ProcessTeamsContext() {
+ProcessTeamsContext.propTypes = {
+    setIsConnectedToResource: PropTypes.func
+};
+
+
+export function ProcessTeamsContext(props) {
     //Get the context of where the tab is currently
     const [resourceList, setResourceList] = useState([]);
     const [title, setTitle] = useState(" ");
+    const setIsConnectedToResource = props.setIsConnectedToResource;
     const { t } = useTranslation();
 
     microsoftTeams.getContext(function (context) {
@@ -30,7 +37,6 @@ export function ProcessTeamsContext() {
             }
             setTitle(t("Connected Resources.Chat"));
             let chatId = <CreateItemWithCopy id={context.chatId} header={t("Connected Resources.Chat ID") + ": " + context.chatId} />;
-            chatId.header = t("Connected Resources.Chat ID") + ": " + context.chatId;
             setResourceList([chatId]);
         }
         else if (title === " ") {
@@ -38,6 +44,8 @@ export function ProcessTeamsContext() {
             setResourceList([]);
         }
     });
+    
+    setIsConnectedToResource(resourceList.length !== 0 && title);
 
     return (
         <div className="connected-resource">
