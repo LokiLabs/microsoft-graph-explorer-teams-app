@@ -28,9 +28,12 @@ export function RSCList() {
 
             if (context) {
                 const rscResponse = await makeGraphCall(requestTypes.GET, [], rscType + "/permissionGrants", graphVersions.beta);
+
                 if (!rscResponse.ok) {
                     setAlert(true);
+                    setIsLoading(false);
                 }
+
                 const rscJson = await rscResponse.json();
                 const RSCs = rscJson.value;
 
@@ -52,12 +55,11 @@ export function RSCList() {
                         }));
                     setAlert(false);
                     setRSCList(RSCRows);
-                    setIsLoading(false);
                 }
                 else {
                     setAlert(true);
-
                 }
+                setIsLoading(false);
             }
         };
         getRSCList(context);
