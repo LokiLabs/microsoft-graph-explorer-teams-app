@@ -85,13 +85,13 @@ export function QueryRunner(props) {
                 setRequestBody={setRequestBody}
                 requestHeaders={requestHeaders}
                 setRequestHeaders={setRequestHeaders}
-                height={200}
+                height={250}
             />
             <Response
                 responseBody={responseBody}
                 responseHeaders={responseHeaders}
                 responseState={responseState}
-                height={200}
+                height={250}
             />
         </>
     );
