@@ -37,7 +37,7 @@ export default function App() {
           <Loader />
         ) : (
           <>
-            <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee" }} >
+            <Provider theme={theme || teamsTheme} styles={{ backgroundColor: "#eeeeee", minHeight: "50vh" }} >
               <Route exact path="/privacy" component={Privacy} />
               <Route exact path="/termsofuse" component={TermsOfUse} />
               <Route exact path="/tab" component={Tab} />
