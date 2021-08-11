@@ -81,7 +81,7 @@
         },
 
         "RSC" : {
-            "loading": "Loading Permissions"
+            "loading": "Loading Granted Permissions"
         }
 
     }
