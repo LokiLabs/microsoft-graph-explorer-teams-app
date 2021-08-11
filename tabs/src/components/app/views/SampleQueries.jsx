@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Table, TableCell, OpenOutsideIcon, Button } from '@fluentui/react-northstar';
+import { Table, TableCell, OpenOutsideIcon, Button, Loader } from '@fluentui/react-northstar';
 import { GRAPH_URL, SAMPLE_QUERIES_URL, requestTypes, graphVersions } from "../../TabConstants";
 import { LocaleContext } from "../../../App";
 import * as microsoftTeams from "@microsoft/teams-js";
+import { useTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 
 FetchSamples.propTypes = {
@@ -20,6 +21,10 @@ export function FetchSamples(props) {
     const locale = useContext(LocaleContext);
 
     const [samples, setSamples] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const { t } = useTranslation();
+
     useEffect(() => {
         async function getSamplesList() {
             microsoftTeams.getContext(async function (context) {
@@ -47,6 +52,8 @@ export function FetchSamples(props) {
                         });
                     setSamples(teamsAppQueries);
                 }
+
+                setIsLoading(false);
             });
         }
         getSamplesList(samples);
@@ -55,7 +62,9 @@ export function FetchSamples(props) {
     }, []);
 
     return (
-        <Table rows={samples} aria-label="sample queries" />
+        <>
+            {isLoading ? <Loader size='medium' label={t("Sample Queries.loading")} /> : <Table rows={samples} aria-label="sample queries" /> }
+        </>
     );
 }
 

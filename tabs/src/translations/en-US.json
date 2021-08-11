@@ -74,6 +74,14 @@
             "Go to Graph Explorer": "Go to Graph Explorer",
             "Graph Explorer Documentation": "Graph Explorer Documentation",
             "Resource-Specific Consent": "Resource-Specific Consent"
+        },
+
+        "Sample Queries" : {
+            "loading": "Loading Sample Queries"
+        },
+
+        "RSC" : {
+            "loading": "Loading Granted Permissions"
         }
 
     }

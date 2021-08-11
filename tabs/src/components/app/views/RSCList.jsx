@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { CLIENT_APP_ID, graphVersions, requestTypes } from "../../TabConstants";
 import { useTeamsFx } from "../../utils/useTeamsFx";
 import { makeGraphCall } from "../../utils/useGraph";
-import { Table, Alert } from '@fluentui/react-northstar';
+import { Table, Loader, Alert } from '@fluentui/react-northstar';
 import { useTranslation } from 'react-i18next';
 
 export function RSCList() {
     const [RSCList, setRSCList] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [alert, setAlert] = useState(false);
     const { context } = useTeamsFx();
     const { t } = useTranslation();
@@ -27,14 +28,18 @@ export function RSCList() {
 
             if (context) {
                 const rscResponse = await makeGraphCall(requestTypes.GET, [], rscType + "/permissionGrants", graphVersions.beta);
+
                 if (!rscResponse.ok) {
                     setAlert(true);
+                    setIsLoading(false);
                 }
+
                 const rscJson = await rscResponse.json();
                 const RSCs = rscJson.value;
 
                 if (RSCs && RSCs.length > 0) {
                     const filteredRSCs = RSCs.filter(rsc => rsc.clientAppId === CLIENT_APP_ID).map(rsc => rsc.permission);
+
                     const RSCRows = filteredRSCs
                         .map(perm => ({
                             key: perm, items: [
@@ -54,29 +59,35 @@ export function RSCList() {
                 else {
                     setAlert(true);
                 }
+                setIsLoading(false);
             }
         };
         getRSCList(context);
     }, [context, t]);
 
-
     return (
-        <div>
-            {RSCList?.length > 0 && (
-                <>
-                    <Table className="table" variables={{
-                        cellContentOverflow: 'none',
-                    }}
-                        header={{ items }}
-                        rows={RSCList}
-                        aria-label="RSC Table" />
-                </>
-            )}
-            {alert && (
-                <>
-                    <Alert danger content={t('RSC Descriptions.No resource available to grant permissions to')} />
-                </>
-            )}
-        </div>
+        <>
+        {isLoading ?
+            <Loader size='medium' label={t("RSC.loading")} />
+        :
+            <div>
+                {RSCList?.length > 0 && (
+                    <>
+                        <Table className="table" variables={{
+                            cellContentOverflow: 'none',
+                        }}
+                            header={{ items }}
+                            rows={RSCList}
+                            aria-label="RSC Table" />
+                    </>
+                )}
+                {alert && (
+                    <>
+                        <Alert danger content={t('RSC Descriptions.No resource available to grant permissions to')} />
+                    </>
+                )}
+            </div>
+        }
+        </>
     );
 }
