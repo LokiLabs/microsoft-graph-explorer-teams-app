@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Button, List, Alert, ListItem, Popup } from '@fluentui/react-northstar';
-import { ClipboardCopiedToIcon } from '@fluentui/react-icons-northstar';
+import { Button, List, Alert, ListItem, Popup, ClipboardCopiedToIcon } from '@fluentui/react-northstar';
 import copy from "copy-to-clipboard";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { useTranslation } from "react-i18next";
@@ -45,7 +44,7 @@ export function ProcessTeamsContext(props) {
             setResourceList([]);
         }
     });
-    
+
     setIsConnectedToResource(resourceList.length !== 0 && title);
 
     return (
@@ -90,7 +89,7 @@ export function CreateItemWithCopy(props) {
             on="context"
             content={t("Connected Resources.copied")} />
     );
-    let item = <ListItem header={props.header} endMedia={endMedia} />;
+    let item = <ListItem header={props.header} endMedia={endMedia} style={{ maxWidth: '700px' }} />;
     //Add the copy icon
     return item;
 }
