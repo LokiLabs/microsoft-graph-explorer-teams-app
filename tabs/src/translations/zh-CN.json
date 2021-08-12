@@ -11,7 +11,9 @@
             "Response headers": "(zh-cn) Response Headers",
             "Response": "(zh-cn) Response",
             "Warning": "(zh-cn) ou must connect the app to a resource in order to make Microsoft Graph requests that use resource-specific consent. For details, see {link to name of article (placeholder)}.",
-            "Add": "(zh-cn) ADD"
+            "Add": "(zh-cn) ADD",
+            "Delete request header": "(zh-cn) Delete request header",
+            "Delete": "(zh-cn) delete"
         },
 
         "Connected Resources": {
@@ -19,11 +21,12 @@
             "Teams Team ID": "(zh-cn) Team ID",
             "Chat": "(zh-cn) Chat",
             "Chat ID": "(zh-cn) Chat ID",
-            "No Connected Resources": "(zh-cn) You must connect to an instance of a team or a chat to make this request."
+            "No Connected Resources": "(zh-cn) You must connect to an instance of a team or a chat to make this request.",
+            "copied": "(zh-cn) Copied to clipboard"
         },
 
         "Tab Config": {
-            "Caption": "(zh-cn) Select save to finish adding the Graph Explorer Sample Teams app. By installing this app, you are granting it resource-specific consent permission against the Teams channel/chat."
+            "Caption": "(zh-cn) Select save to finish adding the Graph Explorer app."
         },
 
         "RSC Headers": {
@@ -55,7 +58,8 @@
             "TeamsTab.Delete.Chat": "(zh-cn) Delete this chat's tabs.",
             "TeamsTab.ReadWrite.Chat": "(zh-cn) Manage this chat's tabs.",
             "TeamsAppInstallation.Read.Chat": "(zh-cn) Get a list of the apps that are installed in this chat.",
-            "OnlineMeeting.ReadBasic.Chat": "(zh-cn) Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat."
+            "OnlineMeeting.ReadBasic.Chat": "(zh-cn) Get basic properties, such as name, schedule, organizer, and join link of a meeting associated with this chat.",
+            "No resource available to grant permissions to" : "(zh-cn) No resource (team or chat) available to grant permissions to."
         },
 
         "Table of Contents" : {
